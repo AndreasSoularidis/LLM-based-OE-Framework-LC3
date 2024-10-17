@@ -1,0 +1,23 @@
+
+Fire Incident 6 Detailed Report
+
+- Date of Incident: July 30, 2023
+- Time Noted: Inception at 14:50, efforts ongoing
+- Notification: Malicious, by mistake
+- Location Details: Platanos, Ancient Olympia, Elis
+- Geographical Coordinates: 
+  - Latitude: 37.6671455
+  - Longitude: 21.6121380
+- Altitude of Incident: 62 meters
+- Starting Point: Woodland area affected
+- Possible Cause of Fire: Selfish action, malicious action, pyromaniac energy
+- Area Burnt in Acres: 20.300 acres, including forests, woodlands, and other lands
+- Determination of Offender: Yes
+- Forces Involved: 32 fire officers, 16 walking departments of the fire department, volunteers, and armed forces personnel
+- Investment Instruments: Firetrucks, tankers, various machines
+- Method of Deposit: By aerial means, with ground and pedestrian sections
+- Water Use: 1.230 cubic meters
+- Foam Usage: 800 liters
+- Use of Retarder: 500 kg
+
+This report compiles the comprehensive details of a fire incident, highlighting the cause, affected areas, response composition, and firefighting resources employed to manage the situation effectively.

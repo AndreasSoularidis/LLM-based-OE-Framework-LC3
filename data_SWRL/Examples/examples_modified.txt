@@ -1,0 +1,161 @@
+ Here's a step-by-step guide to create a SWRL rule from a rule in natural language:
+
+    Step 1: Identify the Entities and Relationships (nouns, verbs, and adjectives)
+    Step 2: Translate to SWRL
+    Step 3: Define Conditions and Conclusions
+    Step 4: Map to SWRL
+    Step 5: Generate the SWRL rule
+
+
+Example 
+Rule in natural language: If a person has a sibling who is a man, then the person has a brother.
+
+Step 1: 
+  Conditions: person has a sibling who is a man
+  Conclusions: the person has a brother
+Step 2: 
+  Entities: person, sibling, man, brother
+  Relationships: has sibling, is man, has brother
+Step 3: Person(?p), hasSibling(?p, ?s), Person(?s), IsMan(?s, true), hasBrother(?p, ?s)
+Step 4: 
+  Conditions: Person(?p) ^ hasSibling(?p, ?s) ^ Person(?s) ^ IsMan(?s)
+  Conclusions: hasBrother(?p, ?s)
+Step 5: Person(?p) ^ hasSibling(?p, ?s) ^ Person(?s) ^ IsMan(?s) -> hasBrother(?p, ?s)
+SWRL rule: Person(?p) ^ hasSibling(?p, ?s) ^ Person(?s) ^ IsMan(?s) -> hasBrother(?p, ?s)
+
+
+Example 
+Rule in natural language: If a person has a phone number that starts with '+', then the person has an international phone number.
+
+Step 1: 
+  Conditions: person has a phone number that starts with '+'
+  Conclusions: the person has an international phone number
+Step 2: 
+  Entities: person, phone number, international phone number
+  Relationships: has phone number, starts with, has international phone number
+Step 3: Person(?p), PhoneNumber(?number), hasPhoneNumber(?p, ?number), swrlb:startsWith(?number, "+"), hasInternationalPhoneNumber(?p, true)
+Step 4: 
+  Conditions: Person(?p) ^ PhoneNumber(?number) ^ hasPhoneNumber(?p, ?number) ^ swrlb:startsWith(?number, "+")
+  Conclusions: hasInternationalPhoneNumber(?p, true)
+Step 5: Person(?p) ^ PhoneNumber(?number) ^ hasPhoneNumber(?p, ?number) ^ swrlb:startsWith(?number, "+") -> hasInternationalPhoneNumber(?p, true)
+SWRL rule: Person(?p) ^ PhoneNumber(?number) ^ hasPhoneNumber(?p, ?number) ^ swrlb:startsWith(?number, "+") -> hasInternationalPhoneNumber(?p, true)
+
+
+Example
+Rule in natural language:  If a person has an age greater than 17, then the person is an adult.
+
+Step 1: 
+  Conditions: person has an age greater than 17
+  Conclusions: the person is an adult
+Step 2: 
+  Entities: person, age, adult
+  Relationships: has age, greater than
+Step 3: Person(?p), hasAge(?p, ?age), Age(?age), swrlb:greaterThan(?age, 17), Adult(?p)
+Step 4: 
+  Conditions: Person(?p) ^ hasAge(?p, ?age) ^ Age(?age) ^ swrlb:greaterThan(?age, 17)
+  Conclusions: Adult(?p)
+Step 5: Person(?p) ^ hasAge(?p, ?age) ^ Age(?age) ^ swrlb:greaterThan(?age, 17) -> Adult(?p)
+SWRL rule: Person(?p) ^ hasAge(?p, ?age) ^ Age(?age) ^ swrlb:greaterThan(?age, 17) -> Adult(?p)
+
+
+Example
+Rule in natural language:  If a publication has two different authors, then those authors have cooperated with each other.
+
+Step 1: 
+  Conditions: a publication has two different authors
+  Conclusions: those authors have cooperated with each other
+Step 2: 
+  Entities: publication, author
+  Relationships: has author, different, cooperated with
+Step 3: Publication(?p), Author(?y), Author(?z), hasAuthor(?p, ?y), hasAuthor(?p, ?z), differentFrom(?y, ?z), cooperatedWith(?y, ?z)
+Step 4: 
+  Conditions: Publication(?p) ^ Author(?y) ^ Author(?z) ^ hasAuthor(?p, ?y) ^ hasAuthor(?p, ?z) ^ differentFrom(?y, ?z)
+  Conclusions: cooperatedWith(?y, ?z)
+Step 5: 
+Publication(?p) ^ Author(?y) ^ Author(?z) ^ hasAuthor(?p, ?y) ^ hasAuthor(?p, ?z) ^ differentFrom(?y, ?z) -> cooperatedWith(?y, ?z)
+SWRL rule: Publication(?p) ^ Author(?y) ^ Author(?z) ^ hasAuthor(?p, ?y) ^ hasAuthor(?p, ?z) ^ differentFrom(?y, ?z) -> cooperatedWith(?y, ?z)
+
+
+Example
+Rule in natural language:  If a driver has an age greater than 25, then the driver is insurable 
+
+Step 1: 
+  Conditions: a driver has an age greater than 25
+  Conclusions: the driver is insurable
+Step 2: 
+  Entities: driver, age
+  Relationships: has age, greater than, is insurable
+Step 3: Driver(?d), hasAge(?d, ?age), Age(?age), swrlb:greaterThan(?age, 25), isInsurable(?d, true)
+Step 4: 
+  Conditions: Driver(?d) ^ hasAge(?d, ?age) ^ Age(?age) ^ swrlb:greaterThan(?age, 25)
+  Conclusions: isInsurable(?d, true)
+Step 5: Driver(?d) ^ hasAge(?d, ?age) ^ Age(?age) ^ swrlb:greaterThan(?age, 25) -> isInsurable(?d, true)
+SWRL rule: Driver(?d) ^ hasAge(?d, ?age) ^ Age(?age) ^ swrlb:greaterThan(?age, 25) -> isInsurable(?d, true)
+
+
+Example
+Rule in natural language: If a vehicle has a motor, then the vehicle is a motorized vehicle 
+
+Step 1: 
+  Conditions: a vehicle has a motor
+  Conclusions: the vehicle is a motorized vehicle
+Step 2: 
+  Entities: vehicle, motor, motorized vehicle
+  Relationships:  has motor,
+Step 3: Vehicle(?v), Motor(?m), hasMotor(?v, ?m), MotorizedVehicle(?v)
+Step 4: 
+  Conditions: Vehicle(?v) ^ Motor(?m) ^ hasMotor(?v, ?m)
+  Conclusions: MotorizedVehicle(?v)
+Step 5: Vehicle(?v) ^ Motor(?m) ^ hasMotor(?v, ?m) -> MotorizedVehicle(?v)
+SWRL rule: Vehicle(?v) ^ Motor(?m) ^ hasMotor(?v, ?m) -> MotorizedVehicle(?v)
+
+
+Example 
+Rule in natural language: If a book is written by an author who is a professor, then the book is an academic book.
+
+Step 1: 
+  Conditions: a book written by an author who is a professor
+  Conclusions: the book is an academic book
+Step 2: 
+  Entities: book, author, professor, academic book
+  Relationships: written by
+Step 3: Book(?b), Author(?a), writtenBy(?b, ?a), Professor(?a), AcademicBook(?b)
+Step 4: 
+  Conditions: Book(?b) ^ Author(?a) ^ writtenBy(?b, ?a) ^ Professor(?a) 
+  Conclusions: AcademicBook(?b)
+Step 5: Book(?b) ^ Author(?a) ^ writtenBy(?b, ?a) ^ Professor(?a) -> AcademicBook(?b)
+SWRL rule: Book(?b) ^ Author(?a) ^ writtenBy(?b, ?a) ^ Professor(?a) -> AcademicBook(?b)
+
+
+Example
+Rule in natural language: If a company has a subsidiary that is located in a country and this country is a member of the "EU", then the company is a multinational corporation.
+
+Step 1: 
+  Conditions: a company has a subsidiary that is located in a country and this country is a member of the "EU"
+  Conclusions: the company is a multinational corporation
+Step 2: 
+  Entities: company, subsidiary, country, member, multinational corporation
+  Relationships: has subsidiary, is located in, is member of
+Step 3: Company(?c), hasSubsidiary(?c, ?s), Subsidiary(?s), isLocatedIn(?s, ?l), Country(?l), isMemberOf(?l, "EU"), MultinationalCorporation(?c)
+Step 4: 
+  Conditions:  Company(?c) ^ Subsidiary(?s) ^ hasSubsidiary(?c, ?s) ^ isLocatedIn(?s, ?l) ^ Country(?l) ^ isMemberOf(?l, "EU")
+  Conclusions: MultinationalCorporation(?c)
+Step 5: Company(?c) ^ Subsidiary(?s) ^ hasSubsidiary(?c, ?s) ^ isLocatedIn(?s, ?l) ^ Country(?l) ^ isMemberOf(?l, "EU") -> MultinationalCorporation(?c)
+SWRL rule: Company(?c) ^ Subsidiary(?s) ^ hasSubsidiary(?c, ?s) ^ isLocatedIn(?s, ?l) ^ Country(?l) ^ isMemberOf(?l, "EU") -> MultinationalCorporation(?c)
+
+
+Example
+Rule in natural language: If a researcher has published more than 10 papers in a top-tier conference, then the researcher is a prominent researcher and has a high citation impact.
+
+Step 1: 
+  Conditions: a researcher has published more than 10 papers in a top-tier conference
+  Conclusions: the researcher a prominent researcher and has a high citation impact
+Step 2: 
+  Entities: researcher, top-tier conference, prominent researcher, high citation impact
+  Relationships: has published, has high citation impact
+Step 3: Researcher(?r), hasPublished(?r, ?p), Conference(?p), topTierConference(?p), swrlb:greaterThan(count(?p), 10), ProminentResearcher(?r), hasHighCitationImpact(?r)
+Step 4: 
+  Conditions: Researcher(?r), hasPublished(?r, ?p), Conference(?p), topTierConference(?p), swrlb:greaterThan(count(?p), 10)
+  Conclusions: ProminentResearcher(?r), hasHighCitationImpact(?r)
+Step 5: Researcher(?r) ^ hasPublished(?r, ?p) ^ Conference(?p) ^ topTierConference(?p) ^ swrlb:greaterThan(count(?p), 10) -> ProminentResearcher(?r) ^ hasHighCitationImpact(?r)
+SWRL rule: Researcher(?r) ^ hasPublished(?r, ?p) ^ Conference(?p) ^ topTierConference(?p) ^ swrlb:greaterThan(count(?p), 10) -> ProminentResearcher(?r) ^ hasHighCitationImpact(?r)

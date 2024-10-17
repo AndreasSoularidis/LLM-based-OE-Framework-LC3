@@ -1,0 +1,111 @@
+
+Question: A new ontology needs to be created about the given aim and scope. How is this be done?
+Thought: I should search the Web for existing ontologies in the given domain. 
+Action: Search the web for existing ontologies related to this domain.
+Observation: A number of related ontologies are available in this area.
+Thought: I should only include the most widely used, and live ontologies.
+Action: Of the existing ontologies, I only keep the most widely used and live ones.
+Thought: I should get the IRIs of the existing ontologies.
+Action: Web search for the IRIs of existing ontologies.
+Observation: Now I have the IRIs of he ontologies to integrate them into the new ontology.
+Response: During the ontology engineering process i will reuse the most appropriate existing ontologies using the required prefixes.
+
+
+Question: A new class needs be added to the ontology. How will this be implemented? 
+Thought: I need to check if this class is already modelled in the current version of the ontology. 
+Action: Check if this concept is already modelled in the ontology. 
+Observation: The new class is not modelled in the current version of the ontology. 
+Thought: I need to check if this class is already modelled in another existing ontology. 
+Action: Check if this concept is already modelled in another existing ontology. 
+Observation: The new class is modelled in an existing ontology. 
+Thought: I need to search in the Web for the IRI of this class  that already existing in another ontology. 
+Action: Search in the Web for the IRI of the class. 
+Observation: The IRI of the desired class was found. 
+Thought: I need to create a new class with a representative label and comment using the owl:Class, rdfs:label, and rdfs:comment axioms.
+Action: Create a new class with a representative label and comment using the owl:Class, rdfs:label, and rdfs:comment axioms.
+Observation: The new class was added to the ontology.
+Thought: It should be investigated whether the new class models a more specific type of another class in the ontology.
+Action: Investigate whether the new class models a more specific type of another class in the ontology.
+Observation: The new class models a more specific type of another class in the ontology.
+Thought: I should position the new class as a child of the appropriate superclass using the rdfs:subClassOf axiom.
+Action: Define the new class as sub class of the related class using the rdfs:subClassOf axiom.
+Observation: The new class was positioned under the appropriate superclass.
+Thought: The new class should be connected with other existing classes. 
+Action: Explore possilbe links with existing classes in the ontology.
+Observation: There are classes that should be linked to the new class.
+Thought: I need to make the connection with these classes defining the domain and the range using the owl:ObjectProperty, rdfs:domain, and rdfs:range axioms.
+Action: Define the connection, the domain and the range of the new connection using the owl:ObjectProperty, rdfs:domain, and rdfs:range axioms.
+Observation: The new connection was inserted successfully.
+Thought: It should be investigated whether the new class is semantically equivalent with other classes of the ontology.
+Action: Investigate possible the existence of semantically equivalent class(es) to the new class in the current version of the ontology.
+Observation: There are classes that are semantically equivalent to the new class.
+Thought: I should define the equivalence between the classes using the owl:equivalentClass axiom.
+Action: Define the equivalence between the classes using the owl:equivalentClass axiom.
+Observation: The equivalences have deen successfully defined.
+Thought: It should be investigated whether the new class is are mutually exclusive with other classes of the ontology.
+Action: Investigate possible the existence of are mutually exclusive class(es) to the new class in the current version of the ontology.
+Observation: There are classes that are are mutually exclusive with the new class.
+Thought: I should define the mutually exclusive classes using the owl:disjointWith axiom.
+Action: Define the mutually exclusive classes using the owl:disjointWith axiom.
+Observation: The mutually exclusive classes have deen successfully defined.
+Response: A new class, representing the given concept was successfully added to the ontology, the new owl:ObjectProperty axioms were created and owl:equivalentClass and owl:disjointWith axioms were defined (if they exist).
+
+
+Question: A new connection between classes needs to be added to the ontology. How is this done?
+Thought: I need to define the classes involved (domain and scope) of this connection.
+Action: Investigate possible classes as domain and scope of this connection. 
+Observation: There are classes that can be defined as domain and scope for this connection.
+Thought : I need to check whether the connection between the classes is already modelled in the current version of the ontology. 
+Action: Check if this connection between the classes already exists in the ontology. 
+Observation: The desired connection does not exist in the current version of the ontology. 
+Thought : I need to add the new connection to the current ontology version using the rdfs:domain, rdfs:range, and owl:ObjectProperty axioms. 
+Action: Add the new connection to the current ontology version using the rdfs:domain, rdfs:range, and owl:ObjectProperty axioms. 
+Observation: The new object property has been successfully added to the current version of the ontology. 
+Thought: It should be investigated whether the new object property is semantically equivalent with other existing object properties of the ontology.
+Action: Investigate possible the existence of semantically equivalent object properties to the new object property in the current version of the ontology.
+Observation: There are object properties that are semantically equivalent to the new object property.
+Thought: I should define the equivalence between the object properties using the owl:equivalentProperty axiom.
+Action: Define the equivalence between the object properties using the owl:equivalentProperty axiom.
+Observation: The equivalences have deen successfully defined.
+Thought: It should be investigated whether the new object property is inverse to other existing object properties of the ontology.
+Action: Investigate possible the existence of object properties that are inverse to the new object property in the current version of the ontology.
+Observation: There are object properties that are inverse to the new object property.
+Thought: I should define the inverse of the object properties using the owl:inverseOf axiom.
+Action: Define the inverse of the object properties using the owl:inverseOf axiom.
+Observation: The inverse of property have deen successfully defined.
+Thought: It should be investigated whether the new object property is transitive to other existing object properties of the ontology.
+Action: Investigate possible the existence of object properties that are transitive to the new object property in the current version of the ontology.
+Observation: There are object properties that are transitive to the new object property.
+Thought: I should define the transitive property of the object properties using the owl:TransitiveProperty axiom.
+Action: Define the transitive property of the object properties using the owl:TransitiveProperty axiom.
+Observation: The transitive property have deen successfully defined.
+Thought: It should be investigated whether the new object property is symmetrical to other existing object properties of the ontology.
+Action: Investigate possible the existence of object properties that are symmetrical to the new object property in the current version of the ontology.
+Observation: There are object properties that are symmetrical to the new object property.
+Thought: I should define the symmetric property of the object properties using the owl:SymmetricProperty axiom.
+Action: Define the symmetrical property of the object properties using the owl:SymmetricProperty axiom.
+Observation: The transitive property have deen successfully defined.
+Response: A new object property, representing a new connection between ontology classes was successfully added to the ontology. 
+          The new owl:ObjectProperty, rdfs:domain, rdfs:range axioms were created. 
+          Moreover, the owl:equivalentProperty, owl:inverseOf, owl:TransitiveProperty, and owl:SymmetricProperty were defined (if they exist). 
+
+
+Question: A new connection between a class and a literal needs to be added to the ontology. How is this done?
+Thought: I need to define the class involved (domain) and the type of the literal (scope) of this connection.
+Action: Investigate possible classes as the domain and the appropriate type for the scope of this connection. 
+Observation: There are classes that can be defined as domain and types as scope for this connection.
+Thought: I need to check if this new connection already exists in the current version of the ontology. 
+Action: Check if this connection already exist in the ontology. 
+Observation: The desired connection does not exist in the current version of the ontology. 
+Thought : I need to add the new connection to the current ontology version using the rdfs:domain, rdfs:range, and owl:DatatypeProperty axioms. 
+Action: Add the new connection to the current ontology version using the rdfs:domain, rdfs:range, and owl:DatatypeProperty axioms. 
+Observation: The new data property has been successfully added to the current version of the ontology. 
+Thought: It should be investigated whether the data property models a more specific type of another data property in the ontology.
+Action: Investigate whether the new data property models a more specific type of another data property in the ontology.
+Observation: The new data property models a more specific type of another data property in the ontology.
+Thought: I should position the new data property as a child of the appropriate data property using the rdfs:subPropertyOf axiom.
+Action: Define the new data property as sub property of the related class using the rdfs:subPropertyOf axiom.
+Observation: The new data property was positioned under the appropriate data property.
+Response: A new data propertyrepresenting a new connection between ontology class and a literal was successfully added to the ontology. 
+          The new owl:DatatypeProperty, rdfs:domain, rdfs:range axioms were created. 
+          Moreover, the rdfs:subPropertyOf axiom was defined (if it exists).

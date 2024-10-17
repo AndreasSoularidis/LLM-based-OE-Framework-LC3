@@ -1,0 +1,82 @@
+Example 1
+Question: A new ontology needs to be created about the given aim and scope. How will this be done?
+Thought 1: I should search for existing ontologies of the given domain. 
+Action 1: Search for existing ontologies that are related to this domain.
+Observation 1: In this area, there are a number of related ontologies available.
+Thought 2: I should only include the most widely used, and live ontologies.
+Action 2: Of the existing ontologies I keep only the most widely used and live ones.
+Response: During the ontology engineering process i will reuse the most suitable existing ontologies
+
+
+Example 2
+Question: A new concept must be inserted in the ontology. How will this be implemented? 
+Thought 1: I need to check if this concept is already modeled in the current version of the ontology. 
+Action 1: Check if this concept is already modeled in the ontology. 
+Observation 1: The given concept is not modeled in the current version of the ontology. 
+Thought 2: It should be investigated if it can be added as a rdfs:subClassOf of a relevant owl:Class.
+Action 2: Investigate if the concept can be added as a rdfs:subClassOf of a relevant owl:Class
+Observation 2: The new concept needs to be added as a rdfs:subClassOfof the relevant owl:Class. Also It should be annotated using rdfs:label and rdfs:comment.
+Action 2: Create a new owl:Class for the given concept defining also the rdfs:label and a representative rdfs:comment. 
+Observation 2: The inserted owl:Class should be connected with other existing classes. 
+Thought 3: Possible links with existing owl:Class (owl:ObjectProperty) must be investigated.
+Action 3: Investigate possible links with other existing owl:Class, create the appropriate owl:ObjectProperty, and define the rdfs:domain and rdfs:range.
+Observation 3: The new owl:Class and related owl:ObjectProperty were inserted successfully.
+Thought 4: It should be investigated if one or more owl:equivalentClass exist.
+Action 4: Investigate possible existence of owl:equivalentClass. 
+Observation 4: There is owl:Class that is owl:equivalentClass with the new owl:Class.
+Thought 5: It should be investigated if owl:disjointWith owl:Class exist.
+Action 5: Investigate possible existence of owl:disjointWith classes. 
+Observation 5: There owl:Class that are owl:disjointWith the new owl:Class.
+Thought 6: So, the owl:equivalentClass and owl:disjointWith axioms should be defined 
+Action 6: Define the owl:equivalentClass and owl:disjointWith axioms.
+Observation 6: The axioms are inserted successfully.
+Response: A new owl:Class, representing the given concept was successfully inserted into the ontology, the new owl:ObjectProperty axioms were created and owl:equivalentClass and owl:disjointWith axioms were defined (if exist).
+
+
+Example 3
+Question: A new owl:ObjectProperty must be inserted. How will this be implemented?
+Thought 1: I need to check if this owl:ObjectProperty is already modelled in the current version of the ontology. 
+Action 1: Check if this owl:ObjectProperty already exist in the ontology. 
+Observation 1: The given owl:ObjectProperty does not exist in the current version of the ontology. 
+Thought 2: It should be investigated the rdfs:domain and rdfs:range of owl:ObjectProperty
+Action 2: Investigate possible rdfs:domain and rdfs:range for the owl:ObjectProperty.
+Observation 2: There are possible owl:Class for rdfs:domain and rdfs:range for the given owl:ObjectProperty.
+Thought 3: So, the owl:ObjectProperty should be inserted into the ontology.
+Action 3: Insert the owl:ObjectProperty into the ontology and define rdfs:domain and rdfs:range.
+Observation 3: The new owl:ObjectProperty was inserted.
+Thought 4: It should be investigated if owl:equivalentProperty exist.  
+Action 4: Investigate possible existence of owl:equivalentProperty.
+Observation 4: There are owl:ObjectProperty that are owl:equivalentProperty with the new owl:ObjectProperty.
+Thought 5: It should be investigated if owl:inverseOf exist.  
+Action 5: Investigate possible existence of owl:inverseOf.
+Observation 5: There is owl:ObjectProperty that is owl:inverseOf of the new owl:ObjectProperty.
+Thought 6: It should be investigated if owl:TransitiveProperty exist.  
+Action 6: Investigate possible existence of owl:TransitiveProperty.
+Observation 6: There is owl:ObjectProperty that is owl:TransitiveProperty with the new owl:ObjectProperty.
+Thought 7: It should be investigated if an owl:SymmetricProperty exists.  
+Action 7: Investigate possible existence of an owl:SymmetricProperty.
+Observation 7: There is owl:ObjectProperty that is owl:SymmetricProperty with the new owl:ObjectProperty.
+Thought 9: So, any owl:equivalentProperty, owl:inverseOf, owl:TransitiveProperty, and owl:SymmetricProperty axioms should be defined. 
+Action 9: Define the owl:equivalentProperty, owl:inverseOf, owl:TransitiveProperty, and owl:SymmetricProperty axioms.
+Observation 9: The axioms were inserted successfully.
+Response: A new owl:ObjectProperty was successfully inserted into the ontology. 
+
+
+Example 4
+Question: A new owl:DatatypeProperty must be inserted. How will this be implemented?
+Thought 1: I need to check if this new owl:DatatypeProperty already exists in the current version of the ontology. 
+Action 1: Check if this owl:DatatypeProperty already exist in the ontology. 
+Observation 1: The given owl:DatatypeProperty does not exist in the current version of the ontology. 
+Thought 2: It should be investigated the rdfs:domain and rdfs:range of the new owl:DatatypeProperty
+Action 2: Investigate possible rdfs:domain and rdfs:range for the new owl:DatatypeProperty
+Observation 2: There are possible concepts for rdfs:domain and rdfs:range for the new owl:DatatypeProperty
+Thought 3: So, the owl:DatatypeProperty should be inserted into the ontology.
+Action 3: Insert the owl:DatatypeProperty into the ontology and define rdfs:domain and rdfs:range.
+Observation 3: The new owl:DatatypeProperty was inserted. 
+Thought 4: It should be investigated if a rdfs:subPropertyOf exists.  
+Action 4: Investigate possible existence of rdfs:subPropertyOf.
+Observation 4: There is an owl:DatatypeProperty that is rdfs:subPropertyOf of the new owl:DatatypeProperty.
+Thought 5: So, the rdfs:subPropertyOf axiom should be defined. 
+Action 5: Define the trdfs:subPropertyOf axioms. 
+Observation 5: The axioms were inserted successfully.
+Response: A new owl:DatatypeProperty and the related axioms were successfully inserted into the ontology. 

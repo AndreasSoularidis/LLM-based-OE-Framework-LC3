@@ -1,0 +1,22 @@
+
+Fire Incident 9 Detailed Report
+
+- Date of Incident: July 6, 2023
+- Time Noted: Inception at 13:00, Partial Control by 15:00
+- Notification: Malicious, by mistake
+- Location Details: Aetorahi-Dafni-Vouprasiou, Andravidas-Kyllinis, Elis
+- Geographical Coordinates: 
+  - Latitude: 21.4715556
+  - Longitude: 37.9357536
+- Altitude of Incident: 182 meters
+- Starting Point: Garbage-landfill area affected
+- Possible Cause of Fire: Incineration of waste
+- Area Burnt in Acres: 20 acres, including agricultural lands and crop residues
+- Determination of Offender: Yes
+- Forces Involved: 20 permanent fire officers, 9 walking departments of the fire department, volunteer firefighters
+- Investment Instruments: Firetrucks, tankers, various machines
+- Method of Deposit: By aerial means, with ground and pedestrian sections
+- Water Use: 360 cubic meters
+- Foam Usage: Not specified
+
+This report compiles the comprehensive details of a fire incident, highlighting the cause, affected areas, response composition, and firefighting resources employed to manage the situation effectively.
