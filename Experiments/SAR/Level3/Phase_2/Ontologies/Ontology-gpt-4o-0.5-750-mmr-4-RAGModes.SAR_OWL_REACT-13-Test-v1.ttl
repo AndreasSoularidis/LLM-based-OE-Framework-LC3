@@ -1,0 +1,153 @@
+@prefix : <http://example.com/owl/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar> rdf:type owl:Ontology .
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:ObservationData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+:location rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:priority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:urgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:temperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:windSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:humidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:weatherForecast rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:sensorData rdf:type owl:ObjectProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string .
+
+:satelliteData rdf:type owl:ObjectProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string .
+
+:socialMediaData rdf:type owl:ObjectProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string .
+
+:creationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:dateTime .
+
+:supportService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range xsd:string .
+
+:missionLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:urgentMissionLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:populationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:float .
+
+:involvedPeopleLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:burntArea rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:float .
+
+:buildingsAffected rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:vehiclesAffected rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:rescuedPeople rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:animalsAffected rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:accidentsOrDeaths rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:firefighters rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:volunteers rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:equipment rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:firetrucks rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:int .
+
+:tankers rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:int .
+
+:portableTools rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:hasUncle owl:propertyChainAxiom ( :hasFather :hasBrother ) .
+
+:Person rdf:type owl:Class .
+:Person owl:equivalentClass :Human .
+:Person rdfs:comment "Represents the set of all people."^^xsd:string .
+
+:hasSSN rdf:type owl:DataProperty .
+
+:Parent owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf ( :Mother :Father )
+] .
+
+:Parent owl:equivalentClass [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasChild ;
+  owl:someValuesFrom :Person
+] .
+
+:Grandfather rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:intersectionOf ( :Man :Parent )
+] .
+
+[] rdf:type owl:AllDisjointClasses ;
+    owl:members ( :Mother :Father :YoungChild ) .

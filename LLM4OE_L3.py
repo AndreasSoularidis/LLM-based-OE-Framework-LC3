@@ -2,14 +2,13 @@ from dotenv import load_dotenv
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
 from langchain_community.vectorstores import FAISS
 from FileLoaders import FileLoader
 from OntologyExtractor import OntologyExtractor
 from ChatExtractor import ChatExtractor
 from Modes import RAGModes
 from ModelLoader import ModelLoader
+from ChainBuilder import Builder
 
 
 load_dotenv()
@@ -20,7 +19,7 @@ CHUNK_SIZE = 750
 CHUNK_OVERLAP = 0
 SEARCH_TYPE = 'mmr'
 K = 4
-MODE = RAGModes.SAR_OWL_REACT
+MODE = RAGModes.SAR_REACT
 ITERATION = 13
 
 # Data sources
@@ -116,46 +115,7 @@ def process_chat(question, sar_retriever, owl_retriever, react_retriever):
     """
         
     custom_rag_prompt = PromptTemplate.from_template(template)
-    match MODE.value:
-      case 1:
-        rag_chain = (
-          { "sar_context": sar_retriever | format_docs, "question": RunnablePassthrough()}
-          | { "owl_context": owl_retriever | format_docs, "question": RunnablePassthrough()}
-          | {"react_context": react_retriever | format_docs, "question": RunnablePassthrough()}
-          | custom_rag_prompt
-          | model
-          | StrOutputParser()
-        )
-      case 2:
-        rag_chain = (
-          { "sar_context": sar_retriever | format_docs, "question": RunnablePassthrough()}
-          | {"react_context": react_retriever | format_docs, "question": RunnablePassthrough()}
-          | custom_rag_prompt
-          | model
-          | StrOutputParser()
-        )
-      case 3:
-        rag_chain = (
-          {"react_context": react_retriever | format_docs, "question": RunnablePassthrough()}
-          | custom_rag_prompt
-          | model
-          | StrOutputParser()
-        )
-      case 5:
-        rag_chain = (
-          {"sar_context": sar_retriever | format_docs, "question": RunnablePassthrough()}
-          | custom_rag_prompt
-          | model
-          | StrOutputParser()
-        )
-      case _:
-        rag_chain = (
-          custom_rag_prompt
-          | model
-          | StrOutputParser()
-        )
-      # case _:
-        # raise "No module selected"
+    rag_chain = Builder.create_rag_chain(MODE.value, sar_retriever, owl_retriever, react_retriever, model, custom_rag_prompt)
 
     response = rag_chain.invoke(question)
 
