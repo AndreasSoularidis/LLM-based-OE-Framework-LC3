@@ -1,0 +1,121 @@
+**Iterative Discussion:**
+
+**Knowledge Engineer:** Let's start by identifying the key concepts and relationships we need to model for the Search and Rescue (SAR) missions in the context of wildfire incidents. We need to ensure our ontology can answer all the competency questions and cover the requirements.
+
+**Domain Expert:** Absolutely. We need to include concepts like "Incident," "WeatherCondition," "SensorData," "Mission," and "Service." For incidents, we should capture details like location, priority, and urgency. Weather conditions should include variables like temperature, wind speed, and humidity.
+
+**Knowledge Worker:** I agree. We also need to consider the data sources, such as sensors and social media, and how they contribute to understanding the situation. The ontology should also represent the relationships between different services involved in wildfire management.
+
+**Knowledge Engineer:** Good points. Let's start by defining the main classes and properties. We can use existing ontologies where applicable to ensure interoperability. I'll begin by creating the basic structure.
+
+**Domain Expert:** Don't forget to include subclasses for different types of incidents and weather conditions. We should also define properties to capture the relationships between these concepts.
+
+**Knowledge Worker:** We should also consider how to represent the status of forestry works and the classification of smoke. These are important for assessing the situation on the ground.
+
+**Knowledge Engineer:** Agreed. I'll incorporate these elements into the ontology. Let's iterate on this and refine as needed.
+
+**Generated Ontology in Turtle (TTL) Format:**
+
+```turtle
+@prefix : <http://example.com/sar-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasUrgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasTemperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasForecast rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:collectedFrom rdf:type owl:ObjectProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range :DataSource .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:dateTime .
+
+:hasSmokeClassification rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string .
+
+:involvesVulnerableObject rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :VulnerableObject .
+
+:hasForestryWorkStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:offersService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:hasMissionLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:involvesPeople rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Person .
+
+:Location rdf:type owl:Class .
+:DataSource rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+:Person rdf:type owl:Class .
+
+:WeatherCondition owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:unionOf (:Temperature :WindSpeed :Humidity)
+] .
+
+:Incident owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:intersectionOf (:Location :Priority :Urgency)
+] .
+
+:Mission owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:intersectionOf (:Service :Location)
+] .
+```
+
+**Knowledge Engineer:** This initial version of the ontology captures the main concepts and relationships. Let's review it to ensure it answers all the competency questions and meets the requirements.
+
+**Domain Expert:** It looks comprehensive. We should test it against the competency questions to verify its completeness.
+
+**Knowledge Worker:** Agreed. Let's iterate on this and refine as needed to ensure it covers all aspects of SAR missions in wildfire incidents.

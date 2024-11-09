@@ -1,0 +1,88 @@
+@prefix : <http://example.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:Urgency rdf:type owl:Class .
+:WildfireIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:Smoke rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:FireBreak rdf:type owl:Class ; rdfs:subClassOf :Incident .
+
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Support rdf:type owl:Class .
+
+:Location rdf:type owl:Class .
+:PopulationDensity rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+
+:hasLocation rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Location .
+:hasPriority rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Priority .
+:hasUrgency rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Urgency .
+:collectedFrom rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SensorData, :SatelliteData, :SocialMediaData .
+:hasCreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ; rdfs:range xsd:dateTime .
+:providesSupport rdf:type owl:ObjectProperty ; rdfs:domain :Service ; rdfs:range :Support .
+:followsMission rdf:type owl:ObjectProperty ; rdfs:domain :Support ; rdfs:range :Mission .
+:hasLocation rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Location .
+:hasPopulationDensity rdf:type owl:ObjectProperty ; rdfs:domain :Location ; rdfs:range :PopulationDensity .
+:involvesVulnerableObject rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :VulnerableObject .
+
+:Temperature rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WeatherForecast rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+
+:WeatherCondition rdf:type owl:Class .
+
+:hasTemperature rdf:type owl:ObjectProperty ; rdfs:domain :WeatherCondition ; rdfs:range :Temperature .
+:hasWindSpeed rdf:type owl:ObjectProperty ; rdfs:domain :WeatherCondition ; rdfs:range :WindSpeed .
+:hasHumidity rdf:type owl:ObjectProperty ; rdfs:domain :WeatherCondition ; rdfs:range :Humidity .
+:hasWeatherForecast rdf:type owl:ObjectProperty ; rdfs:domain :WeatherCondition ; rdfs:range :WeatherForecast .
+
+:Incident rdf:type owl:Class .
+:WildfireIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:Smoke rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:FireBreak rdf:type owl:Class ; rdfs:subClassOf :Incident .
+
+:hasIncidentLocation rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Location .
+:hasIncidentPriority rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Priority .
+:hasIncidentUrgency rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Urgency .
+
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+
+:collectedFromSensor rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SensorData .
+:collectedFromSatellite rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SatelliteData .
+:collectedFromSocialMedia rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SocialMediaData .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData ; rdfs:range xsd:dateTime .
+:hasCreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :SatelliteData ; rdfs:range xsd:dateTime .
+:hasCreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :SocialMediaData ; rdfs:range xsd:dateTime .
+
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Support rdf:type owl:Class .
+
+:providesSupport rdf:type owl:ObjectProperty ; rdfs:domain :Service ; rdfs:range :Support .
+:followsMission rdf:type owl:ObjectProperty ; rdfs:domain :Support ; rdfs:range :Mission .
+:hasMissionLocation rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Location .
+
+:PopulationDensity rdf:type owl:Class .
+:hasPopulationDensity rdf:type owl:ObjectProperty ; rdfs:domain :Location ; rdfs:range :PopulationDensity .
+
+:VulnerableObject rdf:type owl:Class .
+:involvesVulnerableObject rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :VulnerableObject .

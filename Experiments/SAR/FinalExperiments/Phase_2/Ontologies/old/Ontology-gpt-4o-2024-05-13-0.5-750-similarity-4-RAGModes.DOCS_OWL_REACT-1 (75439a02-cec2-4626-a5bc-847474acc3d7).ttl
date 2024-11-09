@@ -1,0 +1,97 @@
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type :WeatherCondition .
+:WindSpeed rdf:type :WeatherCondition .
+:Humidity rdf:type :WeatherCondition .
+:WeatherForecast rdf:type :WeatherCondition .
+:Measurement rdf:type owl:Class .
+:Forecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:FirstResponderInput rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:Sensor rdf:type owl:Class .
+:Satellite rdf:type owl:Class .
+:SocialMediaPost rdf:type owl:Class .
+:FirefightingService rdf:type :Service .
+:SupportService rdf:type :Service .
+
+:hasImpact rdf:type owl:ObjectProperty .
+:hasWeatherCondition rdf:type owl:ObjectProperty .
+:hasSensorData rdf:type owl:ObjectProperty .
+:hasSocialMediaData rdf:type owl:ObjectProperty .
+:hasFirstResponderInput rdf:type owl:ObjectProperty .
+:hasMission rdf:type owl:ObjectProperty .
+:hasService rdf:type owl:ObjectProperty .
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:DatatypeProperty .
+:hasUrgency rdf:type owl:DatatypeProperty .
+:hasTemperature rdf:type owl:DatatypeProperty .
+:hasWindSpeed rdf:type owl:DatatypeProperty .
+:hasHumidity rdf:type owl:DatatypeProperty .
+:hasWeatherForecast rdf:type owl:DatatypeProperty .
+:hasCreationDate rdf:type owl:DatatypeProperty .
+:hasClassificationType rdf:type owl:DatatypeProperty .
+:involvesVulnerableObject rdf:type owl:ObjectProperty .
+:hasForestryWorkStatus rdf:type owl:DatatypeProperty .
+:offersService rdf:type owl:ObjectProperty .
+:followsMission rdf:type owl:ObjectProperty .
+:hasMissionLocation rdf:type owl:ObjectProperty .
+:hasUrgentMissionLocation rdf:type owl:ObjectProperty .
+:hasPopulationDensity rdf:type owl:DatatypeProperty .
+:hasInvolvedPeopleLocation rdf:type owl:ObjectProperty .
+
+:Incident rdfs:comment "Represents a wildfire incident."^^xsd:string .
+:Impact rdfs:comment "Represents the impact of a wildfire incident."^^xsd:string .
+:WeatherCondition rdfs:comment "Represents weather conditions relevant to wildfire incidents."^^xsd:string .
+:Temperature rdfs:comment "Represents the temperature condition."^^xsd:string .
+:WindSpeed rdfs:comment "Represents the wind speed condition."^^xsd:string .
+:Humidity rdfs:comment "Represents the humidity condition."^^xsd:string .
+:WeatherForecast rdfs:comment "Represents the weather forecast."^^xsd:string .
+:Measurement rdfs:comment "Represents a measurement of a weather condition."^^xsd:string .
+:Forecast rdfs:comment "Represents a forecast of a weather condition."^^xsd:string .
+:SensorData rdfs:comment "Represents data collected from sensors."^^xsd:string .
+:SocialMediaData rdfs:comment "Represents data collected from social media."^^xsd:string .
+:FirstResponderInput rdfs:comment "Represents input from first responders."^^xsd:string .
+:Mission rdfs:comment "Represents a mission during a wildfire incident."^^xsd:string .
+:Service rdfs:comment "Represents a service involved in wildfire management."^^xsd:string .
+:Location rdfs:comment "Represents a location relevant to a wildfire incident."^^xsd:string .
+:Sensor rdfs:comment "Represents a sensor device."^^xsd:string .
+:Satellite rdfs:comment "Represents a satellite device."^^xsd:string .
+:SocialMediaPost rdfs:comment "Represents a social media post."^^xsd:string .
+:FirefightingService rdfs:comment "Represents a firefighting service."^^xsd:string .
+:SupportService rdfs:comment "Represents a support service."^^xsd:string .
+
+:hasImpact rdfs:comment "Links an incident to its impact."^^xsd:string .
+:hasWeatherCondition rdfs:comment "Links an incident to its weather condition."^^xsd:string .
+:hasSensorData rdfs:comment "Links an incident to its sensor data."^^xsd:string .
+:hasSocialMediaData rdfs:comment "Links an incident to its social media data."^^xsd:string .
+:hasFirstResponderInput rdfs:comment "Links an incident to its first responder input."^^xsd:string .
+:hasMission rdfs:comment "Links an incident to its mission."^^xsd:string .
+:hasService rdfs:comment "Links an incident to its service."^^xsd:string .
+:hasLocation rdfs:comment "Links an incident to its location."^^xsd:string .
+:hasPriority rdfs:comment "Represents the priority of an incident."^^xsd:string .
+:hasUrgency rdfs:comment "Represents the urgency of an incident."^^xsd:string .
+:hasTemperature rdfs:comment "Represents the temperature of a weather condition."^^xsd:string .
+:hasWindSpeed rdfs:comment "Represents the wind speed of a weather condition."^^xsd:string .
+:hasHumidity rdfs:comment "Represents the humidity of a weather condition."^^xsd:string .
+:hasWeatherForecast rdfs:comment "Represents the weather forecast of a weather condition."^^xsd:string .
+:hasCreationDate rdfs:comment "Represents the creation date of data."^^xsd:string .
+:hasClassificationType rdfs:comment "Represents the classification type of smoke."^^xsd:string .
+:involvesVulnerableObject rdfs:comment "Links an incident to its involved vulnerable objects."^^xsd:string .
+:hasForestryWorkStatus rdfs:comment "Represents the status of forestry works."^^xsd:string .
+:offersService rdfs:comment "Links a service to its offered support."^^xsd:string .
+:followsMission rdfs:comment "Links a service to its followed mission."^^xsd:string .
+:hasMissionLocation rdfs:comment "Represents the location of a mission."^^xsd:string .
+:hasUrgentMissionLocation rdfs:comment "Represents the location of the most urgent mission."^^xsd:string .
+:hasPopulationDensity rdfs:comment "Represents the population density in an area."^^xsd:string .
+:hasInvolvedPeopleLocation rdfs:comment "Represents the location of involved people."^^xsd:string .

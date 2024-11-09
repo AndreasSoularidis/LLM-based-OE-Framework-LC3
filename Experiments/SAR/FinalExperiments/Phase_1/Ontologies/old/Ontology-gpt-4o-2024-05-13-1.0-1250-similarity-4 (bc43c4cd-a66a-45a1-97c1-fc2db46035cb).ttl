@@ -1,0 +1,138 @@
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar> rdf:type owl:Ontology .
+
+### Classes ###
+:Incident rdf:type owl:Class ;
+          rdfs:comment "Represents an incident during a wildfire."^^xsd:string .
+
+:WeatherCondition rdf:type owl:Class ;
+                  rdfs:comment "Represents the weather conditions impacting wildfires."^^xsd:string .
+
+:Observation rdf:type owl:Class ;
+             rdfs:comment "Represents data observations from various sources."^^xsd:string .
+
+:Mission rdf:type owl:Class ;
+         rdfs:comment "Represents a mission undertaken during wildfire incidents."^^xsd:string .
+
+:Service rdf:type owl:Class ;
+         rdfs:comment "Represents services offered in support of wildfire management."^^xsd:string .
+
+:DataSource rdf:type owl:Class ;
+            rdfs:comment "Represents the source of data, such as sensors, satellites, or social media."^^xsd:string .
+
+:Impact rdf:type owl:Class ;
+        rdfs:comment "Represents the impact of the incident."^^xsd:string .
+
+:Priority rdf:type owl:Class ;
+          rdfs:comment "Represents the priority level of an incident."^^xsd:string .
+
+### Object Properties ###
+:hasLocation rdf:type owl:ObjectProperty ;
+             rdfs:domain :Incident, :Mission, :Observation ;
+             rdfs:range  :Location ;
+             rdfs:comment "Indicates the location of an incident, mission, or observation."^^xsd:string .
+
+:hasPriority rdf:type owl:ObjectProperty ;
+             rdfs:domain :Incident ;
+             rdfs:range  :Priority ;
+             rdfs:comment "Indicates the priority level of an incident."^^xsd:string .
+
+:isPartOf rdf:type owl:ObjectProperty ;
+          rdfs:domain :Mission, :Service ;
+          rdfs:range  :Incident ;
+          rdfs:comment "Indicates that a mission or a service is part of an incident."^^xsd:string .
+
+:hasSupportService rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Mission ;
+                   rdfs:range  :Service ;
+                   rdfs:comment "Indicates the support service associated with a mission."^^xsd:string .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Incident ;
+                     rdfs:range  :WeatherCondition ;
+                     rdfs:comment "Indicates the weather conditions associated with an incident."^^xsd:string .
+
+:hasDataSource rdf:type owl:ObjectProperty ;
+              rdfs:domain :Observation ;
+              rdfs:range  :DataSource ;
+              rdfs:comment "Indicates the source of an observation."^^xsd:string .
+
+### Data Properties ###
+:priorityLevel rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Incident ;
+               rdfs:range xsd:int ;
+               rdfs:comment "Represents the priority level of an incident."^^xsd:string .
+
+:temperature rdf:type owl:DatatypeProperty ;
+             rdfs:domain :WeatherCondition ;
+             rdfs:range xsd:float ;
+             rdfs:comment "Represents the temperature."^^xsd:string .
+
+:windSpeed rdf:type owl:DatatypeProperty ;
+           rdfs:domain :WeatherCondition ;
+           rdfs:range xsd:float ;
+           rdfs:comment "Represents the wind speed."^^xsd:string .
+
+:humidity rdf:type owl:DatatypeProperty ;
+          rdfs:domain :WeatherCondition ;
+          rdfs:range xsd:float ;
+          rdfs:comment "Represents the humidity level."^^xsd:string .
+
+:forecast rdf:type owl:DatatypeProperty ;
+          rdfs:domain :WeatherCondition ;
+          rdfs:range xsd:string ;
+          rdfs:comment "Represents the weather forecast."^^xsd:string .
+
+:creationDate rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Observation ;
+              rdfs:range xsd:dateTime ;
+              rdfs:comment "Represents the creation date of the observation."^^xsd:string .
+
+:vulnerableObject rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Incident ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Represents vulnerable objects involved in the incident."^^xsd:string .
+
+:status rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Observation, :Mission ;
+        rdfs:range xsd:string ;
+        rdfs:comment "Represents the status of an observation or mission."^^xsd:string .
+
+### Equivalent Classes and Properties ###
+:Incident rdf:type owl:Class ;
+          owl:equivalentClass [
+              rdf:type owl:Class ;
+              owl:intersectionOf ( :Event [
+                  rdf:type owl:Restriction ;
+                  owl:onProperty :hasPriority ;
+                  owl:someValuesFrom xsd:int
+              ])
+          ] .
+
+:WeatherCondition rdf:type owl:Class ;
+                  owl:equivalentClass [
+                      rdf:type owl:Class ;
+                      owl:intersectionOf (
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :temperature ;
+                            owl:someValuesFrom xsd:float
+                          ]
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :windSpeed ;
+                            owl:someValuesFrom xsd:float
+                          ]
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :humidity ;
+                            owl:someValuesFrom xsd:float
+                          ]
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :forecast ;
+                            owl:someValuesFrom xsd:string
+                          ]
+                      )
+                  ] .

@@ -1,36 +1,34 @@
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import Chroma
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-from langchain.retrievers import EnsembleRetriever
 from langchain_community.vectorstores import FAISS
 from FileLoaders import FileLoader
 from OntologyExtractor import OntologyExtractor
 from ChatExtractor import ChatExtractor
 from Modes import RAGModes
+from ModelLoader import ModelLoader
 
 
 load_dotenv()
-# gpt-4o-2024-08-06
 # Hyperparameters
-MODEL = "gpt-4o-2024-05-13"
-TEMPERATURE = 1.0
-CHUNK_SIZE = 1000
+MODEL = "gpt-4o"
+TEMPERATURE = 0.5
+CHUNK_SIZE = 750
 CHUNK_OVERLAP = 0
-SEARCH_TYPE = 'similarity'
+SEARCH_TYPE = 'mmr'
 K = 4
-MODE = RAGModes.DOCS_OWL_REACT
-ITERATION = 17
+MODE = RAGModes.SAR_OWL_REACT
+ITERATION = 13
 
-model = ChatOpenAI(
-  model = MODEL,
-  temperature = TEMPERATURE
-)
+# Data sources
+SAR_DOCUMENTS = "data/SAR_docs_text"
+OWL_DOCUMENTATION = "https://www.w3.org/2007/OWL/draft/owl2-primer/#Classes.2C_Properties.2C_and_Individuals_.E2.80.93_And_Basic_Modeling_With_Them"
+REACT_DOCUMENTS = "data/ReAct-v2"
 
+model = ModelLoader.load_llm(MODEL, TEMPERATURE)
 
 def split_documents(docs, chunk_size, chunk_overlap):
   splitter = RecursiveCharacterTextSplitter(
@@ -100,8 +98,8 @@ def process_chat(question, sar_retriever, owl_retriever, react_retriever):
 
     if sar_retriever:
       template += """
-      The following data describe real Search and Rescue (SAR) missions. You should extract related concepts (classes
-      and properties) and add them to the generated ontology.
+      The following data describe real Search and Rescue (SAR) missions. You should EXTRACT related concepts (CLASSES
+      and OBJECT PROPERTIES) and add them to the generated ontology. Try to extract as much relevant classes and properies as possible.
       START OF DOMAIN DATA
       
       {sar_context} 
@@ -113,41 +111,51 @@ def process_chat(question, sar_retriever, owl_retriever, react_retriever):
       The iterative discussion stops when the generated ontology answers all the given competency questions and covers all the requirements of the ontology. 
       Thus create as many classes and properties as possible.
       Feel free to use domain knowledge to extend the ontology with classes and properties to make it as comprehensive as possible. 
+      DO NOT STOP until cover all the given requirements.
       Present the iterative discussion and the generated ontology in Turtle (TTL) format WITHOUT individuals. 
     """
         
     custom_rag_prompt = PromptTemplate.from_template(template)
-
-    if sar_retriever and owl_retriever and react_retriever:
-      rag_chain = (
-        { "sar_context": sar_retriever | format_docs, "question": RunnablePassthrough()}
-        | { "owl_context": owl_retriever | format_docs, "question": RunnablePassthrough()}
-        | {"react_context": react_retriever | format_docs, "question": RunnablePassthrough()}
-        | custom_rag_prompt
-        | model
-        | StrOutputParser()
-      )
-    elif owl_retriever and react_retriever:
-      rag_chain = (
-        { "owl_context": owl_retriever | format_docs, "question": RunnablePassthrough()}
-        | {"react_context": react_retriever | format_docs, "question": RunnablePassthrough()}
-        | custom_rag_prompt
-        | model
-        | StrOutputParser()
-      )
-    elif react_retriever:
-      rag_chain = (
-        {"react_context": react_retriever | format_docs, "question": RunnablePassthrough()}
-        | custom_rag_prompt
-        | model
-        | StrOutputParser()
-      )
-    else:
-      rag_chain = (
-        custom_rag_prompt
-        | model
-        | StrOutputParser()
-      )
+    match MODE.value:
+      case 1:
+        rag_chain = (
+          { "sar_context": sar_retriever | format_docs, "question": RunnablePassthrough()}
+          | { "owl_context": owl_retriever | format_docs, "question": RunnablePassthrough()}
+          | {"react_context": react_retriever | format_docs, "question": RunnablePassthrough()}
+          | custom_rag_prompt
+          | model
+          | StrOutputParser()
+        )
+      case 2:
+        rag_chain = (
+          { "sar_context": sar_retriever | format_docs, "question": RunnablePassthrough()}
+          | {"react_context": react_retriever | format_docs, "question": RunnablePassthrough()}
+          | custom_rag_prompt
+          | model
+          | StrOutputParser()
+        )
+      case 3:
+        rag_chain = (
+          {"react_context": react_retriever | format_docs, "question": RunnablePassthrough()}
+          | custom_rag_prompt
+          | model
+          | StrOutputParser()
+        )
+      case 5:
+        rag_chain = (
+          {"sar_context": sar_retriever | format_docs, "question": RunnablePassthrough()}
+          | custom_rag_prompt
+          | model
+          | StrOutputParser()
+        )
+      case _:
+        rag_chain = (
+          custom_rag_prompt
+          | model
+          | StrOutputParser()
+        )
+      # case _:
+        # raise "No module selected"
 
     response = rag_chain.invoke(question)
 
@@ -156,9 +164,9 @@ def process_chat(question, sar_retriever, owl_retriever, react_retriever):
 
 if __name__ == '__main__':
   print("Initialization..")
-  sar_docs = FileLoader.get_pdf_loader("data/Refined")
-  owl_docs = FileLoader.get_web_loader("https://www.w3.org/2007/OWL/draft/owl2-primer/#Classes.2C_Properties.2C_and_Individuals_.E2.80.93_And_Basic_Modeling_With_Them")
-  react_docs = FileLoader.get_txt_loader("data")
+  sar_docs = FileLoader.get_txt_loader(SAR_DOCUMENTS)
+  owl_docs = FileLoader.get_web_loader(OWL_DOCUMENTATION)
+  react_docs = FileLoader.get_txt_loader(REACT_DOCUMENTS)
 
   sar_docs = split_documents(sar_docs, CHUNK_SIZE, CHUNK_OVERLAP)
   owl_docs = split_documents(owl_docs, CHUNK_SIZE, CHUNK_OVERLAP)
@@ -172,10 +180,7 @@ if __name__ == '__main__':
   owl_retriever = owl_vector_store.as_retriever(search_type=SEARCH_TYPE, search_kwargs={"k":K})
   react_retriever = react_vector_store.as_retriever(search_type=SEARCH_TYPE, search_kwargs={"k":K})
 
-  # ensemble_retriever = EnsembleRetriever(retrievers=[sar_retriever, owl_retriever, react_retriever])
-
-
-  filename = f"{MODEL}-{TEMPERATURE}-{CHUNK_SIZE}-{SEARCH_TYPE}-{K}-{MODE}-{ITERATION}"
+  filename = f"{MODEL}-{TEMPERATURE}-{CHUNK_SIZE}-{SEARCH_TYPE}-{K}-{MODE}-{ITERATION}-Test"
   ontology_extractor = OntologyExtractor("SAR/Level3/Phase_2/Ontologies", "Ontology-" + filename)
   chat_extractor = ChatExtractor("SAR/Level3/Phase_2/Discussions", "Chat-" + filename)
   
@@ -185,8 +190,20 @@ if __name__ == '__main__':
     
     if user_input.lower().strip() == "exit":
       break
-
-    response = process_chat(user_input, sar_retriever, owl_retriever, react_retriever) 
+    
+    match MODE.value:
+      case 1:
+        response = process_chat(user_input, sar_retriever, owl_retriever, react_retriever) 
+      case 2:
+        response = process_chat(user_input, sar_retriever, None, react_retriever)
+      case 3:
+        response = process_chat(user_input, None, None, react_retriever)
+      case 4:
+        response = process_chat(user_input, None, None, None)
+      case 5:
+        response = process_chat(user_input, sar_retriever, None, None)
+      case _:
+        print("Error: No mode was selected")
 
     print(response)
 

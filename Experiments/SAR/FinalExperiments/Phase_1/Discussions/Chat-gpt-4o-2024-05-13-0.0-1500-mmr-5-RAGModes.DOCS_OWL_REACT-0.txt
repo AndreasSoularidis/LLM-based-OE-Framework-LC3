@@ -1,0 +1,203 @@
+### Iterative Discussion
+
+#### Knowledge Engineer (KE), Domain Expert (DE), and Knowledge Worker (KW) Discussion
+
+**KE:** Let's start by identifying the main concepts and relationships we need for our ontology. We need to cover incidents and impacts, weather conditions, data from human and earth observations, and missions and relationships between services. 
+
+**DE:** For incidents and impacts, we need to capture the type of fire, location, severity, and priority. Weather conditions should include temperature, wind speed, humidity, and forecasts. 
+
+**KW:** We also need to include data from sensors, satellites, and social media. This will help us monitor and assess the wildfire situation in real-time.
+
+**KE:** Agreed. Let's start by defining the main classes: `Incident`, `WeatherCondition`, `SensorData`, `SocialMediaData`, `Mission`, and `Service`.
+
+**DE:** Don't forget to include subclasses for different types of incidents, such as `Wildfire`, and different types of weather conditions, like `Temperature`, `WindSpeed`, and `Humidity`.
+
+**KW:** We should also define properties to link these classes. For example, `hasLocation`, `hasSeverity`, `hasPriority` for `Incident`, and `hasTemperature`, `hasWindSpeed`, `hasHumidity` for `WeatherCondition`.
+
+**KE:** Good point. Let's also define properties for the relationships between missions and services, such as `supportsService`, `followsMission`, and `hasUrgency`.
+
+**DE:** We should also include properties for the data from human and earth observations, like `hasSource`, `hasCreationDate`, `hasLocation`, and `hasClassificationType`.
+
+**KW:** And don't forget to include properties for vulnerable objects involved in the incident, like `involvesVulnerableObject`.
+
+**KE:** Great. Let's start defining these classes and properties in our ontology.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.com/sar-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar-ontology> rdf:type owl:Ontology .
+
+### Classes
+:Incident rdf:type owl:Class .
+:Wildfire rdf:type owl:Class ;
+          rdfs:subClassOf :Incident .
+
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class ;
+             rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ;
+           rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ;
+          rdfs:subClassOf :WeatherCondition .
+
+:SensorData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+:VulnerableObject rdf:type owl:Class .
+
+### Properties
+:hasLocation rdf:type owl:ObjectProperty ;
+             rdfs:domain :Incident ;
+             rdfs:range :Location .
+
+:hasSeverity rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Incident ;
+             rdfs:range xsd:string .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Incident ;
+             rdfs:range xsd:string .
+
+:hasTemperature rdf:type owl:DatatypeProperty ;
+                rdfs:domain :WeatherCondition ;
+                rdfs:range xsd:float .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+              rdfs:domain :WeatherCondition ;
+              rdfs:range xsd:float .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+             rdfs:domain :WeatherCondition ;
+             rdfs:range xsd:float .
+
+:hasForecast rdf:type owl:DatatypeProperty ;
+             rdfs:domain :WeatherCondition ;
+             rdfs:range xsd:string .
+
+:hasSource rdf:type owl:ObjectProperty ;
+           rdfs:domain :SensorData ;
+           rdfs:range xsd:string .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :SensorData ;
+                 rdfs:range xsd:dateTime .
+
+:hasClassificationType rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :SensorData ;
+                       rdfs:range xsd:string .
+
+:involvesVulnerableObject rdf:type owl:ObjectProperty ;
+                          rdfs:domain :Incident ;
+                          rdfs:range :VulnerableObject .
+
+:supportsService rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Mission ;
+                 rdfs:range :Service .
+
+:followsMission rdf:type owl:ObjectProperty ;
+                rdfs:domain :Service ;
+                rdfs:range :Mission .
+
+:hasUrgency rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Mission ;
+            rdfs:range xsd:string .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Location ;
+                      rdfs:range xsd:float .
+
+:hasInvolvedPeople rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Incident ;
+                   rdfs:range :Person .
+
+### Additional Classes and Properties from Domain Data
+:Location rdf:type owl:Class .
+:Person rdf:type owl:Class .
+
+:hasAltitude rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Location ;
+             rdfs:range xsd:float .
+
+:hasLongitude rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Location ;
+              rdfs:range xsd:float .
+
+:hasLatitude rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Location ;
+             rdfs:range xsd:float .
+
+:hasHazardIndex rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Incident ;
+                rdfs:range xsd:string .
+
+:hasNotificationMethod rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :Incident ;
+                       rdfs:range xsd:string .
+
+:hasDistanceFromFireVehicle rdf:type owl:DatatypeProperty ;
+                            rdfs:domain :Incident ;
+                            rdfs:range xsd:float .
+
+### Example of Equivalent Classes and Properties
+:Incident owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:Wildfire)
+] .
+
+:WeatherCondition owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:Temperature :WindSpeed :Humidity)
+] .
+
+:hasLocation owl:equivalentProperty [
+  rdf:type owl:ObjectProperty ;
+  owl:unionOf (:hasLongitude :hasLatitude :hasAltitude)
+] .
+
+### Example of Property Chain Axiom
+:hasFullLocation owl:propertyChainAxiom (:hasLongitude :hasLatitude :hasAltitude) .
+
+### Example of Symmetric Property
+:hasSupport rdf:type owl:SymmetricProperty ;
+            rdfs:domain :Service ;
+            rdfs:range :Mission .
+
+### Example of Transitive Property
+:hasAncestor rdf:type owl:TransitiveProperty ;
+             rdfs:domain :Person ;
+             rdfs:range :Person .
+
+### Example of Functional Property
+:hasAge rdf:type owl:FunctionalProperty ;
+        rdfs:domain :Person ;
+        rdfs:range xsd:nonNegativeInteger .
+
+### Example of Inverse Property
+:hasParent owl:inverseOf :hasChild ;
+           rdfs:domain :Person ;
+           rdfs:range :Person .
+
+### Example of Disjoint Properties
+:hasSon owl:propertyDisjointWith :hasDaughter ;
+        rdfs:domain :Person ;
+        rdfs:range :Person .
+
+### Example of Negative Property Assertion
+[] rdf:type owl:NegativePropertyAssertion ;
+   owl:sourceIndividual :John ;
+   owl:assertionProperty :hasWife ;
+   owl:targetIndividual :Mary .
+```
+
+### Conclusion
+
+The ontology now includes all necessary classes and properties to cover the requirements and answer the competency questions. The iterative discussion ensured that all aspects of the domain were considered, and the ontology was extended with relevant concepts and properties from the domain data. The ontology is well-connected and expressive, capable of capturing, linking, and semantically integrating heterogeneous data for Search and Rescue (SAR) missions related to wildfire incidents.

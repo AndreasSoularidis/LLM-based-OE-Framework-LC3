@@ -1,0 +1,292 @@
+### Iterative Discussion
+
+**Knowledge Engineer (KE):** Let's start by identifying the key concepts and relationships we need to include in our ontology for Search and Rescue (SAR) missions specifically for wildfire incidents. We need to address the competency questions and ensure our ontology is comprehensive.
+
+**Domain Expert (DE):** Agreed. We should begin by listing the main categories: Incidents and Impacts, Weather Conditions, Data from Human and Earth Observations, and Missions and Relationships Between Services. 
+
+**Knowledge Worker (KW):** For Incidents and Impacts, we need to capture the cause, location, severity, and priority of incidents. Let's also consider the impact on vulnerable objects and the status of wildfire forestry works.
+
+**KE:** Right. We'll also need to represent weather conditions such as temperature, wind speed, humidity, and weather forecasts. These are critical for understanding the wildfire's behavior.
+
+**DE:** Don't forget to include data from various sensors, satellites, and social media. This will help in monitoring and assessing the wildfire situation.
+
+**KW:** For Missions and Relationships Between Services, we need to capture the services offered, missions followed, locations of missions, and the population density in the area.
+
+**KE:** Let's start by creating the basic structure and then iteratively refine it to cover all competency questions.
+
+### Iteration 1: Basic Structure
+
+**KE:** I'll create the initial classes and properties. We'll start with `Incident`, `WeatherCondition`, `DataSource`, `Mission`, and `Service`.
+
+```ttl
+@prefix : <http://example.org/sar-ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident a owl:Class .
+:WeatherCondition a owl:Class .
+:DataSource a owl:Class .
+:Mission a owl:Class .
+:Service a owl:Class .
+
+:hasLocation a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasSeverity a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasPriority a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasTemperature a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasWindSpeed a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasHumidity a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasForecast a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+```
+
+**DE:** This is a good start. Now, let's add more specific properties and relationships.
+
+### Iteration 2: Adding Specific Properties
+
+**KW:** We need properties for data sources, such as `creationDate`, `location`, and `classificationType`.
+
+```ttl
+:hasCreationDate a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:dateTime .
+
+:hasDataLocation a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:string .
+
+:hasClassificationType a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:string .
+```
+
+**KE:** Let's add properties for vulnerable objects and forestry works status.
+
+```ttl
+:involvesVulnerableObject a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasForestryWorkStatus a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+```
+
+**DE:** Don't forget to add properties for missions and services, such as `missionLocation`, `urgentMissionLocation`, `populationDensity`, and `peopleLocation`.
+
+```ttl
+:hasMissionLocation a rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:hasUrgentMissionLocation a rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:hasPopulationDensity a rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:float .
+
+:hasPeopleLocation a rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:offersService a rdf:Property ;
+    rdfs:domain :Service ;
+    rdfs:range xsd:string .
+
+:hasServiceMission a rdf:Property ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+```
+
+### Iteration 3: Refining and Extending the Ontology
+
+**KW:** Let's ensure that our ontology answers all the competency questions. We might need to add more classes and properties.
+
+**KE:** Agreed. Let's add more specific classes and relationships to cover all the requirements.
+
+```ttl
+:WildfireIncident a owl:Class ;
+    rdfs:subClassOf :Incident .
+
+:SensorData a owl:Class ;
+    rdfs:subClassOf :DataSource .
+
+:SatelliteData a owl:Class ;
+    rdfs:subClassOf :DataSource .
+
+:SocialMediaData a owl:Class ;
+    rdfs:subClassOf :DataSource .
+
+:FirefightingService a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:RescueService a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:hasIncidentCause a rdf:Property ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+
+:hasIncidentImpact a rdf:Property ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+```
+
+**DE:** This looks comprehensive. Let's do a final check to ensure all competency questions can be answered.
+
+### Final Check
+
+**KE:** Let's verify:
+
+- **CQ1:** Weather variables like temperature, wind speed, and humidity are covered.
+- **CQ2:** Current measurements can be obtained from `WeatherCondition`.
+- **CQ3:** Weather forecast is covered.
+- **CQ4:** Incident location is covered.
+- **CQ5:** Incident priority is covered.
+- **CQ6:** Urgent incidents can be identified.
+- **CQ7:** Data source details are covered.
+- **CQ8:** Creation date of data is covered.
+- **CQ9:** Data location is covered.
+- **CQ10:** Classification type of smoke is covered.
+- **CQ11:** Vulnerable objects involved are covered.
+- **CQ12:** Status of forestry works is covered.
+- **CQ13:** Services offered for firefighting are covered.
+- **CQ14:** Missions followed for services are covered.
+- **CQ15:** Mission locations are covered.
+- **CQ16:** Urgent mission locations are covered.
+- **CQ17:** Population density in the area is covered.
+- **CQ18:** Location of involved people is covered.
+
+**KW:** Great. Let's finalize the ontology.
+
+### Final Ontology in Turtle (TTL) Format
+
+```ttl
+@prefix : <http://example.org/sar-ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident a owl:Class .
+:WildfireIncident a owl:Class ;
+    rdfs:subClassOf :Incident .
+:WeatherCondition a owl:Class .
+:DataSource a owl:Class .
+:SensorData a owl:Class ;
+    rdfs:subClassOf :DataSource .
+:SatelliteData a owl:Class ;
+    rdfs:subClassOf :DataSource .
+:SocialMediaData a owl:Class ;
+    rdfs:subClassOf :DataSource .
+:Mission a owl:Class .
+:Service a owl:Class .
+:FirefightingService a owl:Class ;
+    rdfs:subClassOf :Service .
+:RescueService a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:hasLocation a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasSeverity a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasPriority a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasIncidentCause a rdf:Property ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+
+:hasIncidentImpact a rdf:Property ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+
+:involvesVulnerableObject a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasForestryWorkStatus a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasTemperature a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasWindSpeed a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasHumidity a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasForecast a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:hasCreationDate a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:dateTime .
+
+:hasDataLocation a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:string .
+
+:hasClassificationType a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:string .
+
+:hasMissionLocation a rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:hasUrgentMissionLocation a rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:hasPopulationDensity a rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:float .
+
+:hasPeopleLocation a rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:offersService a rdf:Property ;
+    rdfs:domain :Service ;
+    rdfs:range xsd:string .
+
+:hasServiceMission a rdf:Property ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+```
+
+**KE:** Our ontology is now comprehensive and capable of answering all the competency questions. Great work, team!

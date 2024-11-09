@@ -1,0 +1,205 @@
+
+Ticket serial number: ___________________
+
+Service Title: FORESTRY-RURAL FIRE BULLETIN
+
+Bulletin Editor: ____________________________________________
+
+General Information
+Inception: -
+Marking: -
+Announcement: -
+Intervention: -
+Partial Control: 2023 AUGUST 4, 14:00- ON GOING
+Resurgence: -
+Repayment: -
+Full extinguishing: -
+
+False advertisement: -
+Malicious: -
+By mistake: X
+Method of Notification: -
+Distance from nearest fire vehicle (Km): 2.3
+Hazard index: MEDIUM
+
+Responsibility of the Forest Service
+    Form of Fire:
+        Vertical: -
+        Creeping: -
+        Lands: -
+        Mixed: X
+
+Starting Point
+    Regional: ELIS
+    Municipality or Community: ANCIENT OLYMPIA
+    Area-Location: PLATANOS
+    Longitude: 37.6671455
+    Latitude: 21.6121380 
+    Altitude (m): 62
+
+Starting Position
+    Grove: -
+    Forest: -
+    Woodland: -
+    Agricultural area: X
+    Grassland area: -
+    Reed-swamps: -
+    Populated area: -
+    Agricultural facility: -
+    Livestock facility: -
+    Garbage-Landfill: -
+    Industry-craftsmanship: -
+    Construction site: -
+    Road slopes: -
+    Another one: -
+
+Possible Cause of Fire:
+    Physics
+Lightning strike: -
+    Arson with intent
+       Selfish action: -
+       Malicious action: X
+       Concealing a crime: -
+       Psychopath energy: -
+       Mentally retarded energy: -
+       Pyromaniac energy: -
+    Arson by negligence: -
+        Incineration of waste: -
+        Spark Machinery: X
+        Hikers Campers Hunters: -
+        Army shot: -
+        Use of explosives: -
+        Smoking residue: -
+        Burning of crop residues: X
+        Field workers: X
+        Short circuit: -
+
+Determination of Offender or Offenders:
+    YES: -
+    NO: X
+
+Area Burnt in Acres:
+    Forests: -
+    Swamps-Reeds: -
+    Woodland: X
+    Agricultural lands: X
+    Grove: -
+    Crop residues: X
+    Grasslands: -
+    Other lands: X
+    Total: - 
+
+Other Disasters:
+    Buildings: 
+        N/A: 1
+        Kind: CEMETERY
+        Address: PLATANOS 27065
+        Insurance: -
+        Operator Name: -
+    Vehicles-Machinery: 
+        N/A: -
+        Kind: -
+        License Plate: - 
+        Insurance: -
+        Operator Name: -
+
+Rescues of People:
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Animals: X
+Birds: X
+Hives: X
+
+Accidents-Deaths: 
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Forces Involved:
+    Permanent 
+        Fire Officers: 8
+        Walking Departments of Fire Department: 8
+    Seasonal  
+        Fire Officers: 18
+        Walking Departments of Fire Department: 2
+    
+    Volunteer Firefighters: 10
+    Armed Forces Personnel: -
+    Service Personnel: -
+    Staff from Municipality: -
+    Staff of the wider Public Sector: -
+    Club Members: -
+    Individuals with a request for personal work: -
+    Individuals: 4
+
+Investment Instruments:
+    Firetrucks: -
+    Tankers: 2
+    Fire Fighting Vehicles of other Services: 3
+    Various machines: -
+
+Portable Tools and Machines: -
+
+Air Involvement:
+    N/A: 1-
+    Type: -
+    Number: -
+
+Method of Deposit:
+    By aerial means: -
+    Self extinguishing: -
+    With ground sections: X
+    With pedestrian sections: X
+
+Use of backfire or incineration
+    YES: X
+    NO: - 
+    QUANTITY: -
+Water use (m3) 
+     YES: X  
+     NO: - 
+     QUANTITY: 120
+Foam usage (lt) 
+     YES: X  
+     NO: -
+     QUANTITY:  38
+Use of retarder (kg)
+     YES: -  
+     NO: -
+     QUANTITY: --
+
+Employment of Personnel and Media:
+    Vehicle number 1:
+        Notification DateTime: 23:07
+        Departure DateTime: 23:09
+        Arrival DateTime: 23:23
+        Departure from event DateTime: 23:51
+        Return DateTime: 00:17
+        Number of Personnel: 2
+        Mileage: 50
+    Vehicle number 2:
+        Notification DateTime: 23:07
+        Departure DateTime: 23:10
+        Arrival DateTime: 23:25
+        Departure from event DateTime: 23:45
+        Return DateTime: 00:02
+        Number of Personnel: 2
+        Mileage: 50
+
+Armed Forces Personnel
+    Slope
+        DateTime: -
+    Arrival
+        DateTime: -
+    Number of Personnel: -
+     Hours of Employment: -
+Comments: - 
+
+    
+

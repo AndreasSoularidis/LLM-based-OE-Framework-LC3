@@ -1,0 +1,220 @@
+### Iterative Discussion
+
+#### Round 1: Initial Discussion
+
+**Knowledge Engineer (KE):**
+Alright team, let's start by identifying the high-level concepts we need for our ontology. We need to cover incidents and impacts, weather conditions, data from human and earth observations, and missions and relationships between services.
+
+**Domain Expert (DE):**
+Correct. For incidents and impacts, we need concepts like `Incident`, `Impact`, `Priority`, `Urgency`, and `Location`. For weather conditions, we need `WeatherCondition`, `Temperature`, `WindSpeed`, `Humidity`, and `WeatherForecast`.
+
+**Knowledge Worker (KW):**
+We also need to consider data from sensors, satellites, and social media. Concepts like `DataSource`, `SensorData`, `SatelliteData`, `SocialMediaData`, `CreationDate`, and `ClassificationType` will be important.
+
+**KE:**
+Good points. For missions and relationships between services, we need `Mission`, `Service`, `Support`, `PopulationDensity`, and `InvolvedPeople`.
+
+**DE:**
+Don’t forget the classes for different types of land affected, like `Forest`, `Woodland`, `CropResidue`, `Grassland`, etc. We also need to represent `Buildings`, `Vehicles`, `Rescues`, `Animals`, and `Accidents`.
+
+**KW:**
+And we need to capture the forces involved, like `FireOfficers`, `VolunteerFirefighters`, `ArmedForcesPersonnel`, etc. Plus, equipment like `Firetrucks`, `Tankers`, and `PortableTools`.
+
+#### Round 2: Refining Concepts and Properties
+
+**KE:**
+Let’s refine the relationships between these concepts. For example, an `Incident` can have a `Location`, `Priority`, `Urgency`, and be linked to `WeatherConditions`.
+
+**DE:**
+Yes, and `WeatherConditions` should be linked to `Temperature`, `WindSpeed`, `Humidity`, and `WeatherForecast`.
+
+**KW:**
+`DataSource` should be linked to `SensorData`, `SatelliteData`, and `SocialMediaData`, each having properties like `CreationDate` and `Location`.
+
+**KE:**
+For missions, a `Mission` should be linked to `Service`, `Support`, `Location`, and `PopulationDensity`.
+
+**DE:**
+We also need to link `Incidents` to `Impacts`, which can include `Buildings`, `Vehicles`, `Rescues`, `Animals`, and `Accidents`.
+
+#### Round 3: Adding Domain Data and Finalizing
+
+**KE:**
+Based on the domain data, we need to add specific properties like `AreaBurnt`, `PossibleCauseOfFire`, `ForcesInvolved`, and `InvestmentInstruments`.
+
+**DE:**
+Correct. We should also include properties for `Insurance`, `OperatorName`, `LicensePlate`, and `Kind` for `Buildings` and `Vehicles`.
+
+**KW:**
+For `Rescues`, we need properties like `FullName`, `Capacity`, `Age`, and `Cause`.
+
+**KE:**
+Alright, let’s finalize the ontology. We need to ensure it can answer all the competency questions.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar-ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident a rdfs:Class .
+:Impact a rdfs:Class .
+:Priority a rdfs:Class .
+:Urgency a rdfs:Class .
+:Location a rdfs:Class .
+:WeatherCondition a rdfs:Class .
+:Temperature a rdfs:Class .
+:WindSpeed a rdfs:Class .
+:Humidity a rdfs:Class .
+:WeatherForecast a rdfs:Class .
+:DataSource a rdfs:Class .
+:SensorData a rdfs:Class .
+:SatelliteData a rdfs:Class .
+:SocialMediaData a rdfs:Class .
+:CreationDate a rdfs:Class .
+:ClassificationType a rdfs:Class .
+:Mission a rdfs:Class .
+:Service a rdfs:Class .
+:Support a rdfs:Class .
+:PopulationDensity a rdfs:Class .
+:InvolvedPeople a rdfs:Class .
+:Forest a rdfs:Class .
+:Woodland a rdfs:Class .
+:CropResidue a rdfs:Class .
+:Grassland a rdfs:Class .
+:Building a rdfs:Class .
+:Vehicle a rdfs:Class .
+:Rescue a rdfs:Class .
+:Animal a rdfs:Class .
+:Accident a rdfs:Class .
+:FireOfficer a rdfs:Class .
+:VolunteerFirefighter a rdfs:Class .
+:ArmedForcesPersonnel a rdfs:Class .
+:Firetruck a rdfs:Class .
+:Tanker a rdfs:Class .
+:PortableTool a rdfs:Class .
+
+:hasLocation a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasPriority a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range :Priority .
+
+:hasUrgency a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range :Urgency .
+
+:hasWeatherCondition a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasTemperature a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Humidity .
+
+:hasWeatherForecast a rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WeatherForecast .
+
+:hasDataSource a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range :DataSource .
+
+:hasSensorData a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range :SensorData .
+
+:hasSatelliteData a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range :SatelliteData .
+
+:hasSocialMediaData a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range :SocialMediaData .
+
+:hasCreationDate a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range :CreationDate .
+
+:hasClassificationType a rdf:Property ;
+    rdfs:domain :DataSource ;
+    rdfs:range :ClassificationType .
+
+:hasMission a rdf:Property ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:hasSupport a rdf:Property ;
+    rdfs:domain :Service ;
+    rdfs:range :Support .
+
+:hasPopulationDensity a rdf:Property ;
+    rdfs:domain :Location ;
+    rdfs:range :PopulationDensity .
+
+:hasInvolvedPeople a rdf:Property ;
+    rdfs:domain :Location ;
+    rdfs:range :InvolvedPeople .
+
+:hasAreaBurnt a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:integer .
+
+:hasPossibleCauseOfFire a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasForcesInvolved a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasInvestmentInstruments a rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasInsurance a rdf:Property ;
+    rdfs:domain :Building, :Vehicle ;
+    rdfs:range xsd:string .
+
+:hasOperatorName a rdf:Property ;
+    rdfs:domain :Building, :Vehicle ;
+    rdfs:range xsd:string .
+
+:hasLicensePlate a rdf:Property ;
+    rdfs:domain :Vehicle ;
+    rdfs:range xsd:string .
+
+:hasKind a rdf:Property ;
+    rdfs:domain :Building, :Vehicle ;
+    rdfs:range xsd:string .
+
+:hasFullName a rdf:Property ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:hasCapacity a rdf:Property ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:hasAge a rdf:Property ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:integer .
+
+:hasCause a rdf:Property ;
+    rdfs:domain :Rescue, :Accident ;
+    rdfs:range xsd:string .
+```
+
+This ontology covers the required concepts and properties to answer all the given competency questions and represents the necessary domain knowledge for Search and Rescue missions during wildfire incidents.

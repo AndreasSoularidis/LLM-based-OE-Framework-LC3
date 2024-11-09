@@ -1,0 +1,121 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sar: <http://example.com/ontology/sar#> .
+@prefix sweet: <https://sweetontology.com/v1/sweet.owl#> .
+@prefix dmo: <https://www.w3.org/ns/dmo#> .
+
+sar:Wildfire a owl:Class ;
+    rdfs:subClassOf dmo:Disaster ;
+    rdfs:comment "A wildfire incident." .
+
+sar:WeatherCondition a owl:Class ;
+    rdfs:subClassOf sweet:AtmosphericFeature ;
+    rdfs:comment "Weather conditions relevant to wildfire incidents." .
+
+sar:Temperature a owl:Class ;
+    rdfs:subClassOf sar:WeatherCondition ;
+    rdfs:comment "Temperature measurement." .
+
+sar:WindSpeed a owl:Class ;
+    rdfs:subClassOf sar:WeatherCondition ;
+    rdfs:comment "Wind speed measurement." .
+
+sar:Humidity a owl:Class ;
+    rdfs:subClassOf sar:WeatherCondition ;
+    rdfs:comment "Humidity measurement." .
+
+sar:AreaAffected a owl:Class ;
+    rdfs:comment "Area affected by the wildfire." .
+
+sar:Forest a owl:Class ;
+    rdfs:subClassOf sar:AreaAffected ;
+    rdfs:comment "Forest area affected by the wildfire." .
+
+sar:Grassland a owl:Class ;
+    rdfs:subClassOf sar:AreaAffected ;
+    rdfs:comment "Grassland area affected by the wildfire." .
+
+sar:Building a owl:Class ;
+    rdfs:subClassOf dmo:Infrastructure ;
+    rdfs:comment "Building affected by the wildfire." .
+
+sar:Vehicle a owl:Class ;
+    rdfs:subClassOf dmo:Infrastructure ;
+    rdfs:comment "Vehicle affected by the wildfire." .
+
+sar:RescueMission a owl:Class ;
+    rdfs:subClassOf dmo:EmergencyResponse ;
+    rdfs:comment "A rescue mission during a wildfire incident." .
+
+sar:Resource a owl:Class ;
+    rdfs:subClassOf dmo:Resource ;
+    rdfs:comment "Resource deployed during a wildfire incident." .
+
+sar:Firefighter a owl:Class ;
+    rdfs:subClassOf sar:Resource ;
+    rdfs:comment "Firefighter involved in the wildfire response." .
+
+sar:Firetruck a owl:Class ;
+    rdfs:subClassOf sar:Resource ;
+    rdfs:comment "Firetruck deployed to the wildfire incident." .
+
+# Object Properties
+
+sar:hasWeatherCondition a owl:ObjectProperty ;
+    rdfs:domain sar:Wildfire ;
+    rdfs:range sar:WeatherCondition ;
+    rdfs:comment "Links a wildfire incident to its associated weather conditions." .
+
+sar:affects a owl:ObjectProperty ;
+    rdfs:domain sar:Wildfire ;
+    rdfs:range sar:AreaAffected ;
+    rdfs:comment "Links a wildfire incident to the areas it affects." .
+
+sar:hasImpactOn a owl:ObjectProperty ;
+    rdfs:domain sar:Wildfire ;
+    rdfs:range dmo:Infrastructure ;
+    rdfs:comment "Links a wildfire incident to the infrastructure it impacts." .
+
+sar:involves a owl:ObjectProperty ;
+    rdfs:domain sar:Wildfire ;
+    rdfs:range sar:RescueMission ;
+    rdfs:comment "Links a wildfire incident to the rescue missions associated with it." .
+
+sar:deploys a owl:ObjectProperty ;
+    rdfs:domain sar:RescueMission ;
+    rdfs:range sar:Resource ;
+    rdfs:comment "Links a rescue mission to the resources deployed during the mission." .
+
+# Data Properties
+
+sar:hasTemperatureValue a owl:DatatypeProperty ;
+    rdfs:domain sar:Temperature ;
+    rdfs:range xsd:double ;
+    rdfs:comment "The numerical value of the temperature measurement." .
+
+sar:hasWindSpeedValue a owl:DatatypeProperty ;
+    rdfs:domain sar:WindSpeed ;
+    rdfs:range xsd:double ;
+    rdfs:comment "The numerical value of the wind speed measurement." .
+
+sar:hasHumidityValue a owl:DatatypeProperty ;
+    rdfs:domain sar:Humidity ;
+    rdfs:range xsd:double ;
+    rdfs:comment "The numerical value of the humidity measurement." .
+
+sar:hasAreaBurned a owl:DatatypeProperty ;
+    rdfs:domain sar:AreaAffected ;
+    rdfs:range xsd:double ;
+    rdfs:comment "The area burned in a specific category (e.g., forest, grassland) in acres." .
+
+sar:hasBuildingType a owl:DatatypeProperty ;
+    rdfs:domain sar:Building ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The type of building affected by the wildfire." .
+
+sar:hasVehicleType a owl:DatatypeProperty ;
+    rdfs:domain sar:Vehicle ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The type of vehicle affected by the wildfire." .

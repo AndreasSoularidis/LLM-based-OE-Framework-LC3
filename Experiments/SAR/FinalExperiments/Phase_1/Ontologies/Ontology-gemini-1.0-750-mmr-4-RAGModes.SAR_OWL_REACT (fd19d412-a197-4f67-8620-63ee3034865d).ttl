@@ -1,0 +1,44 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix dmo: <http://purl.org/dmo#> .
+@prefix sar: <http://example.com/ontology/sar#> .
+
+sar:Wildfire rdf:type owl:Class ;
+    rdfs:subClassOf dmo:Disaster ;
+    rdfs:label "Wildfire" ;
+    rdfs:comment "A wildfire incident." .
+
+sar:WildfireCause rdf:type owl:Class ;
+    rdfs:label "Wildfire Cause" ;
+    rdfs:comment "The cause of a wildfire." .
+
+sar:LightningStrike rdf:type owl:Class ;
+    rdfs:subClassOf sar:WildfireCause ;
+    rdfs:label "Lightning Strike" ;
+    owl:disjointWith sar:HumanActivity .
+
+# ... Other Classes (WeatherCondition, Terrain, Resource, etc.)
+
+sar:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain sar:Wildfire ;
+    rdfs:range geo:SpatialThing ;
+    rdfs:label "has location" .
+
+# ... Other Object Properties (hasSize, affects, usedFor, etc.)
+
+sar:waterCapacity rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:Firetruck ;
+    rdfs:range xsd:integer ;
+    rdfs:label "water capacity" .
+
+# ... Other Datatype Properties (hasWindSpeed, hasTemperature, etc.)
+
+# Competency Question Examples:
+# CQ1: What are the most important weather variables that can cause forest fire?
+# Answer: Retrieve subclasses of WeatherCondition that are linked to WildfireCause with hasCause property.
+
+# CQ13: What services or support do you offer for firefighting?
+# Answer: Retrieve instances of Resource with usedFor property value "firefighting".

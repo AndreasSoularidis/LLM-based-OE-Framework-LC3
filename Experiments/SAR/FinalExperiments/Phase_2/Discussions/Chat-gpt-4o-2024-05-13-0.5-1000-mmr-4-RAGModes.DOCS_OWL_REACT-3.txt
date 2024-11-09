@@ -1,0 +1,165 @@
+### Iterative Discussion
+
+#### Round 1: Initial Conceptualization
+
+**Knowledge Engineer (KE):**
+Alright, let's start by defining the key concepts and relationships for our ontology. We need to cover incidents and impacts, weather conditions, data from human and earth observations, and missions and relationships between services.
+
+**Domain Expert (DE):**
+Absolutely. For incidents and impacts, we need to capture specific types of incidents like "WildfireIncident," "Impact," and "PriorityLevel." Weather conditions should include "Temperature," "WindSpeed," "Humidity," and "WeatherForecast."
+
+**Knowledge Worker (KW):**
+Don't forget the data sources. We need to include classes for "SensorData," "SatelliteData," and "SocialMediaData." For missions and services, we should have "Mission," "Service," and "FirstResponder."
+
+**KE:**
+Great. Let's start with these classes and define some basic properties. We will refine and expand as we go.
+
+#### Round 2: Adding Properties and Relationships
+
+**KE:**
+We need to add properties to link these classes. For example, "WildfireIncident" can have properties like "hasImpact," "hasLocation," and "hasPriorityLevel."
+
+**DE:**
+We should also define properties for weather conditions. "WeatherForecast" can have properties like "hasTemperature," "hasWindSpeed," and "hasHumidity."
+
+**KW:**
+For data sources, "SensorData" can have properties like "hasCreationDate" and "hasLocation." "SocialMediaData" should have "hasContent" and "hasLocation."
+
+**KE:**
+Let's add these properties and define some relationships between the classes.
+
+#### Round 3: Refining and Expanding
+
+**KE:**
+We need to ensure our ontology can answer the competency questions. For example, CQ1 asks about important weather variables. We need a property to link "WildfireIncident" with "WeatherCondition."
+
+**DE:**
+Good point. We should also add properties for the status of forestry works and the classification of smoke. These are crucial for CQ11 and CQ12.
+
+**KW:**
+We should also represent relationships between missions and services. For example, "Mission" can have a property "isSupportedBy" linking to "Service."
+
+**KE:**
+Let's implement these changes and check if our ontology can answer all the competency questions.
+
+#### Round 4: Finalizing
+
+**KE:**
+We need to ensure our ontology is well-connected and expressive. Let's use some OWL axioms like `owl:equivalentClass`, `owl:subClassOf`, and `owl:Restriction` to enhance our ontology.
+
+**DE:**
+Agreed. Let's also add negative property assertions where applicable, like ensuring certain incidents do not have specific impacts.
+
+**KW:**
+We should also include annotations for better understanding and documentation.
+
+**KE:**
+Alright, let's finalize these changes and review if our ontology meets all the requirements and competency questions.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:WildfireIncident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:PriorityLevel rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:FirstResponder rdf:type owl:Class .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+           rdfs:domain :WildfireIncident ;
+           rdfs:range :Impact .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+             rdfs:domain :WildfireIncident ;
+             rdfs:range xsd:string .
+
+:hasPriorityLevel rdf:type owl:ObjectProperty ;
+                  rdfs:domain :WildfireIncident ;
+                  rdfs:range :PriorityLevel .
+
+:hasTemperature rdf:type owl:ObjectProperty ;
+                rdfs:domain :WeatherForecast ;
+                rdfs:range :Temperature .
+
+:hasWindSpeed rdf:type owl:ObjectProperty ;
+              rdfs:domain :WeatherForecast ;
+              rdfs:range :WindSpeed .
+
+:hasHumidity rdf:type owl:ObjectProperty ;
+             rdfs:domain :WeatherForecast ;
+             rdfs:range :Humidity .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :SensorData ;
+                 rdfs:range xsd:dateTime .
+
+:hasContent rdf:type owl:DatatypeProperty ;
+            rdfs:domain :SocialMediaData ;
+            rdfs:range xsd:string .
+
+:isSupportedBy rdf:type owl:ObjectProperty ;
+               rdfs:domain :Mission ;
+               rdfs:range :Service .
+
+:hasStatus rdf:type owl:DatatypeProperty ;
+           rdfs:domain :ForestryWork ;
+           rdfs:range xsd:string .
+
+:hasClassification rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Smoke ;
+                   rdfs:range xsd:string .
+
+:ForestryWork rdf:type owl:Class .
+:Smoke rdf:type owl:Class .
+
+# Example of a subclass and equivalent class
+:UrgentIncident rdf:type owl:Class ;
+                rdfs:subClassOf :WildfireIncident .
+
+:HighPriority rdf:type owl:Class ;
+              owl:equivalentClass :PriorityLevel .
+
+# Example of a restriction
+:Teenager rdfs:subClassOf
+      [ rdf:type             owl:Restriction ;
+        owl:onProperty       :hasAge ;
+        owl:someValuesFrom
+         [ rdf:type             rdfs:Datatype ;
+           owl:onDatatype       xsd:integer ;
+           owl:withRestrictions (  [ xsd:minExclusive     "12"^^xsd:integer ]
+                                   [ xsd:maxInclusive     "19"^^xsd:integer ]
+           )
+         ]
+      ] .
+
+# Negative property assertion
+[] rdf:type owl:NegativePropertyAssertion ;
+   owl:sourceIndividual :WildfireIncident1 ;
+   owl:assertionProperty :hasImpact ;
+   owl:targetIndividual :NoImpact .
+
+# Example of annotated axiom
+:Man rdfs:subClassOf :Person .
+[] rdf:type owl:Axiom ;
+   owl:annotatedSource :Man ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget :Person ;
+   rdfs:comment "States that every man is a person."^^xsd:string .
+```
+
+This ontology should be capable of answering the given competency questions and covering all the requirements for modeling Search and Rescue (SAR) missions in the context of wildfire incidents.

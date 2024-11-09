@@ -1,0 +1,205 @@
+
+Ticket serial number: ___________________
+
+Service Title: FORESTRY-RURAL FIRE BULLETIN
+
+Bulletin Editor: ____________________________________________
+
+General Information
+Inception: -
+Marking: -
+Announcement: -
+Intervention: -
+Partial Control: 2023 AUGUST 01, 16:32- ON GOING
+Resurgence: -
+Repayment: -
+Full extinguishing: -
+
+False advertisement: X
+Malicious: -
+By mistake: -
+Method of Notification: -
+Distance from nearest fire vehicle (Km): 11
+Hazard index: VERY LOW
+
+Responsibility of the Forest Service
+    Form of Fire:
+        Vertical: -
+        Creeping: -
+        Lands: X
+        Mixed: -
+
+Starting Point
+    Regional: ELIS
+    Municipality or Community: PYRGOS
+    Area-Location: PYRGOS
+    Longitude: 37.7185096
+    Latitude: 21.3510102
+    Altitude (m): -
+
+Starting Position
+    Grove: -
+    Forest: -
+    Woodland: -
+    Agricultural area: -
+    Grassland area: -
+    Reed-swamps: -
+    Populated area: -
+    Agricultural facility: -
+    Livestock facility: -
+    Garbage-Landfill: -
+    Industry-craftsmanship: -
+    Construction site: -
+    Road slopes: -
+    Another one: X
+
+Possible Cause of Fire:
+    Physics
+Lightning strike: -
+    Arson with intent
+       Selfish action: -
+       Malicious action: -
+       Concealing a crime: -
+       Psychopath energy: X
+       Mentally retarded energy: X
+       Pyromaniac energy: -
+    Arson by negligence: -
+        Incineration of waste: -
+        Spark Machinery: X
+        Hikers Campers Hunters: -
+        Army shot: -
+        Use of explosives: -
+        Smoking residue: -
+        Burning of crop residues: X
+        Field workers: X
+        Short circuit: -
+
+Determination of Offender or Offenders:
+    YES: X
+    NO: -
+
+Area Burnt in Acres:
+    Forests: -
+    Swamps-Reeds: -
+    Woodland: -
+    Agricultural lands: -
+    Grove: -
+    Crop residues: -
+    Grasslands: -
+    Other lands: X
+    Total: - 
+
+Other Disasters:
+    Buildings: 
+        N/A: -
+        Kind: -
+        Address: -
+        Insurance: -
+        Operator Name: -
+    Vehicles-Machinery: 
+        N/A: -
+        Kind: -
+        License Plate: - 
+        Insurance: -
+        Operator Name: -
+
+Rescues of People:
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Animals: -
+Birds: -
+Hives: --
+
+Accidents-Deaths: 
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Forces Involved:
+    Permanent 
+        Fire Officers: -
+        Walking Departments of Fire Department: -
+    Seasonal  
+        Fire Officers: -
+        Walking Departments of Fire Department: -
+    
+    Volunteer Firefighters: -
+    Armed Forces Personnel: -
+    Service Personnel: -
+    Staff from Municipality: -
+    Staff of the wider Public Sector: -
+    Club Members: -
+    Individuals with a request for personal work: -
+    Individuals: 6
+
+Investment Instruments:
+    Firetrucks: -
+    Tankers: 1
+    Fire Fighting Vehicles of other Services: 2
+    Various machines: -
+
+Portable Tools and Machines: -
+
+Air Involvement:
+    N/A: 1-
+    Type: -
+    Number: -
+
+Method of Deposit:
+    By aerial means: -
+    Self extinguishing: -
+    With ground sections: X
+    With pedestrian sections: -
+
+Use of backfire or incineration
+    YES: -
+    NO: - 
+    QUANTITY: -
+Water use (m3) 
+     YES: X  
+     NO: - 
+     QUANTITY: 0
+Foam usage (lt) 
+     YES: -  
+     NO: -
+     QUANTITY: -
+Use of retarder (kg)
+     YES: -  
+     NO: -
+     QUANTITY: -
+
+Employment of Personnel and Media:
+    Vehicle number 1:
+        Notification DateTime: 23:07
+        Departure DateTime: 23:09
+        Arrival DateTime: 23:23
+        Departure from event DateTime: 23:51
+        Return DateTime: 00:17
+        Number of Personnel: 2
+        Mileage: 50
+    Vehicle number 2:
+        Notification DateTime: 23:07
+        Departure DateTime: 23:10
+        Arrival DateTime: 23:25
+        Departure from event DateTime: 23:45
+        Return DateTime: 00:02
+        Number of Personnel: 2
+        Mileage: 50
+
+Armed Forces Personnel
+    Slope
+        DateTime: -
+    Arrival
+        DateTime: -
+    Number of Personnel: -
+     Hours of Employment: -
+Comments: - 
+
+    
+

@@ -1,0 +1,73 @@
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar> rdf:type owl:Ontology .
+
+:WildfireIncident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Observation rdf:type owl:Class .
+:DataSource rdf:type owl:Class .
+:Sensor rdf:type owl:Class ; rdfs:subClassOf :DataSource .
+:Satellite rdf:type owl:Class ; rdfs:subClassOf :DataSource .
+:SocialMedia rdf:type owl:Class ; rdfs:subClassOf :DataSource .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Support rdf:type owl:Class ; rdfs:subClassOf :Service .
+
+:hasTemperature rdf:type owl:DatatypeProperty .
+:hasWindSpeed rdf:type owl:DatatypeProperty .
+:hasHumidity rdf:type owl:DatatypeProperty .
+:hasForecast rdf:type owl:ObjectProperty ; rdfs:range :WeatherCondition .
+:incidentLocation rdf:type owl:ObjectProperty .
+:hasSeverity rdf:type owl:DatatypeProperty .
+:hasObservationType rdf:type owl:DatatypeProperty .
+:creationDate rdf:type owl:DatatypeProperty ; rdfs:comment "Date when data was created"^^xsd:string .
+:hasPriority rdf:type owl:DatatypeProperty .
+:isUrgent rdf:type owl:DatatypeProperty .
+:incidentLocation rdf:type owl:ObjectProperty ; rdfs:range :Location .
+:followsMissionPlan rdf:type owl:ObjectProperty ; rdfs:range :Mission .
+:hasDataSource rdf:type owl:ObjectProperty ; rdfs:domain :Observation ; rdfs:range :DataSource .
+:populationDensity rdf:type owl:DatatypeProperty ; rdfs:comment "Population density in the area"^^xsd:string .
+:smokeClassification rdf:type owl:DatatypeProperty .
+:fireBreakStatus rdf:type owl:DatatypeProperty .
+
+:IncidentImpact rdf:type owl:Class ; rdfs:subClassOf [
+    rdf:type owl:Class ;
+    owl:intersectionOf ( :WildfireIncident :Impact )
+] .
+
+:WeatherCondition rdf:type owl:Class ; rdfs:subClassOf [
+    rdf:type owl:Class ;
+    owl:intersectionOf ( :temperature :humidity :windSpeed )
+] .
+
+:Observation owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:intersectionOf ( :sensorData :satelliteData :socialMediaData )
+] .
+
+:Mission owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:someValuesFrom :missionLocation
+] .
+
+:missionLocation rdf:type owl:DatatypeProperty .
+:sensorData rdf:type owl:DatatypeProperty .
+:satelliteData rdf:type owl:DatatypeProperty .
+:socialMediaData rdf:type owl:DatatypeProperty .
+
+# Annotations
+:WildfireIncident rdfs:comment "Class representing wildfire incidents"^^xsd:string .
+:Impact rdfs:comment "Class representing impacts of incidents"^^xsd:string .
+:WeatherCondition rdfs:comment "Class representing various weather conditions"^^xsd:string .
+:incidentLocation rdfs:comment "Location where the incident took place"^^xsd:string .
+:hasSeverity rdfs:comment "Severity of the incident"^^xsd:string .
+:hasPriority rdfs:comment "Priority level of the incident"^^xsd:string .
+:isUrgent rdfs:comment "Urgency level of the incident"^^xsd:string .
+:populationDensity rdfs:comment "Population density in the affected area"^^xsd:string .
+:smokeClassification rdfs:comment "Classification of smoke observed"^^xsd:string .
+:fireBreakStatus rdfs:comment "Status of wildfire forestry works such as firebreaks"^^xsd:string .

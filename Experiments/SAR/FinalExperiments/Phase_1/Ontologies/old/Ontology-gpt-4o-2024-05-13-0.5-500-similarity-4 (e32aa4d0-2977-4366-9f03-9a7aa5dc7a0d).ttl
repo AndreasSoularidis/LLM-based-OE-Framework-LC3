@@ -1,0 +1,64 @@
+@prefix : <http://example.com/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar> rdf:type owl:Ontology .
+
+### Classes
+:WildfireIncident rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:CurrentWeather rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:ForecastedWeather rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:SensorData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:FirstResponder rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+
+### Object Properties
+:hasWeatherCondition rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :WeatherCondition .
+:hasSensorData rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :SensorData .
+:hasSocialMediaData rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :SocialMediaData .
+:hasFirstResponder rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :FirstResponder .
+:hasService rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Service .
+:involvedIn rdf:type owl:ObjectProperty ; rdfs:domain :VulnerableObject ; rdfs:range :WildfireIncident .
+
+### Data Properties
+:temperature rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:windSpeed rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:humidity rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:weatherForecast rdf:type owl:DatatypeProperty ; rdfs:domain :ForecastedWeather ; rdfs:range xsd:string .
+:creationDate rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData, :SocialMediaData ; rdfs:range xsd:dateTime .
+:location rdf:type owl:DatatypeProperty ; rdfs:domain :WildfireIncident, :SensorData, :SocialMediaData, :Mission ; rdfs:range xsd:string .
+:dataType rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData, :SocialMediaData ; rdfs:range xsd:string .
+:priority rdf:type owl:DatatypeProperty ; rdfs:domain :WildfireIncident ; rdfs:range xsd:string .
+:urgency rdf:type owl:DatatypeProperty ; rdfs:domain :WildfireIncident ; rdfs:range xsd:string .
+:missionType rdf:type owl:DatatypeProperty ; rdfs:domain :Mission ; rdfs:range xsd:string .
+:missionLocation rdf:type owl:DatatypeProperty ; rdfs:domain :Mission ; rdfs:range xsd:string .
+:status rdf:type owl:DatatypeProperty ; rdfs:domain :VulnerableObject ; rdfs:range xsd:string .
+
+### Equivalent Classes and Properties
+:WildfireIncident owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:intersectionOf (:Incident [
+    rdf:type owl:Class ;
+    owl:complementOf :NonFireIncident
+  ])
+] .
+
+:temperature owl:equivalentProperty otherOnt:temp .
+:windSpeed owl:equivalentProperty otherOnt:windSpd .
+:humidity owl:equivalentProperty otherOnt:hum .
+
+### Annotations
+:WildfireIncident rdfs:comment "Represents wildfire incidents during SAR missions."^^xsd:string .
+:WeatherCondition rdfs:comment "Represents various weather conditions affecting wildfire behavior."^^xsd:string .
+:SensorData rdfs:comment "Represents data collected from sensors during wildfire incidents."^^xsd:string .
+:SocialMediaData rdfs:comment "Represents data collected from social media during wildfire incidents."^^xsd:string .
+:FirstResponder rdfs:comment "Represents first responders involved in SAR missions."^^xsd:string .
+:Mission rdfs:comment "Represents missions carried out during SAR operations."^^xsd:string .
+:Service rdfs:comment "Represents services involved in SAR missions."^^xsd:string .
+:VulnerableObject rdfs:comment "Represents vulnerable objects involved in wildfire incidents."^^xsd:string .

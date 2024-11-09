@@ -1,0 +1,145 @@
+### Iterative Discussion
+
+#### Round 1: Initial Discussion
+
+**Knowledge Engineer (KE):**
+Alright team, let's start by identifying the main classes and properties we need for our ontology. Based on the requirements, we need to cover incidents, weather conditions, data from human and earth observations, and missions and relationships between services. 
+
+**Domain Expert (DE):**
+For incidents, we should have classes like `Incident`, `Impact`, and `Location`. For weather conditions, we need classes such as `WeatherCondition`, `Temperature`, `WindSpeed`, `Humidity`, and `WeatherForecast`.
+
+**Knowledge Worker (KW):**
+Don't forget about the data from sensors and social media. We need classes like `SensorData`, `SatelliteData`, `SocialMediaData`, and `FirstResponderInput`.
+
+**KE:**
+Good point. For missions and relationships between services, we should have classes like `Mission`, `Service`, and `Support`.
+
+#### Round 2: Refining Classes and Properties
+
+**KE:**
+Let's refine our classes and add properties. For `Incident`, we need properties like `hasLocation`, `hasPriority`, and `hasUrgency`.
+
+**DE:**
+For `WeatherCondition`, we need properties like `hasTemperature`, `hasWindSpeed`, `hasHumidity`, and `hasForecast`.
+
+**KW:**
+For `SensorData`, `SatelliteData`, and `SocialMediaData`, we need properties like `hasCreationDate`, `hasLocation`, and `hasClassificationType`.
+
+**KE:**
+For `Mission`, we need properties like `hasService`, `hasLocation`, `hasUrgency`, and `hasPopulationDensity`.
+
+#### Round 3: Adding More Details
+
+**KE:**
+Let's add more specific properties. For `Incident`, we should have `involvesVulnerableObject` and `hasStatus`.
+
+**DE:**
+For `WeatherCondition`, we should add `hasMeasurement` and `hasForecastDate`.
+
+**KW:**
+For `Mission`, we should add `hasSupportType` and `hasInvolvedPeople`.
+
+#### Round 4: Finalizing the Ontology
+
+**KE:**
+I think we have covered all the requirements and competency questions. Let's finalize the ontology and present it in Turtle format.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```ttl
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+:Incident a owl:Class .
+:Impact a owl:Class .
+:Location a owl:Class .
+:WeatherCondition a owl:Class .
+:Temperature a owl:Class .
+:WindSpeed a owl:Class .
+:Humidity a owl:Class .
+:WeatherForecast a owl:Class .
+:SensorData a owl:Class .
+:SatelliteData a owl:Class .
+:SocialMediaData a owl:Class .
+:FirstResponderInput a owl:Class .
+:Mission a owl:Class .
+:Service a owl:Class .
+:Support a owl:Class .
+:VulnerableObject a owl:Class .
+
+:hasLocation a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasPriority a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasUrgency a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasTemperature a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Humidity .
+
+:hasForecast a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WeatherForecast .
+
+:hasMeasurement a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasForecastDate a owl:DatatypeProperty ;
+    rdfs:domain :WeatherForecast ;
+    rdfs:range xsd:dateTime .
+
+:hasCreationDate a owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range xsd:dateTime .
+
+:hasClassificationType a owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range xsd:string .
+
+:hasService a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:hasSupportType a owl:DatatypeProperty ;
+    rdfs:domain :Support ;
+    rdfs:range xsd:string .
+
+:hasInvolvedPeople a owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:hasPopulationDensity a owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:float .
+
+:involvesVulnerableObject a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :VulnerableObject .
+
+:hasStatus a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasUrgency a owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+```
+
+This ontology should now be capable of answering all the competency questions and covering all the requirements specified.

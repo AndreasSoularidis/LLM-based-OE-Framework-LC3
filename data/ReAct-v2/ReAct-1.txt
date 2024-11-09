@@ -1,0 +1,21 @@
+Question: How should a new ontology be created to meet the given aim and scope?
+
+Thought 1: To avoid duplicating existing knowledge, I should first check if there are established ontologies relevant to this domain.
+
+Action 1: Search the web for ontologies related to this domain.
+
+Observation 1: I have found several related ontologies in this area.
+
+Thought 2: To keep the ontology focused and practical, I should only consider the most widely used and currently maintained (live) ontologies.
+
+Action 2: Review the list of existing ontologies and select only those that are widely used and currently maintained.
+
+Observation 2: I now have a refined list of widely used, live ontologies for reference.
+
+Thought 3: Next, I need the IRIs (Internationalized Resource Identifiers) of these selected ontologies to integrate them effectively.
+
+Action 3: Perform a web search to locate the IRIs of the selected ontologies.
+
+Observation 3: I have obtained the IRIs of the relevant ontologies, which are ready for integration.
+
+Response: I will proceed by reusing these widely adopted, live ontologies in the new ontology, using their respective IRIs and prefixes to ensure compatibility and reusability.

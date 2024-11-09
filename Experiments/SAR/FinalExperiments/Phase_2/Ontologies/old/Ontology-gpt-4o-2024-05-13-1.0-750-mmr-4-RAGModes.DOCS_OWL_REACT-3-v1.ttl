@@ -1,0 +1,91 @@
+@prefix : <http://example.com/owl/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar> rdf:type owl:Ontology .
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Missions rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:FirstResponder rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:Smoke rdf:type owl:Class .
+:ThickSmoke rdf:type rdfs:subClassOf :Smoke .
+:LightSmoke rdf:type rdfs:subClassOf :Smoke .
+
+:HouseFire rdf:type rdfs:subClassOf :Incident .
+:ForestFire rdf:type rdfs:subClassOf :Incident .
+
+:DamageToProperty rdf:type rdfs:subClassOf :Impact .
+:Injury rdf:type rdfs:subClassOf :Impact .
+:Death rdf:type rdfs:subClassOf :Impact .
+
+:CriticalIncident rdf:type rdfs:subClassOf :Incident .
+:ModerateIncident rdf:type rdfs:subClassOf :Incident .
+
+:firefighter rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :FirstResponder .
+
+:temperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:windSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:humidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:offersService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:performsMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :FirstResponder ;
+    rdfs:range :Mission .
+
+:missionLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location .
+
+:dataCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:dateTime .
+
+:dataLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range :Location .
+
+:priority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:vulnerabilityStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:statusOfFirebreaks rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .

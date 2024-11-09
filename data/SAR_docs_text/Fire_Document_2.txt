@@ -1,0 +1,244 @@
+
+Ticket serial number: ___________________
+
+Service Title: FORESTRY-RURAL FIRE BULLETIN
+
+Bulletin Editor: ____________________________________________
+
+General Information
+Inception: -
+Marking: -
+Announcement: -
+Intervention: -
+Partial Control: 2023 SEPTEMBER 08, 23:06 - 23:40
+Resurgence: -
+Repayment: -
+Full extinguishing: -
+
+False advertisement: -
+Malicious: -
+By mistake: X
+Method of Notification: PHONE CALL
+Distance from nearest fire vehicle: 26 Km
+Hazard index: LOW
+
+Responsibility of the Forest Service
+    Form of Fire:
+        Vertical: -
+        Creeping: -
+        Lands: X
+        Mixed: -
+
+Starting Point
+    Regional: ELIS
+    Municipality or Community: LECHENA
+    Area-Location: KOUNOUPELI
+    Longitude: 38.1019143
+    Latitude: 21.3517498
+    Altitude: 47 m
+
+Starting Position
+    Grove: -
+    Forest: -
+    Woodland: -
+    Agricultural area: -
+    Grassland area: X
+    Reed-swamps: -
+    Populated area: -
+    Agricultural facility: -
+    Livestock facility: -
+    Garbage-Landfill: -
+    Industry-craftsmanship: -
+    Construction site: -
+    Road slopes: -
+    Another one: -
+
+Possible Cause of Fire:
+    Physics
+Lightning strike: -
+    Arson with intent
+       Selfish action: -
+       Malicious action: -
+       Concealing a crime: -
+       Psychopath energy: -
+       Mentally retarded energy: -
+       Pyromaniac energy: -
+    Arson by negligence: -
+        Incineration of waste: -
+        Spark Machinery: -
+        Hikers Campers Hunters: X
+        Army shot: -
+        Use of explosives: -
+        Smoking residue: X
+        Burning of crop residues: -
+        Field workers: -
+        Short circuit: X
+
+Determination of Offender or Offenders:
+    YES: X
+    NO: -
+
+Area Burnt in Acres:
+    Forests: -
+    Swamps-Reeds: X
+    Woodland: -
+    Agricultural lands: -
+    Grove: -
+    Crop residues: -
+    Grasslands: X
+    Other lands: -
+    Total: 11 
+
+Other Disasters:
+    Buildings: 
+        N/A: -
+        Kind: -
+        Address: -
+        Insurance: -
+        Operator Name: -
+    Vehicles-Machinery: 
+        N/A: -
+        Kind: -
+        License Plate: - 
+        Insurance: -
+        Operator Name: -
+
+Rescues of People:
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Animals: -
+Birds: -
+Hives: -
+
+Accidents-Deaths: 
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Forces Involved:
+    Permanent 
+        Fire Officers: 6
+        Walking Departments of Fire Department: 3
+    Seasonal  
+        Fire Officers: -
+        Walking Departments of Fire Department: -
+    Volunteer Firefighters: 8
+    Armed Forces Personnel: -
+    Service Personnel: -
+    Staff from Municipality: -
+    Staff of the wider Public Sector: -
+    Club Members: -
+    Individuals with a request for personal work: -
+    Individuals: -
+
+Investment Instruments:
+    Firetrucks: 3
+    Tankers: 4
+    Fire Fighting Vehicles of other Services: -
+    Various machines: -
+
+Portable Tools and Machines: -
+
+Air Involvement:
+    N/A: - 
+    Type: -
+    Number: -
+
+Method of Deposit:
+    By aerial means: -
+    Self extinguishing: X
+    With ground sections: X
+    With pedestrian sections: X
+
+Use of backfire or incineration
+    YES: -
+    NO: - 
+    QUANTITY: -
+Water use (m3) 
+     YES: X  
+     NO: - 
+     QUANTITY: 365
+Foam usage (lt) 
+     YES: X  
+     NO: -
+     QUANTITY: 783
+Use of retarder (kg)
+     YES: -  
+     NO: -
+     QUANTITY: -
+
+Employment of Personnel and Media:
+    Vehicle number 1:
+        Notification DateTime: 8/9/2023 23:07
+        Departure DateTime: 8/9/2023 23:09
+        Arrival DateTime: 8/9/2023 23:23
+        Departure from event DateTime: 8/9/2023 23:51
+        Return DateTime: 9/9/2023 00:17
+        Number of Personnel: 2
+        Mileage: 50
+    Vehicle number 2:
+        Notification DateTime: 8/9/2023 23:07
+        Departure DateTime: 8/9/2023 23:10
+        Arrival DateTime: 8/9/2023 23:25
+        Departure from event DateTime: 8/9/2023 23:45
+        Return DateTime: 9/9/2023 00:02
+        Number of Personnel: 2
+        Mileage: 50
+Vehicle number 3:
+        Notification DateTime: 8/9/2023 23:07
+        Departure DateTime: 8/9/2023 23:10
+        Arrival DateTime: 8/9/2023 23:24 
+        Departure from event DateTime: 8/9/2023 23:49
+        Return DateTime: 9/9/2023 00:07
+        Number of Personnel: 2
+        Mileage: 50
+Vehicle number 4:
+        Notification Date DateTime: 8/9/2023 23:16
+        Departure DateTime: 8/9/2023 23:17
+        Arrival DateTime: 8/9/2023 23:30
+        Departure from event DateTime: 8/9/2023 23:41
+        Return DateTime: 23:54
+        Number of Personnel: 3
+        Mileage: 23
+Vehicle number 5:
+        Notification DateTime: 8/9/2023 23:15
+        Departure DateTime: 8/9/2023 23:17
+        Arrival DateTime: 8/9/2023 23:23 
+        Departure from event DateTime: 8/9/2023 23:47
+        Return DateTime: 23:55
+        Number of Personnel: 2
+        Mileage: 20
+Vehicle number 6:
+        Notification DateTime: 8/9/2023 23:16
+        Departure DateTime: 8/9/2023 23:29
+        Arrival DateTime: 8/9/2023 23:35
+        Departure from event DateTime: 8/9/2023 23:50
+        Return DateTime: 9/9/2023 00:00
+        Number of Personnel: 1
+        Mileage: 13
+Vehicle number 7:
+        Notification DateTime: 8/9/2023 23:16
+        Departure DateTime: 8/9/2023 23:29
+        Arrival DateTime: 8/9/2023 23:35
+        Departure from event DateTime: 8/9/2023 23:50
+        Return DateTime: 9/9/2023 00:01
+        Number of Personnel: 1
+        Mileage: 13
+
+Armed Forces Personnel
+    Slope
+        DateTime: -
+    Arrival
+        DateTime: -
+    Number of Personnel: -
+     Hours of Employment: -
+Comments: - 
+
+    
+

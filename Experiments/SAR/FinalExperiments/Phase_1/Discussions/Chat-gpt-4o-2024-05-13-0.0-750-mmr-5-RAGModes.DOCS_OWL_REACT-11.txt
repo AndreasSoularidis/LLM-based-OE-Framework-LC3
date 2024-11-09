@@ -1,0 +1,279 @@
+### Iterative Discussion
+
+#### Knowledge Engineer (KE), Domain Expert (DE), and Knowledge Worker (KW) Discussion
+
+**KE:** Let's start by identifying the main concepts and relationships we need for our ontology. We need to cover incidents and impacts, weather conditions, data from human and earth observations, and missions and relationships between services. 
+
+**DE:** For incidents and impacts, we need to capture the type of incident, its location, and its priority. For weather conditions, we need to include variables like temperature, wind speed, and humidity.
+
+**KW:** Don't forget we also need to capture data from various sources like sensors, satellites, and social media. This will help us monitor and assess the wildfire situation.
+
+**KE:** Agreed. Let's start by defining the main classes: `Incident`, `WeatherCondition`, `ObservationData`, and `Mission`.
+
+**DE:** We should also define subclasses for `Incident` like `WildfireIncident`, and for `WeatherCondition` like `Temperature`, `WindSpeed`, and `Humidity`.
+
+**KW:** For `ObservationData`, we can have subclasses like `SensorData`, `SatelliteData`, and `SocialMediaData`.
+
+**KE:** Good point. Let's also define properties to link these classes. For example, `hasLocation`, `hasPriority`, `hasWeatherCondition`, and `hasObservationData`.
+
+**DE:** We also need to define properties for the relationships between services and missions, like `supportsService` and `followsMission`.
+
+**KW:** And don't forget properties to capture the status of wildfire forestry works, like `firebreakStatus` and `accessToForestRoads`.
+
+**KE:** Let's start by creating these classes and properties in our ontology.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.com/owl/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar> rdf:type owl:Ontology .
+
+### Classes
+:Incident rdf:type owl:Class .
+:WildfireIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:ObservationData rdf:type owl:Class .
+:SensorData rdf:type owl:Class ; rdfs:subClassOf :ObservationData .
+:SatelliteData rdf:type owl:Class ; rdfs:subClassOf :ObservationData .
+:SocialMediaData rdf:type owl:Class ; rdfs:subClassOf :ObservationData .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+### Properties
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:DatatypeProperty .
+:hasWeatherCondition rdf:type owl:ObjectProperty .
+:hasObservationData rdf:type owl:ObjectProperty .
+:supportsService rdf:type owl:ObjectProperty .
+:followsMission rdf:type owl:ObjectProperty .
+:firebreakStatus rdf:type owl:DatatypeProperty .
+:accessToForestRoads rdf:type owl:DatatypeProperty .
+
+### Additional Classes and Properties
+:Firebreak rdf:type owl:Class .
+:ForestRoad rdf:type owl:Class .
+:FirebreakStatus rdf:type owl:Class .
+:AccessToForestRoads rdf:type owl:Class .
+
+### Relationships
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPriority ;
+  owl:someValuesFrom xsd:string
+] .
+
+:WildfireIncident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasWeatherCondition ;
+  owl:someValuesFrom :WeatherCondition
+] .
+
+:ObservationData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasObservationData ;
+  owl:someValuesFrom :ObservationData
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :supportsService ;
+  owl:someValuesFrom :Service
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :followsMission ;
+  owl:someValuesFrom :Mission
+] .
+
+:Firebreak rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :firebreakStatus ;
+  owl:someValuesFrom :FirebreakStatus
+] .
+
+:ForestRoad rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :accessToForestRoads ;
+  owl:someValuesFrom :AccessToForestRoads
+] .
+
+### Equivalent Classes and Properties
+:Incident owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:WildfireIncident)
+] .
+
+:WeatherCondition owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:Temperature :WindSpeed :Humidity)
+] .
+
+:ObservationData owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:SensorData :SatelliteData :SocialMediaData)
+] .
+
+:Mission owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:Service)
+] .
+
+### Disjoint Classes
+[] rdf:type owl:AllDisjointClasses ;
+   owl:members (:WildfireIncident :WeatherCondition :ObservationData :Mission) .
+
+### Property Chain Axioms
+:hasObservationData owl:propertyChainAxiom (:hasLocation :hasPriority) .
+```
+
+### Final Discussion
+
+**KE:** We've defined the main classes and properties. Let's check if our ontology can answer the competency questions.
+
+**DE:** For CQ1, we have `Temperature`, `WindSpeed`, and `Humidity` as weather variables. For CQ2 and CQ3, we can use `hasWeatherCondition` to link incidents to current and forecasted weather conditions.
+
+**KW:** For CQ4, we have `hasLocation`. For CQ5 and CQ6, we have `hasPriority` to determine the priority and urgency of incidents.
+
+**KE:** For CQ7 to CQ12, we have `ObservationData` and its subclasses, along with properties like `hasObservationData`, `firebreakStatus`, and `accessToForestRoads`.
+
+**DE:** For CQ13 to CQ18, we have `Mission`, `Service`, and properties like `supportsService`, `followsMission`, and `hasLocation`.
+
+**KW:** It looks like our ontology covers all the requirements and can answer the competency questions. I think we're done!
+
+**KE:** Agreed. Let's finalize the ontology.
+
+### Finalized Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.com/owl/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar> rdf:type owl:Ontology .
+
+### Classes
+:Incident rdf:type owl:Class .
+:WildfireIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:ObservationData rdf:type owl:Class .
+:SensorData rdf:type owl:Class ; rdfs:subClassOf :ObservationData .
+:SatelliteData rdf:type owl:Class ; rdfs:subClassOf :ObservationData .
+:SocialMediaData rdf:type owl:Class ; rdfs:subClassOf :ObservationData .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+### Properties
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:DatatypeProperty .
+:hasWeatherCondition rdf:type owl:ObjectProperty .
+:hasObservationData rdf:type owl:ObjectProperty .
+:supportsService rdf:type owl:ObjectProperty .
+:followsMission rdf:type owl:ObjectProperty .
+:firebreakStatus rdf:type owl:DatatypeProperty .
+:accessToForestRoads rdf:type owl:DatatypeProperty .
+
+### Additional Classes and Properties
+:Firebreak rdf:type owl:Class .
+:ForestRoad rdf:type owl:Class .
+:FirebreakStatus rdf:type owl:Class .
+:AccessToForestRoads rdf:type owl:Class .
+
+### Relationships
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPriority ;
+  owl:someValuesFrom xsd:string
+] .
+
+:WildfireIncident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasWeatherCondition ;
+  owl:someValuesFrom :WeatherCondition
+] .
+
+:ObservationData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasObservationData ;
+  owl:someValuesFrom :ObservationData
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :supportsService ;
+  owl:someValuesFrom :Service
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :followsMission ;
+  owl:someValuesFrom :Mission
+] .
+
+:Firebreak rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :firebreakStatus ;
+  owl:someValuesFrom :FirebreakStatus
+] .
+
+:ForestRoad rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :accessToForestRoads ;
+  owl:someValuesFrom :AccessToForestRoads
+] .
+
+### Equivalent Classes and Properties
+:Incident owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:WildfireIncident)
+] .
+
+:WeatherCondition owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:Temperature :WindSpeed :Humidity)
+] .
+
+:ObservationData owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:SensorData :SatelliteData :SocialMediaData)
+] .
+
+:Mission owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:Service)
+] .
+
+### Disjoint Classes
+[] rdf:type owl:AllDisjointClasses ;
+   owl:members (:WildfireIncident :WeatherCondition :ObservationData :Mission) .
+
+### Property Chain Axioms
+:hasObservationData owl:propertyChainAxiom (:hasLocation :hasPriority) .
+```
+
+This ontology should now be capable of answering all the competency questions and covering all the requirements for modeling Search and Rescue (SAR) missions related to wildfire incidents.

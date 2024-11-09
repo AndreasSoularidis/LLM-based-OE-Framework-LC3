@@ -1,0 +1,78 @@
+**Iterative Discussion:**
+
+**Knowledge Engineer:** Let's start by identifying the key concepts and relationships we need for our ontology. We need to cover incidents and impacts, weather conditions, data from human and earth observations, and missions and relationships between services. 
+
+**Domain Expert:** For incidents and impacts, we should include concepts like "WildfireIncident," "Impact," "Priority," and "Urgency." These will help us answer questions about the severity and priority of incidents.
+
+**Knowledge Worker:** I agree. We also need to consider the weather conditions that affect wildfires, such as "Temperature," "WindSpeed," "Humidity," and "WeatherForecast."
+
+**Knowledge Engineer:** Good points. We should also include data sources like "SensorData," "SatelliteData," and "SocialMediaData" to capture human and earth observations.
+
+**Domain Expert:** Don't forget about the missions and services involved in wildfire management. We need concepts like "FirefightingService," "Mission," and "SupportService."
+
+**Knowledge Worker:** We should also consider the relationships between these concepts. For example, a "WildfireIncident" can have multiple "Impacts," and a "Mission" can involve several "Services."
+
+**Knowledge Engineer:** Let's start modeling these concepts and relationships in our ontology. We'll use OWL axioms to make it as expressive as possible.
+
+**Domain Expert:** For the weather conditions, we can create a class "WeatherCondition" with subclasses for "Temperature," "WindSpeed," and "Humidity." We can also add properties like "hasCurrentMeasurement" and "hasForecast."
+
+**Knowledge Worker:** For incidents, we can create a class "WildfireIncident" with properties like "hasLocation," "hasPriority," and "hasUrgency."
+
+**Knowledge Engineer:** Let's also create a class "DataSource" with subclasses for "SensorData," "SatelliteData," and "SocialMediaData." We can add properties like "hasCreationDate" and "hasLocation."
+
+**Domain Expert:** For missions and services, we can create a class "Mission" with properties like "hasLocation" and "involvesService." We can also create a class "Service" with subclasses for "FirefightingService" and "SupportService."
+
+**Knowledge Worker:** We should also define relationships between these classes. For example, "WildfireIncident" can be linked to "WeatherCondition" through a property like "isInfluencedBy."
+
+**Knowledge Engineer:** Agreed. Let's implement these ideas in Turtle format.
+
+**Generated Ontology in Turtle (TTL) Format:**
+
+```turtle
+@prefix : <http://example.com/owl/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar> rdf:type owl:Ontology .
+
+:WildfireIncident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:Urgency rdf:type owl:Class .
+
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdfs:subClassOf :WeatherCondition .
+:Humidity rdfs:subClassOf :WeatherCondition .
+:WeatherForecast rdf:type owl:Class .
+
+:DataSource rdf:type owl:Class .
+:SensorData rdfs:subClassOf :DataSource .
+:SatelliteData rdfs:subClassOf :DataSource .
+:SocialMediaData rdfs:subClassOf :DataSource .
+
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:FirefightingService rdfs:subClassOf :Service .
+:SupportService rdfs:subClassOf :Service .
+
+:hasCurrentMeasurement rdf:type owl:ObjectProperty .
+:hasForecast rdf:type owl:ObjectProperty .
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:ObjectProperty .
+:hasUrgency rdf:type owl:ObjectProperty .
+:hasCreationDate rdf:type owl:DatatypeProperty .
+:involvesService rdf:type owl:ObjectProperty .
+:isInfluencedBy rdf:type owl:ObjectProperty .
+
+:WildfireIncident :isInfluencedBy :WeatherCondition .
+:Mission :involvesService :Service .
+```
+
+**Knowledge Engineer:** This ontology should now be able to answer the competency questions and cover all the requirements. Let's review it to ensure it meets all the criteria.
+
+**Domain Expert:** It looks comprehensive. We've covered incidents, weather conditions, data sources, and missions. The relationships between these concepts are also well-defined.
+
+**Knowledge Worker:** I agree. This ontology should provide the necessary framework for decision support in wildfire SAR missions.

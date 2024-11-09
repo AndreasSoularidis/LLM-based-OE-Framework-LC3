@@ -1,0 +1,110 @@
+**Iterative Discussion:**
+
+**Knowledge Engineer:** Let's start by identifying the key concepts and relationships we need to model for the Search and Rescue (SAR) missions in the context of wildfire incidents. We need to ensure our ontology can answer all the competency questions and cover the requirements.
+
+**Domain Expert:** Agreed. We should begin with the main concepts such as `Incident`, `WeatherCondition`, `ObservationData`, `Mission`, and `Service`. These will form the backbone of our ontology.
+
+**Knowledge Worker:** I think we should also consider the relationships between these concepts. For example, an `Incident` can have a `Location`, and `WeatherCondition` can influence the `Incident`.
+
+**Knowledge Engineer:** Good point. Let's define `Location` as a class and create properties like `hasLocation` for `Incident` and `hasWeatherCondition` for `Incident`.
+
+**Domain Expert:** We also need to capture the severity and priority of incidents. This can be done by introducing properties like `hasSeverity` and `hasPriority`.
+
+**Knowledge Worker:** For the weather conditions, we should include properties like `temperature`, `windSpeed`, `humidity`, and `weatherForecast`.
+
+**Knowledge Engineer:** Let's also consider the data from human and earth observations. We can create a class `ObservationData` with properties like `source`, `creationDate`, `classificationType`, and `status`.
+
+**Domain Expert:** Don't forget about the missions and services. We need to represent the relationships between them. We can have a class `Mission` with properties like `hasService`, `missionLocation`, and `missionPriority`.
+
+**Knowledge Worker:** We should also include properties to capture the population density and the location of involved people, as these are crucial for decision-making during SAR missions.
+
+**Knowledge Engineer:** Agreed. Let's proceed to define these classes and properties in the ontology.
+
+**Generated Ontology in Turtle (TTL) Format:**
+
+```turtle
+@prefix : <http://example.com/owl/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar> rdf:type owl:Ontology .
+
+:Incident rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:ObservationData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Location rdf:type owl:Class .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasSeverity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:temperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:windSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:humidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:weatherForecast rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:source rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string .
+
+:creationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:dateTime .
+
+:classificationType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string .
+
+:status rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string .
+
+:hasService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:missionLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location .
+
+:missionPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:populationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:involvedPeopleLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+```
+
+**Knowledge Engineer:** This ontology should now be able to answer all the competency questions and cover the requirements for SAR missions in the context of wildfire incidents. Let's review and iterate if necessary.

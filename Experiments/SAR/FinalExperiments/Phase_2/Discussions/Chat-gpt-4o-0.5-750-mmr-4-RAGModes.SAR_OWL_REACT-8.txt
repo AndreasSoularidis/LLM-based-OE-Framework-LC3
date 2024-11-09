@@ -1,0 +1,179 @@
+### Iterative Discussion
+
+#### Iteration 1: Initial Setup and Requirement Gathering
+
+**Knowledge Engineer (KE):** Let's start by defining the core classes and properties for our ontology. We need to cover incidents, weather conditions, data from human and earth observations, and missions.
+
+**Domain Expert (DE):** For incidents, we need classes like `Wildfire`, `Incident`, and `Impact`. We should also consider `WeatherCondition` for weather-related data.
+
+**Knowledge Worker (KW):** Don't forget to include sources of data like `Sensor`, `Satellite`, and `SocialMedia`. These will help us integrate heterogeneous data.
+
+**KE:** Agreed. Let's also define the relationships between these classes. For example, `hasImpact`, `hasWeatherCondition`, `hasDataSource`, etc.
+
+#### Iteration 2: Competency Questions and Class Extensions
+
+**KE:** We need to ensure our ontology can answer the competency questions. For CQ1 ("What are the most important weather variables that can cause forest fire?"), we need to define properties like `temperature`, `windSpeed`, and `humidity`.
+
+**DE:** Also, for CQ4 ("Where did the incident take place?"), we need a class `Location` and a property `hasLocation`.
+
+**KW:** For CQ6 ("What incidents during forest fires are the most urgent?"), we could define an `UrgencyLevel` class and a property `hasUrgencyLevel`.
+
+#### Iteration 3: Data Integration and Property Definitions
+
+**KE:** Let's define properties for data integration. For CQ7 ("What data from the source are depicted?"), we need a property `hasData`.
+
+**DE:** For CQ10 ("Which is the classification type of smoke?"), we can define a class `Smoke` and a property `hasClassification`.
+
+**KW:** For CQ12 ("What is the status of wildfire forestry works?"), we need a class `ForestryWork` and a property `hasStatus`.
+
+#### Iteration 4: Finalizing Classes and Properties
+
+**KE:** We should now focus on relationships between services and missions. For CQ13 ("What services or support do you offer for firefighting?"), we need a class `Service` and a property `offersSupport`.
+
+**DE:** For CQ15 ("What is the location where this mission is taking place?"), we need a class `Mission` and a property `missionLocation`.
+
+**KW:** For CQ17 ("What is the population density in the area?"), we need a property `populationDensity`.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.com/owl/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar> rdf:type owl:Ontology .
+
+:Wildfire rdf:type owl:Class .
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Sensor rdf:type owl:Class .
+:Satellite rdf:type owl:Class .
+:SocialMedia rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:UrgencyLevel rdf:type owl:Class .
+:Smoke rdf:type owl:Class .
+:ForestryWork rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+
+:hasImpact rdf:type owl:ObjectProperty .
+:hasWeatherCondition rdf:type owl:ObjectProperty .
+:hasDataSource rdf:type owl:ObjectProperty .
+:hasLocation rdf:type owl:ObjectProperty .
+:hasUrgencyLevel rdf:type owl:ObjectProperty .
+:hasData rdf:type owl:ObjectProperty .
+:hasClassification rdf:type owl:ObjectProperty .
+:hasStatus rdf:type owl:ObjectProperty .
+:offersSupport rdf:type owl:ObjectProperty .
+:missionLocation rdf:type owl:ObjectProperty .
+:populationDensity rdf:type owl:DatatypeProperty .
+
+:temperature rdf:type owl:DatatypeProperty .
+:windSpeed rdf:type owl:DatatypeProperty .
+:humidity rdf:type owl:DatatypeProperty .
+:weatherForecast rdf:type owl:DatatypeProperty .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Wildfire rdfs:subClassOf :Incident .
+:Impact rdfs:subClassOf :Incident .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :temperature ;
+  owl:someValuesFrom xsd:float
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :windSpeed ;
+  owl:someValuesFrom xsd:float
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :humidity ;
+  owl:someValuesFrom xsd:float
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :weatherForecast ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Sensor rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasData ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Satellite rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasData ;
+  owl:someValuesFrom xsd:string
+] .
+
+:SocialMedia rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasData ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Smoke rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasClassification ;
+  owl:someValuesFrom xsd:string
+] .
+
+:ForestryWork rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasStatus ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Service rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :offersSupport ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :missionLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :populationDensity ;
+  owl:someValuesFrom xsd:float
+] .
+
+:Wildfire owl:disjointWith :Impact .
+:Incident owl:disjointWith :WeatherCondition .
+:Sensor owl:disjointWith :Satellite .
+:SocialMedia owl:disjointWith :Sensor .
+:Service owl:disjointWith :Mission .
+
+:hasImpact owl:inverseOf :isImpactOf .
+:hasWeatherCondition owl:inverseOf :isWeatherConditionOf .
+:hasDataSource owl:inverseOf :isDataSourceOf .
+:hasLocation owl:inverseOf :isLocationOf .
+:hasUrgencyLevel owl:inverseOf :isUrgencyLevelOf .
+:hasData owl:inverseOf :isDataOf .
+:hasClassification owl:inverseOf :isClassificationOf .
+:hasStatus owl:inverseOf :isStatusOf .
+:offersSupport owl:inverseOf :isSupportOfferedBy .
+:missionLocation owl:inverseOf :isMissionLocationOf .
+:populationDensity owl:inverseOf :isPopulationDensityOf .
+```
+
+This ontology covers all the defined requirements and is capable of answering the competency questions. The iterative discussion ensures that all necessary classes and properties are included, making the ontology comprehensive and well-connected.

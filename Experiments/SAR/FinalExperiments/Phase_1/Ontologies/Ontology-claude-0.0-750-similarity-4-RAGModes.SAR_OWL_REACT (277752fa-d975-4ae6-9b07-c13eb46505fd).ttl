@@ -1,0 +1,76 @@
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+:Incident rdf:type owl:Class ;
+    rdfs:comment "Represents a wildfire incident"@en .
+
+:WeatherCondition rdf:type owl:Class ;
+    rdfs:comment "Weather conditions affecting the wildfire"@en .
+
+:Impact rdf:type owl:Class .
+
+:Mission rdf:type owl:Class .
+
+:ObservationSource rdf:type owl:Class .
+
+:Location rdf:type owl:Class .
+
+:AffectedArea rdf:type owl:Class .
+
+:EmergencyService rdf:type owl:Class .
+
+# Weather-related classes
+:Temperature rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:WindSpeed rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:Humidity rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+# Impact-related classes
+:LandImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+:StructuralImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+:HumanImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+:WildlifeImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+# Observation sources
+:Sensor rdf:type owl:Class ;
+    rdfs:subClassOf :ObservationSource .
+
+:SocialMedia rdf:type owl:Class ;
+    rdfs:subClassOf :ObservationSource .
+
+:FirstResponderReport rdf:type owl:Class ;
+    rdfs:subClassOf :ObservationSource .
+
+# Properties
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasPriority rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+
+:involvesMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :

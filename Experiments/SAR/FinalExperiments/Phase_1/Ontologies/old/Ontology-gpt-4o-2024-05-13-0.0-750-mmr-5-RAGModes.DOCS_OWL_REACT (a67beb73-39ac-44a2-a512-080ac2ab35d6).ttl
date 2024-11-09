@@ -1,0 +1,114 @@
+@prefix : <http://example.com/owl/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar> rdf:type owl:Ontology .
+
+### Classes
+:Incident rdf:type owl:Class .
+:FireIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Forecast rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:SensorData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+### Properties
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:DatatypeProperty .
+:hasUrgency rdf:type owl:DatatypeProperty .
+:hasWeatherCondition rdf:type owl:ObjectProperty .
+:hasSensorData rdf:type owl:ObjectProperty .
+:hasSocialMediaData rdf:type owl:ObjectProperty .
+:hasMission rdf:type owl:ObjectProperty .
+:hasService rdf:type owl:ObjectProperty .
+
+### Additional Classes and Properties
+:Location rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:Urgency rdf:type owl:Class .
+:Latitude rdf:type owl:DatatypeProperty .
+:Longitude rdf:type owl:DatatypeProperty .
+:Altitude rdf:type owl:DatatypeProperty .
+:Date rdf:type owl:DatatypeProperty .
+:ClassificationType rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+:Firebreak rdf:type owl:Class .
+:ForestRoad rdf:type owl:Class .
+:PopulationDensity rdf:type owl:DatatypeProperty .
+
+### Relationships
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPriority ;
+  owl:someValuesFrom :Priority
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasUrgency ;
+  owl:someValuesFrom :Urgency
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasWeatherCondition ;
+  owl:someValuesFrom :WeatherCondition
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasSensorData ;
+  owl:someValuesFrom :SensorData
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasSocialMediaData ;
+  owl:someValuesFrom :SocialMediaData
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasService ;
+  owl:someValuesFrom :Service
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+### Equivalent Classes and Properties
+:FireIncident owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:intersectionOf ( :Incident :Fire )
+] .
+
+:hasLocation owl:equivalentProperty [
+  rdf:type owl:ObjectProperty ;
+  owl:propertyChainAxiom ( :hasLatitude :hasLongitude )
+] .
+
+### Disjoint Classes
+[] rdf:type owl:AllDisjointClasses ;
+   owl:members ( :FireIncident :WeatherCondition :SensorData :SocialMediaData :Mission :Service ) .
+
+### Example of Negative Property Assertion
+[] rdf:type owl:NegativePropertyAssertion ;
+   owl:sourceIndividual :FireIncident ;
+   owl:assertionProperty :hasLocation ;
+   owl:targetIndividual :Ocean .

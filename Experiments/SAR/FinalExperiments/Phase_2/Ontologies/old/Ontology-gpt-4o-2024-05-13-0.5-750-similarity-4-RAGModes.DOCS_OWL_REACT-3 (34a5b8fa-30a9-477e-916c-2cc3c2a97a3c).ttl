@@ -1,0 +1,42 @@
+@prefix : <http://example.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:WildfireIncident rdf:type owl:Class .
+:Severity rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:PopulationDensity rdf:type owl:Class .
+:SmokeClassification rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+:ForestryWorkStatus rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+
+:hasSeverity rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :Severity .
+:hasLocation rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :Location .
+:hasTemperature rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasWindSpeed rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasHumidity rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasForecast rdf:type owl:ObjectProperty ; rdfs:domain :WeatherCondition ; rdfs:range :WeatherForecast .
+:hasSensorData rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :SensorData .
+:hasSatelliteData rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :SatelliteData .
+:hasSocialMediaData rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :SocialMediaData .
+:hasMission rdf:type owl:ObjectProperty ; rdfs:domain :Service ; rdfs:range :Mission .
+:hasService rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Service .
+:hasPopulationDensity rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:float .
+:hasCreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ; rdfs:range xsd:dateTime .
+:hasSmokeClassification rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :SmokeClassification .
+:hasVulnerableObject rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :VulnerableObject .
+:hasForestryWorkStatus rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :ForestryWorkStatus .
+:hasPriority rdf:type owl:ObjectProperty ; rdfs:domain :WildfireIncident ; rdfs:range :Priority .
+:hasMissionLocation rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Location .

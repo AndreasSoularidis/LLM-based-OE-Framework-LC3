@@ -1,0 +1,175 @@
+### Iterative Discussion
+
+#### Round 1
+
+**Knowledge Engineer:** 
+"Let's start by identifying the main classes and properties we need for our ontology. Based on the competency questions and requirements, we need to include classes for incidents, weather conditions, data sources, missions, and services."
+
+**Domain Expert:** 
+"Agreed. We should also consider the relationships between these classes. For instance, incidents can be linked to weather conditions, data sources, and missions."
+
+**Knowledge Worker:** 
+"Don't forget to include the properties that will help us answer the competency questions. For example, we need properties to capture the location, priority, and urgency of incidents, as well as the measurements and forecasts for weather conditions."
+
+**Knowledge Engineer:** 
+"Let's start by defining the main classes: `Incident`, `WeatherCondition`, `DataSource`, `Mission`, and `Service`. We'll also need properties like `hasLocation`, `hasPriority`, `hasUrgency`, `hasMeasurement`, and `hasForecast`."
+
+#### Round 2
+
+**Knowledge Engineer:** 
+"I've added the main classes and some basic properties. Now, let's refine these classes and add subclasses where necessary. For example, `WeatherCondition` can have subclasses like `Temperature`, `WindSpeed`, and `Humidity`."
+
+**Domain Expert:** 
+"Good idea. We should also add subclasses for `Incident`, such as `WildfireIncident`, and for `DataSource`, like `SensorData`, `SatelliteData`, and `SocialMediaData`."
+
+**Knowledge Worker:** 
+"Make sure to add properties that capture the specific details we need. For instance, `Temperature` should have properties like `currentMeasurement` and `forecastMeasurement`."
+
+**Knowledge Engineer:** 
+"Got it. I'll add these subclasses and properties now."
+
+#### Round 3
+
+**Knowledge Engineer:** 
+"We now have a more detailed structure. Let's add properties to link these classes. For example, `WildfireIncident` should have properties like `hasWeatherCondition`, `hasDataSource`, and `hasMission`."
+
+**Domain Expert:** 
+"Also, don't forget to add properties for capturing the status of forestry works and the classification of smoke. These are important for understanding the wildfire situation."
+
+**Knowledge Worker:** 
+"Right, and we need properties to capture the relationships between services and missions, such as `supportsMission` and `providedByService`."
+
+**Knowledge Engineer:** 
+"I'll add these properties and refine the ontology further."
+
+#### Round 4
+
+**Knowledge Engineer:** 
+"The ontology is looking more comprehensive now. Let's review it to ensure it can answer all the competency questions."
+
+**Domain Expert:** 
+"Yes, let's check if we have the necessary properties for capturing weather variables, incident locations, priorities, and urgency."
+
+**Knowledge Worker:** 
+"We should also verify that we can capture data from various sources, the status of forestry works, and the relationships between services and missions."
+
+**Knowledge Engineer:** 
+"I'll make the final adjustments and ensure all competency questions can be answered."
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+:Incident a owl:Class .
+:WildfireIncident a owl:Class ;
+    rdfs:subClassOf :Incident .
+
+:WeatherCondition a owl:Class .
+:Temperature a owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+:WindSpeed a owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+:Humidity a owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:DataSource a owl:Class .
+:SensorData a owl:Class ;
+    rdfs:subClassOf :DataSource .
+:SatelliteData a owl:Class ;
+    rdfs:subClassOf :DataSource .
+:SocialMediaData a owl:Class ;
+    rdfs:subClassOf :DataSource .
+
+:Mission a owl:Class .
+:Service a owl:Class .
+
+:hasLocation a owl:ObjectProperty ;
+    rdfs:domain :Incident, :DataSource, :Mission ;
+    rdfs:range :Location .
+
+:hasPriority a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasUrgency a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasMeasurement a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasForecast a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:hasWeatherCondition a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasDataSource a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :DataSource .
+
+:hasMission a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Mission .
+
+:supportsMission a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:providedByService a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:hasStatus a owl:DatatypeProperty ;
+    rdfs:domain :ForestryWork ;
+    rdfs:range xsd:string .
+
+:hasClassification a owl:DatatypeProperty ;
+    rdfs:domain :Smoke ;
+    rdfs:range xsd:string .
+
+:ForestryWork a owl:Class .
+:Smoke a owl:Class .
+:Location a owl:Class .
+
+:hasCreationDate a owl:DatatypeProperty ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:dateTime .
+
+:hasVulnerableObject a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :VulnerableObject .
+
+:VulnerableObject a owl:Class .
+
+:hasPopulationDensity a owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:hasInvolvedPeople a owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :Person .
+
+:Person a owl:Class .
+```
+
+### Final Review
+
+**Knowledge Engineer:** 
+"This ontology now covers all the required classes and properties. It should be able to answer all the competency questions."
+
+**Domain Expert:** 
+"Yes, it looks comprehensive and well-structured. It captures the necessary details for incidents, weather conditions, data sources, missions, and services."
+
+**Knowledge Worker:** 
+"Great job! This ontology will be very useful for decision support in wildfire SAR missions."
+
+**Knowledge Engineer:** 
+"Let's finalize and document this ontology. It meets all the requirements and can answer all the competency questions."

@@ -1,0 +1,333 @@
+### Iterative Discussion
+
+#### Knowledge Engineer (KE): 
+Alright team, let's start by outlining the main concepts and relationships we need in our ontology for Search and Rescue (SAR) missions focused on wildfire incidents. The competency questions will guide us. Our key areas are Incidents and Impacts, Weather Conditions, Data from Human and Earth Observations, and Missions and Relationships Between Services.
+
+#### Domain Expert (DE): 
+We should begin with defining the main incidents and impacts. For wildfires, critical incidents include the fire itself, its spread, and the damage it causes. We also need to capture weather conditions such as temperature, wind speed, and humidity. Additionally, we should include data from sensors, satellites, and social media.
+
+#### Knowledge Worker (KW): 
+From a user perspective, we need to ensure the ontology can answer specific questions. For example, CQ1 asks about the most important weather variables that can cause forest fires. We should identify these variables and their relationships to incidents.
+
+#### KE:
+Let's start by defining the main classes: `Incident`, `Impact`, `WeatherCondition`, `SensorData`, `SocialMediaData`, `Mission`, and `Service`. We also need properties to link these classes.
+
+#### DE:
+We should also consider subclasses for `Incident` such as `Wildfire`, `Smoke`, and `Damage`. For `WeatherCondition`, we need subclasses like `Temperature`, `WindSpeed`, and `Humidity`.
+
+#### KW:
+Don't forget to include properties that represent the relationships between these classes. For example, `hasWeatherCondition`, `hasImpact`, `isMonitoredBy`, and `isReportedBy`.
+
+#### KE:
+Great, let's start building the ontology. I'll begin with the main classes and their relationships.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+# SubClasses
+:Wildfire rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:Smoke rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:Damage rdf:type owl:Class ; rdfs:subClassOf :Impact .
+
+:Temperature rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+
+# Properties
+:hasWeatherCondition rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :WeatherCondition .
+:hasImpact rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Impact .
+:isMonitoredBy rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SensorData .
+:isReportedBy rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SocialMediaData .
+:hasMission rdf:type owl:ObjectProperty ; rdfs:domain :Service ; rdfs:range :Mission .
+:hasService rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Service .
+:hasLocation rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasPriority rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasUrgency rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+
+# Competency Questions Representation
+# CQ1: What are the most important weather variables that can cause forest fire?
+:Wildfire rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasWeatherCondition ;
+  owl:someValuesFrom :WeatherCondition
+] .
+
+# CQ2: What are the current measurements for these weather variables?
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :isMonitoredBy ;
+  owl:someValuesFrom :SensorData
+] .
+
+# CQ3: What is the forecast for the weather in this location?
+:WeatherForecast rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:hasForecast rdf:type owl:ObjectProperty ; rdfs:domain :Location ; rdfs:range :WeatherForecast .
+
+# CQ4: Where did the incident take place?
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom xsd:string
+] .
+
+# CQ5: What is the priority of an incident during a forest fire disaster?
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPriority ;
+  owl:someValuesFrom xsd:string
+] .
+
+# CQ6: What incidents during forest fires are the most urgent?
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasUrgency ;
+  owl:someValuesFrom xsd:string
+] .
+
+# CQ7: What data from the source are depicted?
+:SensorData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :isMonitoredBy ;
+  owl:someValuesFrom :Incident
+] .
+
+# CQ8: Which is the creation date of these data?
+:hasCreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData ; rdfs:range xsd:dateTime .
+
+# CQ9: What is the location of this item?
+:Item rdf:type owl:Class .
+:hasItemLocation rdf:type owl:ObjectProperty ; rdfs:domain :Item ; rdfs:range xsd:string .
+
+# CQ10: Which is the classification type of smoke?
+:Smoke rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasClassification ;
+  owl:someValuesFrom xsd:string
+] .
+
+# CQ11: Which vulnerable objects were involved in the incident?
+:VulnerableObject rdf:type owl:Class .
+:hasVulnerableObject rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :VulnerableObject .
+
+# CQ12: What is the status of wildfire forestry works (firebreaks, access to forest roads, etc.)?
+:ForestryWork rdf:type owl:Class .
+:hasForestryWorkStatus rdf:type owl:DatatypeProperty ; rdfs:domain :ForestryWork ; rdfs:range xsd:string .
+
+# CQ13: What services or support do you offer for firefighting?
+:FirefightingSupport rdf:type owl:Class ; rdfs:subClassOf :Service .
+
+# CQ14: Which mission do you follow for this support/service?
+:hasMission rdf:type owl:ObjectProperty ; rdfs:domain :FirefightingSupport ; rdfs:range :Mission .
+
+# CQ15: What is the location where this mission is taking place?
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom xsd:string
+] .
+
+# CQ16: Where is the most urgent mission taking place?
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasUrgency ;
+  owl:someValuesFrom xsd:string
+] .
+
+# CQ17: What is the population density in the area?
+:Location rdf:type owl:Class .
+:hasPopulationDensity rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:integer .
+
+# CQ18: What is the location of the involved people?
+:Person rdf:type owl:Class .
+:hasPersonLocation rdf:type owl:ObjectProperty ; rdfs:domain :Person ; rdfs:range :Location .
+```
+
+### Iterative Discussion (Continued)
+
+#### KE:
+We've covered the main classes and properties. Now, let's ensure that our ontology can answer all the competency questions. Are there any additional properties or classes we need?
+
+#### DE:
+We should add properties to capture detailed information about the incidents, such as `hasLongitude`, `hasLatitude`, and `hasAltitude` for the location details.
+
+#### KW:
+For the missions and services, we need to ensure that we can capture relationships between different services and the specific missions they are involved in.
+
+#### KE:
+Good point. I'll add those properties and ensure our ontology is well-connected and expressive.
+
+### Finalized Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:Item rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+:ForestryWork rdf:type owl:Class .
+:Person rdf:type owl:Class .
+
+# SubClasses
+:Wildfire rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:Smoke rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:Damage rdf:type owl:Class ; rdfs:subClassOf :Impact .
+:Temperature rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:FirefightingSupport rdf:type owl:Class ; rdfs:subClassOf :Service .
+:WeatherForecast rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+
+# Properties
+:hasWeatherCondition rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :WeatherCondition .
+:hasImpact rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Impact .
+:isMonitoredBy rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SensorData .
+:isReportedBy rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SocialMediaData .
+:hasMission rdf:type owl:ObjectProperty ; rdfs:domain :Service ; rdfs:range :Mission .
+:hasService rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Service .
+:hasLocation rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Location .
+:hasPriority rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasUrgency rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasCreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData ; rdfs:range xsd:dateTime .
+:hasItemLocation rdf:type owl:ObjectProperty ; rdfs:domain :Item ; rdfs:range :Location .
+:hasClassification rdf:type owl:DatatypeProperty ; rdfs:domain :Smoke ; rdfs:range xsd:string .
+:hasVulnerableObject rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :VulnerableObject .
+:hasForestryWorkStatus rdf:type owl:DatatypeProperty ; rdfs:domain :ForestryWork ; rdfs:range xsd:string .
+:hasPopulationDensity rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:integer .
+:hasPersonLocation rdf:type owl:ObjectProperty ; rdfs:domain :Person ; rdfs:range :Location .
+:hasLongitude rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:float .
+:hasLatitude rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:float .
+:hasAltitude rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:float .
+
+# Competency Questions Representation
+:Wildfire rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasWeatherCondition ;
+  owl:someValuesFrom :WeatherCondition
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :isMonitoredBy ;
+  owl:someValuesFrom :SensorData
+] .
+
+:Location rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasForecast ;
+  owl:someValuesFrom :WeatherForecast
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPriority ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasUrgency ;
+  owl:someValuesFrom xsd:string
+] .
+
+:SensorData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :isMonitoredBy ;
+  owl:someValuesFrom :Incident
+] .
+
+:SensorData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasCreationDate ;
+  owl:someValuesFrom xsd:dateTime
+] .
+
+:Item rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasItemLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Smoke rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasClassification ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasVulnerableObject ;
+  owl:someValuesFrom :VulnerableObject
+] .
+
+:ForestryWork rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasForestryWorkStatus ;
+  owl:someValuesFrom xsd:string
+] .
+
+:FirefightingSupport rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasMission ;
+  owl:someValuesFrom :Mission
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasUrgency ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Location rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPopulationDensity ;
+  owl:someValuesFrom xsd:integer
+] .
+
+:Person rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPersonLocation ;
+  owl:someValuesFrom :Location
+] .
+```
+
+### Conclusion
+The generated ontology now covers all required concepts and relationships for SAR missions focused on wildfire incidents. It can answer all the competency questions and is well-connected and expressive.

@@ -1,0 +1,94 @@
+### Iterative Discussion
+
+#### Knowledge Engineer (KE):
+Alright, team, we have a challenging task ahead of us. We need to create an ontology for Search and Rescue (SAR) missions specifically for wildfire incidents. Let's start by defining the key concepts and relationships. 
+
+#### Domain Expert (DE):
+Absolutely. We should start by identifying the core classes. For incidents and impacts, we need classes like `Incident`, `Impact`, `WeatherCondition`, and `Location`. For the data from human and earth observations, we need classes like `SensorData`, `SatelliteData`, `SocialMediaData`, and `FirstResponderInput`. For missions and relationships, we should have classes like `Mission`, `Service`, and `Support`.
+
+#### Knowledge Worker (KW):
+That makes sense. We should also define properties to capture the relationships and attributes of these classes. For example, `Incident` should have properties like `hasPriority`, `hasUrgency`, and `occurredAt`. `WeatherCondition` should have properties like `temperature`, `windSpeed`, `humidity`, and `forecast`.
+
+#### KE:
+Great start. Let's also define some object properties to link these classes. For instance, `Incident` can be linked to `Location` using `occurredAt`, and `Mission` can be linked to `Location` using `takesPlaceAt`.
+
+#### DE:
+Don't forget to include properties for the data from various sources. For example, `SensorData` should have properties like `capturedAt`, `hasLocation`, and `depicts`. `SocialMediaData` should have properties like `postedAt`, `hasLocation`, and `contains`.
+
+#### KW:
+We should also define some subclasses to make the ontology more comprehensive. For instance, `WeatherCondition` can have subclasses like `Temperature`, `WindSpeed`, and `Humidity`. `Incident` can have subclasses like `FireIncident`, `SmokeIncident`, and `EvacuationIncident`.
+
+#### KE:
+Good point. Let's also define some properties for the missions and services. For example, `Mission` should have properties like `hasSupport`, `followsService`, and `involvesPopulation`.
+
+#### DE:
+We should also consider the competency questions. For example, CQ1 to CQ6 are related to incidents and impacts, so we need to ensure our ontology can answer questions about weather variables, their measurements, forecasts, incident locations, priorities, and urgencies.
+
+#### KW:
+For CQ7 to CQ12, we need to ensure our ontology can capture data from various sources, their creation dates, locations, smoke classifications, vulnerable objects involved, and the status of forestry works.
+
+#### KE:
+And for CQ13 to CQ18, we need to ensure our ontology can capture information about services and support for firefighting, the missions they follow, their locations, the urgency of missions, population density, and the location of involved people.
+
+#### DE:
+Let's finalize the classes and properties and ensure we cover all the competency questions.
+
+#### KW:
+Agreed. Let's iterate and refine until we have a comprehensive ontology.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```ttl
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Classes
+:Incident a owl:Class .
+:Impact a owl:Class .
+:WeatherCondition a owl:Class .
+:Location a owl:Class .
+:SensorData a owl:Class .
+:SatelliteData a owl:Class .
+:SocialMediaData a owl:Class .
+:FirstResponderInput a owl:Class .
+:Mission a owl:Class .
+:Service a owl:Class .
+:Support a owl:Class .
+
+# Subclasses
+:FireIncident a owl:Class ; rdfs:subClassOf :Incident .
+:SmokeIncident a owl:Class ; rdfs:subClassOf :Incident .
+:EvacuationIncident a owl:Class ; rdfs:subClassOf :Incident .
+:Temperature a owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed a owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity a owl:Class ; rdfs:subClassOf :WeatherCondition .
+
+# Object Properties
+:occurredAt a owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Location .
+:takesPlaceAt a owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Location .
+:hasSupport a owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Support .
+:followsService a owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Service .
+:involvesPopulation a owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Location .
+:depicts a owl:ObjectProperty ; rdfs:domain :SensorData ; rdfs:range :Incident .
+:contains a owl:ObjectProperty ; rdfs:domain :SocialMediaData ; rdfs:range :Incident .
+:hasLocation a owl:ObjectProperty ; rdfs:domain :SensorData ; rdfs:range :Location .
+:hasLocation a owl:ObjectProperty ; rdfs:domain :SocialMediaData ; rdfs:range :Location .
+
+# Data Properties
+:hasPriority a owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasUrgency a owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:temperature a owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:windSpeed a owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:humidity a owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:forecast a owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:string .
+:capturedAt a owl:DatatypeProperty ; rdfs:domain :SensorData ; rdfs:range xsd:dateTime .
+:postedAt a owl:DatatypeProperty ; rdfs:domain :SocialMediaData ; rdfs:range xsd:dateTime .
+:creationDate a owl:DatatypeProperty ; rdfs:domain :SatelliteData ; rdfs:range xsd:dateTime .
+:classificationType a owl:DatatypeProperty ; rdfs:domain :SmokeIncident ; rdfs:range xsd:string .
+:status a owl:DatatypeProperty ; rdfs:domain :Impact ; rdfs:range xsd:string .
+:populationDensity a owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:float .
+```
+
+This ontology covers the defined requirements and competency questions. The iterative discussion and refinement process ensures that the ontology is comprehensive and capable of answering the given questions.

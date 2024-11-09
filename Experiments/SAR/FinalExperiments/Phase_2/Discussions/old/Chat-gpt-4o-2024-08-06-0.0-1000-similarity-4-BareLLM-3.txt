@@ -1,0 +1,148 @@
+### Iterative Discussion
+
+#### Round 1: Initial Discussion
+
+**Knowledge Engineer (KE):** Let's start by identifying the core concepts for our ontology. We need to cover incidents, weather conditions, data from observations, and missions. I propose we start with the class `WildfireIncident` to capture incidents and impacts. We also need `WeatherCondition`, `ObservationData`, and `Mission`.
+
+**Domain Expert (DE):** Agreed. For `WildfireIncident`, we should include properties like `location`, `priority`, and `urgency`. For `WeatherCondition`, we need to capture variables like `temperature`, `windSpeed`, and `humidity`.
+
+**Knowledge Worker (KW):** Don't forget about the data sources. We need to include `SensorData`, `SatelliteData`, and `SocialMediaData` under `ObservationData`. Also, we should consider `FirefightingService` and `SupportService` under `Mission`.
+
+#### Round 2: Refining Concepts
+
+**KE:** Let's refine the properties. For `WeatherCondition`, we should add `currentMeasurement` and `forecast`. For `WildfireIncident`, we need `incidentLocation` and `impact`.
+
+**DE:** We should also include `vulnerableObjects` and `forestryWorkStatus` for `WildfireIncident`. For `ObservationData`, we need `creationDate` and `classificationType`.
+
+**KW:** For `Mission`, we should add `missionLocation`, `urgencyLevel`, and `populationDensity`. Also, `involvedPeopleLocation` is crucial for coordinating efforts.
+
+#### Round 3: Finalizing the Ontology
+
+**KE:** Let's finalize the ontology. We need to ensure it answers all competency questions. For example, `WeatherCondition` should help answer CQ1, CQ2, and CQ3. `WildfireIncident` should address CQ4, CQ5, and CQ6.
+
+**DE:** `ObservationData` should cover CQ7 to CQ12. `Mission` should address CQ13 to CQ18. We should also ensure relationships between these classes are well-defined.
+
+**KW:** Agreed. Let's ensure we have properties linking `Mission` to `WildfireIncident` and `WeatherCondition` to `ObservationData`.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+:WildfireIncident a owl:Class ;
+    rdfs:label "Wildfire Incident" ;
+    rdfs:comment "Represents a wildfire incident and its impacts." .
+
+:WeatherCondition a owl:Class ;
+    rdfs:label "Weather Condition" ;
+    rdfs:comment "Represents weather conditions relevant to wildfire behavior." .
+
+:ObservationData a owl:Class ;
+    rdfs:label "Observation Data" ;
+    rdfs:comment "Data from sensors, satellites, and social media." .
+
+:Mission a owl:Class ;
+    rdfs:label "Mission" ;
+    rdfs:comment "Represents missions and services in wildfire management." .
+
+:location a owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident, :Mission, :ObservationData ;
+    rdfs:range :Location ;
+    rdfs:label "Location" .
+
+:priority a owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string ;
+    rdfs:label "Priority" .
+
+:urgency a owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident, :Mission ;
+    rdfs:range xsd:string ;
+    rdfs:label "Urgency" .
+
+:temperature a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "Temperature" .
+
+:windSpeed a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "Wind Speed" .
+
+:humidity a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "Humidity" .
+
+:currentMeasurement a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string ;
+    rdfs:label "Current Measurement" .
+
+:forecast a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string ;
+    rdfs:label "Forecast" .
+
+:creationDate a owl:DatatypeProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "Creation Date" .
+
+:classificationType a owl:DatatypeProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string ;
+    rdfs:label "Classification Type" .
+
+:vulnerableObjects a owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :VulnerableObject ;
+    rdfs:label "Vulnerable Objects" .
+
+:forestryWorkStatus a owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string ;
+    rdfs:label "Forestry Work Status" .
+
+:populationDensity a owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:float ;
+    rdfs:label "Population Density" .
+
+:involvedPeopleLocation a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location ;
+    rdfs:label "Involved People Location" .
+
+:FirefightingService a owl:Class ;
+    rdfs:subClassOf :Mission ;
+    rdfs:label "Firefighting Service" .
+
+:SupportService a owl:Class ;
+    rdfs:subClassOf :Mission ;
+    rdfs:label "Support Service" .
+
+:SensorData a owl:Class ;
+    rdfs:subClassOf :ObservationData ;
+    rdfs:label "Sensor Data" .
+
+:SatelliteData a owl:Class ;
+    rdfs:subClassOf :ObservationData ;
+    rdfs:label "Satellite Data" .
+
+:SocialMediaData a owl:Class ;
+    rdfs:subClassOf :ObservationData ;
+    rdfs:label "Social Media Data" .
+
+:Location a owl:Class ;
+    rdfs:label "Location" .
+
+:VulnerableObject a owl:Class ;
+    rdfs:label "Vulnerable Object" .
+```
+
+This ontology captures the necessary concepts and relationships for modeling Search and Rescue (SAR) missions in the context of wildfire incidents, addressing all the competency questions and requirements specified.

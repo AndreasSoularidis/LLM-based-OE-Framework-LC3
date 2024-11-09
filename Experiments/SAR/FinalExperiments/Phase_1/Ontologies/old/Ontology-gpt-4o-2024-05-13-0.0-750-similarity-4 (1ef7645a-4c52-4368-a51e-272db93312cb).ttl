@@ -1,0 +1,146 @@
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:FireBreak rdf:type owl:Class .
+:ForestRoad rdf:type owl:Class .
+:Person rdf:type owl:Class .
+
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:DatatypeProperty .
+:hasUrgency rdf:type owl:DatatypeProperty .
+:hasTemperature rdf:type owl:DatatypeProperty .
+:hasWindSpeed rdf:type owl:DatatypeProperty .
+:hasHumidity rdf:type owl:DatatypeProperty .
+:hasForecast rdf:type owl:DatatypeProperty .
+:hasSensorData rdf:type owl:ObjectProperty .
+:hasSatelliteData rdf:type owl:ObjectProperty .
+:hasSocialMediaData rdf:type owl:ObjectProperty .
+:hasMission rdf:type owl:ObjectProperty .
+:hasService rdf:type owl:ObjectProperty .
+:hasFireBreakStatus rdf:type owl:DatatypeProperty .
+:hasForestRoadStatus rdf:type owl:DatatypeProperty .
+:hasPopulationDensity rdf:type owl:DatatypeProperty .
+:hasInvolvedPeople rdf:type owl:ObjectProperty .
+:hasIncidentType rdf:type owl:DatatypeProperty .
+:hasCreationDate rdf:type owl:DatatypeProperty .
+:hasClassificationType rdf:type owl:DatatypeProperty .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPriority ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasUrgency ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasIncidentType ;
+  owl:someValuesFrom xsd:string
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasTemperature ;
+  owl:someValuesFrom xsd:float
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasWindSpeed ;
+  owl:someValuesFrom xsd:float
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasHumidity ;
+  owl:someValuesFrom xsd:float
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasForecast ;
+  owl:someValuesFrom xsd:string
+] .
+
+:SensorData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasCreationDate ;
+  owl:someValuesFrom xsd:dateTime
+] .
+
+:SatelliteData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasCreationDate ;
+  owl:someValuesFrom xsd:dateTime
+] .
+
+:SocialMediaData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasCreationDate ;
+  owl:someValuesFrom xsd:dateTime
+] .
+
+:SocialMediaData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasClassificationType ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasService ;
+  owl:someValuesFrom :Service
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPopulationDensity ;
+  owl:someValuesFrom xsd:float
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasInvolvedPeople ;
+  owl:someValuesFrom :Person
+] .
+
+:FireBreak rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasFireBreakStatus ;
+  owl:someValuesFrom xsd:string
+] .
+
+:ForestRoad rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasForestRoadStatus ;
+  owl:someValuesFrom xsd:string
+] .

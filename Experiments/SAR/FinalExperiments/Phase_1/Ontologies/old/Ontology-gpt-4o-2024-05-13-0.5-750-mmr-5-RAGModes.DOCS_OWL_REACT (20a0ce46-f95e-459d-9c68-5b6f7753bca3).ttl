@@ -1,0 +1,138 @@
+@prefix : <http://example.com/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar> rdf:type owl:Ontology .
+
+### Classes
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:FireBreak rdf:type owl:Class .
+:ForestRoad rdf:type owl:Class .
+:FireVehicle rdf:type owl:Class .
+:PopulationDensity rdf:type owl:Class .
+:Person rdf:type owl:Class .
+:SmokeClassification rdf:type owl:Class .
+
+### Properties
+:hasPriority rdf:type owl:ObjectProperty .
+:hasUrgency rdf:type owl:ObjectProperty .
+:hasMeasurement rdf:type owl:ObjectProperty .
+:hasForecast rdf:type owl:ObjectProperty .
+:hasSource rdf:type owl:ObjectProperty .
+:hasCreationDate rdf:type owl:DatatypeProperty .
+:hasLocation rdf:type owl:ObjectProperty .
+:supportsService rdf:type owl:ObjectProperty .
+:hasStatus rdf:type owl:DatatypeProperty .
+
+### Relationships and Restrictions
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasPriority ;
+  owl:someValuesFrom xsd:string
+] .
+
+:Incident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasUrgency ;
+  owl:someValuesFrom xsd:string
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasMeasurement ;
+  owl:someValuesFrom [
+    rdf:type owl:Class ;
+    owl:unionOf ( :Temperature :WindSpeed :Humidity )
+  ]
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasForecast ;
+  owl:someValuesFrom [
+    rdf:type owl:Class ;
+    owl:unionOf ( :Temperature :WindSpeed :Humidity )
+  ]
+] .
+
+:SensorData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasSource ;
+  owl:someValuesFrom [
+    rdf:type owl:Class ;
+    owl:unionOf ( :SensorData :SatelliteData :SocialMediaData )
+  ]
+] .
+
+:SensorData rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasCreationDate ;
+  owl:someValuesFrom xsd:dateTime
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :supportsService ;
+  owl:someValuesFrom :Service
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:FireBreak rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasStatus ;
+  owl:someValuesFrom xsd:string
+] .
+
+:ForestRoad rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasStatus ;
+  owl:someValuesFrom xsd:string
+] .
+
+:FireVehicle rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Person rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+### Equivalences and Disjointness
+:Person owl:equivalentClass :Human .
+:FireVehicle owl:equivalentClass :Vehicle .
+:Incident owl:disjointWith :WeatherCondition .
+:Mission owl:disjointWith :Service .
+
+### Property Chains
+:hasUncle owl:propertyChainAxiom ( :hasFather :hasBrother ) .
+
+### Imports
+<http://example.com/sar> owl:imports <http://example.org/otherOntologies/sar.owl> .

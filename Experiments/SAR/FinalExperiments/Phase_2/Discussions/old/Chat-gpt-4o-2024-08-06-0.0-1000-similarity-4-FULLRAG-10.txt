@@ -1,0 +1,122 @@
+**Iterative Discussion:**
+
+**Knowledge Engineer:** Let's start by identifying the key concepts and relationships we need to model for the Search and Rescue (SAR) missions in the context of wildfire incidents. We need to ensure our ontology can answer all the competency questions and cover the requirements.
+
+**Domain Expert:** Absolutely. We need to capture incidents and impacts, weather conditions, data from human and earth observations, and missions and relationships between services. For incidents, we should include concepts like "WildfireIncident," "Impact," and "Priority."
+
+**Knowledge Worker:** I agree. For weather conditions, we should include "Temperature," "WindSpeed," "Humidity," and "WeatherForecast." These are crucial for understanding the fire's behavior.
+
+**Knowledge Engineer:** Good point. We should also consider data from sensors, satellites, and social media. Let's include concepts like "SensorData," "SatelliteData," and "SocialMediaData."
+
+**Domain Expert:** Don't forget about the missions and services. We need to model "FirefightingService," "Mission," and "SupportService." These will help us coordinate emergency response efforts.
+
+**Knowledge Worker:** We should also think about the relationships between these concepts. For example, "WildfireIncident" should have properties like "hasLocation," "hasPriority," and "hasImpact."
+
+**Knowledge Engineer:** Agreed. Let's also define properties for weather conditions, such as "hasTemperature," "hasWindSpeed," and "hasHumidity." For data sources, we can use "hasCreationDate" and "hasLocation."
+
+**Domain Expert:** We should also consider the classification of smoke and the status of forestry works. Let's include "SmokeClassification" and "ForestryWorkStatus."
+
+**Knowledge Worker:** And for missions, we need properties like "hasService," "hasMissionLocation," and "hasUrgency."
+
+**Knowledge Engineer:** Great. Let's start creating the ontology in Turtle format.
+
+**Generated Ontology in Turtle (TTL) Format:**
+
+```turtle
+@prefix : <http://example.com/owl/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar> rdf:type owl:Ontology .
+
+:WildfireIncident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:FirefightingService rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:SupportService rdf:type owl:Class .
+:SmokeClassification rdf:type owl:Class .
+:ForestryWorkStatus rdf:type owl:Class .
+
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:ObjectProperty .
+:hasImpact rdf:type owl:ObjectProperty .
+:hasTemperature rdf:type owl:ObjectProperty .
+:hasWindSpeed rdf:type owl:ObjectProperty .
+:hasHumidity rdf:type owl:ObjectProperty .
+:hasWeatherForecast rdf:type owl:ObjectProperty .
+:hasCreationDate rdf:type owl:DatatypeProperty .
+:hasService rdf:type owl:ObjectProperty .
+:hasMissionLocation rdf:type owl:ObjectProperty .
+:hasUrgency rdf:type owl:ObjectProperty .
+
+:WildfireIncident rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasTemperature ;
+  owl:someValuesFrom :Temperature
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasWindSpeed ;
+  owl:someValuesFrom :WindSpeed
+] .
+
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasHumidity ;
+  owl:someValuesFrom :Humidity
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasService ;
+  owl:someValuesFrom :FirefightingService
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasMissionLocation ;
+  owl:someValuesFrom :Location
+] .
+
+:Mission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasUrgency ;
+  owl:someValuesFrom :Priority
+] .
+
+:SmokeClassification rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasImpact ;
+  owl:someValuesFrom :Impact
+] .
+
+:ForestryWorkStatus rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :hasImpact ;
+  owl:someValuesFrom :Impact
+] .
+```
+
+**Knowledge Engineer:** This ontology should cover all the requirements and answer the competency questions. Let's review and iterate if necessary.
+
+**Domain Expert:** It looks comprehensive. We can refine it further based on feedback from real-world applications.
+
+**Knowledge Worker:** Agreed. This should provide a solid foundation for decision support in wildfire SAR missions.

@@ -1,0 +1,174 @@
+@prefix : <http://example.com/sar-wildfire#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar-wildfire> rdf:type owl:Ontology .
+
+### Core Classes
+:Incident rdf:type owl:Class ;
+    rdfs:label "Incident" ;
+    rdfs:comment "Represents a wildfire incident." .
+
+:WeatherCondition rdf:type owl:Class ;
+    rdfs:label "WeatherCondition" ;
+    rdfs:comment "Represents the weather conditions affecting the wildfire." .
+
+:SensorData rdf:type owl:Class ;
+    rdfs:label "SensorData" ;
+    rdfs:comment "Represents data collected from various sensors." .
+
+:SocialMediaInput rdf:type owl:Class ;
+    rdfs:label "SocialMediaInput" ;
+    rdfs:comment "Represents data collected from social media." .
+
+:FirstResponderInput rdf:type owl:Class ;
+    rdfs:label "FirstResponderInput" ;
+    rdfs:comment "Represents input from first responders." .
+
+:Mission rdf:type owl:Class ;
+    rdfs:label "Mission" ;
+    rdfs:comment "Represents a mission in a SAR operation." .
+
+:Service rdf:type owl:Class ;
+    rdfs:label "Service" ;
+    rdfs:comment "Represents a service involved in wildfire management." .
+
+### Properties
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasLocation" ;
+    rdfs:comment "Specifies the location of the incident." .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasPriority" ;
+    rdfs:comment "Specifies the priority of the incident." .
+
+:hasUrgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasUrgency" ;
+    rdfs:comment "Specifies the urgency of the incident." .
+
+:hasTemperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "hasTemperature" ;
+    rdfs:comment "Specifies the temperature during the wildfire." .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "hasWindSpeed" ;
+    rdfs:comment "Specifies the wind speed during the wildfire." .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "hasHumidity" ;
+    rdfs:comment "Specifies the humidity during the wildfire." .
+
+:hasForecast rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasForecast" ;
+    rdfs:comment "Specifies the weather forecast." .
+
+:hasDataSource rdf:type owl:ObjectProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasDataSource" ;
+    rdfs:comment "Specifies the source of the sensor data." .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "hasCreationDate" ;
+    rdfs:comment "Specifies the creation date of the sensor data." .
+
+:hasSmokeClassification rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasSmokeClassification" ;
+    rdfs:comment "Specifies the classification type of smoke." .
+
+:hasVulnerableObject rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasVulnerableObject" ;
+    rdfs:comment "Specifies the vulnerable objects involved in the incident." .
+
+:hasStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasStatus" ;
+    rdfs:comment "Specifies the status of wildfire forestry works." .
+
+:offersService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range xsd:string ;
+    rdfs:label "offersService" ;
+    rdfs:comment "Specifies the services offered for firefighting." .
+
+:followsMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission ;
+    rdfs:label "followsMission" ;
+    rdfs:comment "Specifies the mission followed for the service." .
+
+:hasMissionLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasMissionLocation" ;
+    rdfs:comment "Specifies the location where the mission is taking place." .
+
+:hasUrgentMissionLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasUrgentMissionLocation" ;
+    rdfs:comment "Specifies the location of the most urgent mission." .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:float ;
+    rdfs:label "hasPopulationDensity" ;
+    rdfs:comment "Specifies the population density in the area." .
+
+:hasInvolvedPeopleLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasInvolvedPeopleLocation" ;
+    rdfs:comment "Specifies the location of the involved people." .
+
+:FireIncident rdf:type owl:Class ;
+    rdfs:subClassOf :Incident ;
+    rdfs:label "FireIncident" ;
+    rdfs:comment "Represents a specific type of wildfire incident." .
+
+:Impact rdf:type owl:Class ;
+    rdfs:subClassOf :Incident ;
+    rdfs:label "Impact" ;
+    rdfs:comment "Represents the impacts of a wildfire incident." .
+
+### Additional Properties
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact ;
+    rdfs:label "hasImpact" ;
+    rdfs:comment "Specifies the impacts of the incident." .
+
+:hasSeverity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasSeverity" ;
+    rdfs:comment "Specifies the severity of the impact." .
+
+:hasDescription rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string ;
+    rdfs:label "hasDescription" ;
+    rdfs:comment "Provides a description of the impact." .

@@ -1,0 +1,136 @@
+@prefix : <http://example.com/sar-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar-ontology> rdf:type owl:Ontology .
+
+# Classes
+:WildfireIncident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:Severity rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:Urgency rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:FirstResponderInput rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Support rdf:type owl:Class .
+:Coordination rdf:type owl:Class .
+:SmokeClassification rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+:ForestryWork rdf:type owl:Class .
+:Firebreak rdf:type owl:Class .
+:ForestRoadAccess rdf:type owl:Class .
+:PopulationDensity rdf:type owl:Class .
+:People rdf:type owl:Class .
+
+# Object Properties
+:hasImpact rdf:type owl:ObjectProperty ;
+           rdfs:domain :WildfireIncident ;
+           rdfs:range :Impact .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+             rdfs:domain :WildfireIncident ;
+             rdfs:range :Location .
+
+:hasSeverity rdf:type owl:ObjectProperty ;
+             rdfs:domain :WildfireIncident ;
+             rdfs:range :Severity .
+
+:hasPriority rdf:type owl:ObjectProperty ;
+             rdfs:domain :WildfireIncident ;
+             rdfs:range :Priority .
+
+:hasUrgency rdf:type owl:ObjectProperty ;
+            rdfs:domain :WildfireIncident ;
+            rdfs:range :Urgency .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+                     rdfs:domain :WildfireIncident ;
+                     rdfs:range :WeatherCondition .
+
+:hasTemperature rdf:type owl:ObjectProperty ;
+                rdfs:domain :WeatherCondition ;
+                rdfs:range :Temperature .
+
+:hasWindSpeed rdf:type owl:ObjectProperty ;
+              rdfs:domain :WeatherCondition ;
+              rdfs:range :WindSpeed .
+
+:hasHumidity rdf:type owl:ObjectProperty ;
+             rdfs:domain :WeatherCondition ;
+             rdfs:range :Humidity .
+
+:hasWeatherForecast rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Location ;
+                    rdfs:range :WeatherForecast .
+
+:hasSensorData rdf:type owl:ObjectProperty ;
+               rdfs:domain :WildfireIncident ;
+               rdfs:range :SensorData .
+
+:hasSatelliteData rdf:type owl:ObjectProperty ;
+                  rdfs:domain :WildfireIncident ;
+                  rdfs:range :SatelliteData .
+
+:hasSocialMediaData rdf:type owl:ObjectProperty ;
+                    rdfs:domain :WildfireIncident ;
+                    rdfs:range :SocialMediaData .
+
+:hasFirstResponderInput rdf:type owl:ObjectProperty ;
+                        rdfs:domain :WildfireIncident ;
+                        rdfs:range :FirstResponderInput .
+
+:offersSupport rdf:type owl:ObjectProperty ;
+               rdfs:domain :Service ;
+               rdfs:range :Support .
+
+:followsMission rdf:type owl:ObjectProperty ;
+                rdfs:domain :Service ;
+                rdfs:range :Mission .
+
+:hasPopulationDensity rdf:type owl:ObjectProperty ;
+                      rdfs:domain :Location ;
+                      rdfs:range :PopulationDensity .
+
+:involvesVulnerableObject rdf:type owl:ObjectProperty ;
+                          rdfs:domain :WildfireIncident ;
+                          rdfs:range :VulnerableObject .
+
+:hasFirebreakStatus rdf:type owl:ObjectProperty ;
+                    rdfs:domain :WildfireIncident ;
+                    rdfs:range :Firebreak .
+
+:hasForestRoadAccess rdf:type owl:ObjectProperty ;
+                     rdfs:domain :WildfireIncident ;
+                     rdfs:range :ForestRoadAccess .
+
+# Data Properties
+:hasLongitude rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Location ;
+              rdfs:range xsd:float .
+
+:hasLatitude rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Location ;
+             rdfs:range xsd:float .
+
+:hasAltitude rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Location ;
+             rdfs:range xsd:float .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :SensorData, :SatelliteData, :SocialMediaData, :FirstResponderInput ;
+                 rdfs:range xsd:dateTime .
+
+:hasSmokeClassification rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :SmokeClassification ;
+                        rdfs:range xsd:string .

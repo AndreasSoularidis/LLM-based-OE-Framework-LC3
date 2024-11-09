@@ -1,0 +1,166 @@
+@prefix : <http://example.com/owl/sar-wildfire#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/sar-wildfire> rdf:type owl:Ontology .
+
+# Main Classes
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:ObservationData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+# Subclasses for Incidents and Impacts
+:PropertyDamage rdf:type owl:Class ;
+  rdfs:subClassOf :Impact .
+:HumanCasualty rdf:type owl:Class ;
+  rdfs:subClassOf :Impact .
+:EnvironmentalImpact rdf:type owl:Class ;
+  rdfs:subClassOf :Impact .
+
+# Subclasses for Weather Conditions
+:Temperature rdf:type owl:Class ;
+  rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ;
+  rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ;
+  rdfs:subClassOf :WeatherCondition .
+:WeatherForecast rdf:type owl:Class ;
+  rdfs:subClassOf :WeatherCondition .
+
+# Subclasses for Observation Data
+:SocialMediaData rdf:type owl:Class ;
+  rdfs:subClassOf :ObservationData .
+:SensorData rdf:type owl:Class ;
+  rdfs:subClassOf :ObservationData .
+
+# Subclasses for Missions
+:FirefightingMission rdf:type owl:Class ;
+  rdfs:subClassOf :Mission .
+:EvacuationMission rdf:type owl:Class ;
+  rdfs:subClassOf :Mission .
+:RescueMission rdf:type owl:Class ;
+  rdfs:subClassOf :Mission .
+
+# Properties
+:hasImpact rdf:type owl:ObjectProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range :Impact .
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range :WeatherCondition .
+:hasObservationData rdf:type owl:ObjectProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range :ObservationData .
+:hasMission rdf:type owl:ObjectProperty ;
+  rdfs:domain :Service ;
+  rdfs:range :Mission .
+:hasService rdf:type owl:ObjectProperty ;
+  rdfs:domain :Mission ;
+  rdfs:range :Service .
+:currentMeasurement rdf:type owl:DatatypeProperty ;
+  rdfs:domain :WeatherCondition ;
+  rdfs:range xsd:float .
+:forecast rdf:type owl:DatatypeProperty ;
+  rdfs:domain :WeatherCondition ;
+  rdfs:range xsd:string .
+:hasLocation rdf:type owl:DatatypeProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range xsd:string .
+:priority rdf:type owl:DatatypeProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range xsd:string .
+:classificationType rdf:type owl:DatatypeProperty ;
+  rdfs:domain :ObservationData ;
+  rdfs:range xsd:string .
+:creationDate rdf:type owl:DatatypeProperty ;
+  rdfs:domain :ObservationData ;
+  rdfs:range xsd:dateTime .
+:populationDensity rdf:type owl:DatatypeProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range xsd:float .
+:statusOfForestryWorks rdf:type owl:DatatypeProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range xsd:string .
+:involvedPeopleLocation rdf:type owl:DatatypeProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range xsd:string .
+
+# Equivalence and Disjointness
+:Incident owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:intersectionOf ( :WeatherCondition :Impact )
+] .
+
+[] rdf:type owl:AllDisjointClasses ;
+   owl:members ( :PropertyDamage :HumanCasualty :EnvironmentalImpact ) .
+
+# Inverse Properties
+:hasService owl:inverseOf :hasMission .
+
+# Symmetric and Transitive Properties
+:supportsService rdf:type owl:SymmetricProperty .
+:isSupportedByService rdf:type owl:SymmetricProperty .
+:hasAncestor rdf:type owl:TransitiveProperty .
+:hasParent owl:inverseOf :hasChild .
+
+# Example of a functional property
+:hasAge rdf:type owl:FunctionalProperty ;
+  rdfs:domain :Person ;
+  rdfs:range xsd:nonNegativeInteger .
+
+# Example of a cardinality restriction
+:John rdf:type [
+  rdf:type owl:Restriction ;
+  owl:maxQualifiedCardinality "4"^^xsd:nonNegativeInteger ;
+  owl:onProperty :hasChild ;
+  owl:onClass :Parent
+] .
+
+# Example of an intersection class
+:HappyPerson rdf:type owl:Class ;
+  owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:intersectionOf ( [
+      rdf:type owl:Restriction ;
+      owl:onProperty :hasChild ;
+      owl:allValuesFrom :Happy
+    ] [
+      rdf:type owl:Restriction ;
+      owl:onProperty :hasChild ;
+      owl:someValuesFrom :Happy
+    ] )
+  ] .
+
+# Example of a union class
+:Parent owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf ( :Mother :Father )
+] .
+
+# Example of a complement class
+:ChildlessPerson owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:intersectionOf ( :Person [
+    rdf:type owl:Class ;
+    owl:complementOf :Parent
+  ] )
+] .
+
+# Example of a oneOf class
+:MyBirthdayGuests owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf ( :Bill :John :Mary )
+] .
+
+# Example of a property chain
+:hasUncle owl:propertyChainAxiom ( :hasFather :hasBrother ) .
+
+# Example of a negative property assertion
+[] rdf:type owl:NegativePropertyAssertion ;
+   owl:sourceIndividual :Bill ;
+   owl:assertionProperty :hasWife ;
+   owl:targetIndividual :Mary .

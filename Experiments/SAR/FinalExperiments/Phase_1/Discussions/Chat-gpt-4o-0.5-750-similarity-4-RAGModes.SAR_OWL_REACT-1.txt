@@ -1,0 +1,132 @@
+### Iterative Discussion
+
+#### Round 1
+
+**Knowledge Engineer:** 
+Let's start by identifying the core concepts and relationships we need in our ontology. We need to cover incidents, impacts, weather conditions, data from human and earth observations, and missions and relationships between services. For incidents, we should include classes like `Incident`, `Impact`, `WeatherCondition`, `SensorData`, `SocialMediaData`, `FirstResponderInput`, `Mission`, and `Service`.
+
+**Domain Expert:** 
+Yes, and for incidents, we should have subclasses like `WildfireIncident`, `BuildingDamage`, `VehicleDamage`, `AnimalRescue`, and `HumanRescue`. For weather conditions, we need to include `Temperature`, `WindSpeed`, `Humidity`, and `WeatherForecast`.
+
+**Knowledge Worker:** 
+We should also include properties to link these classes. For example, `hasImpact`, `hasWeatherCondition`, `hasSensorData`, `hasSocialMediaData`, `hasFirstResponderInput`, `hasMission`, and `hasService`.
+
+#### Round 2
+
+**Knowledge Engineer:** 
+Let's refine these classes and properties. For `Incident`, we can have properties like `location`, `priority`, and `urgency`. For `WeatherCondition`, we need properties like `temperature`, `windSpeed`, `humidity`, and `forecast`.
+
+**Domain Expert:** 
+For `SensorData`, `SocialMediaData`, and `FirstResponderInput`, we should include properties like `source`, `creationDate`, `location`, and `dataType`. For `Mission`, we need properties like `missionType`, `location`, and `urgency`.
+
+**Knowledge Worker:** 
+We should also add subclasses for `Impact` like `ForestDamage`, `CropDamage`, `BuildingDamage`, and `VehicleDamage`. For `Mission`, we can have subclasses like `Firefighting`, `Evacuation`, and `MedicalAid`.
+
+#### Round 3
+
+**Knowledge Engineer:** 
+We need to ensure our ontology can answer the competency questions. Let's add properties like `hasTemperature`, `hasWindSpeed`, `hasHumidity`, `hasForecast`, `hasLocation`, `hasPriority`, and `hasUrgency`.
+
+**Domain Expert:** 
+For data from human and earth observations, we should include properties like `depictedData`, `creationDate`, `dataLocation`, `smokeClassification`, and `vulnerableObjectsInvolved`.
+
+**Knowledge Worker:** 
+For missions and relationships between services, we need properties like `offeredService`, `followedMission`, `missionLocation`, `urgentMissionLocation`, `populationDensity`, and `peopleLocation`.
+
+#### Round 4
+
+**Knowledge Engineer:** 
+Let's finalize our classes and properties. We should also add some equivalent classes and properties to make our ontology more expressive. For example, `Incident` can be equivalent to `EmergencyEvent`.
+
+**Domain Expert:** 
+We can also add some restrictions and intersections. For example, `UrgentMission` can be a subclass of `Mission` that has a high `urgency` value.
+
+**Knowledge Worker:** 
+We should also include some negative property assertions to ensure data consistency. For example, a mission cannot have a `location` and `urgentMissionLocation` that are the same.
+
+### Final Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.com/owl/sar> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:FirstResponderInput rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+:WildfireIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:BuildingDamage rdf:type owl:Class ; rdfs:subClassOf :Impact .
+:VehicleDamage rdf:type owl:Class ; rdfs:subClassOf :Impact .
+:AnimalRescue rdf:type owl:Class ; rdfs:subClassOf :Impact .
+:HumanRescue rdf:type owl:Class ; rdfs:subClassOf :Impact .
+
+:Temperature rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WeatherForecast rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+
+:Firefighting rdf:type owl:Class ; rdfs:subClassOf :Mission .
+:Evacuation rdf:type owl:Class ; rdfs:subClassOf :Mission .
+:MedicalAid rdf:type owl:Class ; rdfs:subClassOf :Mission .
+
+:location rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:priority rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:integer .
+:urgency rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:integer .
+
+:hasImpact rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Impact .
+:hasWeatherCondition rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :WeatherCondition .
+:hasSensorData rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SensorData .
+:hasSocialMediaData rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SocialMediaData .
+:hasFirstResponderInput rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :FirstResponderInput .
+:hasMission rdf:type owl:ObjectProperty ; rdfs:domain :Service ; rdfs:range :Mission .
+
+:hasTemperature rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasWindSpeed rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasHumidity rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasForecast rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:string .
+
+:depictedData rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData ; rdfs:range xsd:string .
+:creationDate rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData ; rdfs:range xsd:dateTime .
+:dataLocation rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData ; rdfs:range xsd:string .
+:smokeClassification rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData ; rdfs:range xsd:string .
+:vulnerableObjectsInvolved rdf:type owl:DatatypeProperty ; rdfs:domain :SensorData ; rdfs:range xsd:string .
+
+:offeredService rdf:type owl:DatatypeProperty ; rdfs:domain :Service ; rdfs:range xsd:string .
+:followedMission rdf:type owl:DatatypeProperty ; rdfs:domain :Mission ; rdfs:range xsd:string .
+:missionLocation rdf:type owl:DatatypeProperty ; rdfs:domain :Mission ; rdfs:range xsd:string .
+:urgentMissionLocation rdf:type owl:DatatypeProperty ; rdfs:domain :Mission ; rdfs:range xsd:string .
+:populationDensity rdf:type owl:DatatypeProperty ; rdfs:domain :Mission ; rdfs:range xsd:float .
+:peopleLocation rdf:type owl:DatatypeProperty ; rdfs:domain :Mission ; rdfs:range xsd:string .
+
+:UrgentMission rdf:type owl:Class ; rdfs:subClassOf :Mission .
+:UrgentMission rdfs:subClassOf [
+  rdf:type owl:Restriction ;
+  owl:onProperty :urgency ;
+  owl:hasValue 5
+] .
+
+:Incident owl:equivalentClass :EmergencyEvent .
+
+[] rdf:type owl:NegativePropertyAssertion ;
+   owl:sourceIndividual :Mission1 ;
+   owl:assertionProperty :missionLocation ;
+   owl:targetValue "urgentMissionLocation" .
+
+:Incident rdfs:comment "Represents any incident occurring during a wildfire."^^xsd:string .
+:Impact rdfs:comment "Represents the impact of an incident."^^xsd:string .
+:WeatherCondition rdfs:comment "Represents weather conditions relevant to wildfire incidents."^^xsd:string .
+:SensorData rdfs:comment "Represents data collected from sensors."^^xsd:string .
+:SocialMediaData rdfs:comment "Represents data collected from social media."^^xsd:string .
+:FirstResponderInput rdfs:comment "Represents input from first responders."^^xsd:string .
+:Mission rdfs:comment "Represents a mission carried out during a wildfire incident."^^xsd:string .
+:Service rdfs:comment "Represents a service offered during a wildfire incident."^^xsd:string .
+```
+
+This ontology should now be capable of answering all the competency questions and covering all the requirements for modeling Search and Rescue (SAR) missions during wildfire incidents.

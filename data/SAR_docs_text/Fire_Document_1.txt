@@ -1,0 +1,204 @@
+
+Ticket serial number: ___________________
+
+Service Title: FORESTRY-RURAL FIRE BULLETIN
+
+Bulletin Editor: ____________________________________________
+
+General Information
+Inception: -
+Marking: -
+Announcement: -
+Intervention: -
+Partial Control: 2023 SEPTEMBER 09,  11:30 - 18:30
+Resurgence: -
+Repayment: -
+Full extinguishing: -
+
+False advertisement: -
+Malicious: -
+By mistake: X
+Method of Notification: CIVILIAN PHONE CALL
+Distance from nearest fire vehicle: 5.3
+Hazard index: MEDIUM
+
+Responsibility of the Forest Service
+    Form of Fire:
+        Vertical: -
+        Creeping: X
+        Lands: -
+        Mixed: -
+
+Starting Point
+    Regional: ELIS
+    Municipality or Community: PYRGOS
+    Area-Location: KINDIA
+    Longitude: 37.7828260
+    Latitude: 21.6799445
+    Altitude: 484
+
+Starting Position
+    Grove: -
+    Forest: X
+    Woodland: -
+    Agricultural area: -
+    Grassland area: -
+    Reed-swamps: -
+    Populated area: -
+    Agricultural facility: -
+    Livestock facility: -
+    Garbage-Landfill: -
+    Industry-craftsmanship: -
+    Construction site: -
+    Road slopes: -
+    Another one: -
+
+Possible Cause of Fire:
+    Physics
+Lightning strike: X
+    Arson with intent
+       Selfish action: -
+       Malicious action: -
+       Concealing a crime: -
+       Psychopath energy: -
+       Mentally retarded energy: -
+       Pyromaniac energy: -
+    Arson by negligence
+        Incineration of waste: -
+        Spark Machinery: X
+        Hikers Campers Hunters: -
+        Army shot: -
+        Use of explosives: -
+        Smoking residue: -
+        Burning of crop residues: -
+        Field workers: -
+        Short circuit: X
+
+Determination of Offender or Offenders:
+    YES: -
+    NO: -
+
+Area Burnt in Acres:
+    Forests: X
+    Swamps-Reeds: X
+    Woodland: -
+    Agricultural lands: -
+    Grove: -
+    Crop residues: -
+    Grasslands: -
+    Other lands: -
+    Total: 28 
+
+Other Disasters:
+    Buildings: 
+        N/A: 1
+        Kind: CHURCH
+        Address: KLINDIA 27064
+        Insurance: -
+        Operator Name: -
+    Vehicles-Machinery: 
+        N/A: 1
+        Kind: PRIVATE VEHICLE
+        License Plate: UNKNOWN
+        Insurance: NONE
+        Operator Name: UNKNOWN
+
+Rescues of People:
+    N/A: 1
+    Full Name:  XRISTOS XRISTODOULOS
+    Capacity: PASTOR
+    Age: 43
+    Cause: -
+
+Animals: X
+Birds: X
+Hives: X
+
+Accidents-Deaths: 
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Forces Involved:
+    Permanent 
+        Fire Officers: 42
+        Walking Departments of Fire Department: 14
+    Seasonal  
+        Fire Officers: -
+        Walking Departments of Fire Department: -
+    Volunteer Firefighters: -
+    Armed Forces Personnel: -
+    Service Personnel: -
+    Staff from Municipality: -
+    Staff of the wider Public Sector: -
+    Club Members: -
+    Individuals with a request for personal work: -
+    Individuals: -
+
+Investment Instruments:
+    Firetrucks: 14
+    Tankers: 2
+    Fire Fighting Vehicles of other Services: -
+    Various machines: -
+
+Portable Tools and Machines: -
+
+Air Involvement:
+    N/A: - 
+    Type: -
+    Number: -
+
+Method of Deposit:
+    By aerial means: -
+    Self extinguishing: -
+    With ground sections: X
+    With pedestrian sections: X
+
+Use of backfire or incineration
+    YES: -
+    NO: - 
+    QUANTITY: -
+Water use (m3) 
+     YES: X  
+     NO: - 
+     QUANTITY: 408
+Foam usage (lt) 
+     YES: X  
+     NO: -
+     QUANTITY: 623
+Use of retarder (kg)
+     YES: -  
+     NO: -
+     QUANTITY: -
+
+Employment of Personnel and Media:
+    Vehicle number 1:
+        Notification DateTime: 9/9/2023 12:43
+        Departure DateTime: 9/9/2023 13:06
+        Arrival DateTime: 9/9/2023 13:18
+        Departure from event DateTime: 9/9/2023 18:52
+        Return DateTime: 9/9/2023 19:03
+        Number of Personnel: -
+        Mileage: 12.3
+    Vehicle number 2:
+        Notification DateTime: 9/9/2023 12:51
+        Departure DateTime: 9/9/2023 12:55
+        Arrival DateTime: 9/9/2023 13:20
+        Departure from event DateTime: 9/9/2023 18:53
+        Return DateTime: 9/9/2023 19:18
+        Number of Personnel: -
+        Mileage: 24.2
+
+Armed Forces Personnel
+    Slope
+        DateTime: -
+    Arrival
+        DateTime: -
+    Number of Personnel: -
+     Hours of Employment: -
+Comments: - 
+
+    
+

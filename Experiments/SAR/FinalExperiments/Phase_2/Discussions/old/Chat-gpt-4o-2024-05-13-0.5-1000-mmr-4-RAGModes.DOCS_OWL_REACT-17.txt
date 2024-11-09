@@ -1,0 +1,329 @@
+### Iterative Discussion
+
+#### Knowledge Engineer (KE), Domain Expert (DE), and Knowledge Worker (KW) Discussion
+
+**KE:** Alright team, let's start by identifying the main classes and properties for our ontology. We'll need to model incidents, weather conditions, missions, and data sources. DE, could you provide us with some initial terms and definitions?
+
+**DE:** Sure. For incidents, we have terms like "Wildfire," "IncidentLocation," "Impact," and "Priority." For weather conditions, we need to capture "Temperature," "WindSpeed," "Humidity," and "WeatherForecast." For data sources, we have "SensorData," "SatelliteData," and "SocialMediaData." For missions, we need "Mission," "Service," and "FirstResponder."
+
+**KW:** Don't forget about the relationships between these classes. For example, an incident occurs at a location, and weather conditions influence the severity of the incident.
+
+**KE:** Good point. Let's start by defining the main classes and their relationships.
+
+### Initial Ontology Design
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Wildfire rdf:type owl:Class .
+:IncidentLocation rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:FirstResponder rdf:type owl:Class .
+
+:occursAt rdf:type owl:ObjectProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range :IncidentLocation .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range :Impact .
+
+:hasPriority rdf:type owl:ObjectProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range :Priority .
+
+:influences rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Wildfire .
+
+:providesData rdf:type owl:ObjectProperty ;
+    rdfs:domain :DataSource ;
+    rdfs:range :Wildfire .
+
+:involves rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:executedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FirstResponder .
+
+:DataSource rdf:type owl:Class ;
+    owl:oneOf (:SensorData :SatelliteData :SocialMediaData) .
+
+:WeatherCondition rdf:type owl:Class ;
+    owl:oneOf (:Temperature :WindSpeed :Humidity :WeatherForecast) .
+
+:Incident rdf:type owl:Class ;
+    owl:oneOf (:Wildfire) .
+```
+
+**KE:** We've defined the main classes and their relationships. Now let's address the competency questions.
+
+**KW:** For CQ1, we need to identify the most important weather variables that can cause a forest fire. DE, what are these variables?
+
+**DE:** The key variables are "Temperature," "WindSpeed," and "Humidity."
+
+**KE:** Let's add these as subclasses of "WeatherCondition."
+
+### Updated Ontology
+
+```turtle
+:Temperature rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:WindSpeed rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:Humidity rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+```
+
+**KW:** For CQ2, we need to capture current measurements for these weather variables. How should we model this?
+
+**KE:** We can use datatype properties to represent measurements.
+
+### Updated Ontology
+
+```turtle
+:hasTemperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+```
+
+**KW:** For CQ3, we need to capture weather forecasts. How do we handle this?
+
+**KE:** We can add a property to link an incident location with a weather forecast.
+
+### Updated Ontology
+
+```turtle
+:hasWeatherForecast rdf:type owl:ObjectProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range :WeatherForecast .
+```
+
+**KW:** For CQ4, we need to capture the location of the incident. We already have "IncidentLocation" linked to "Wildfire."
+
+**KE:** Correct. We'll also add properties to capture specific details like latitude and longitude.
+
+### Updated Ontology
+
+```turtle
+:hasLatitude rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:hasLongitude rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+```
+
+**KW:** For CQ5 and CQ6, we need to capture the priority and urgency of incidents. We have the "Priority" class, but we need properties to link it to incidents.
+
+### Updated Ontology
+
+```turtle
+:hasPriority rdf:type owl:ObjectProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range :Priority .
+
+:isUrgent rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range xsd:boolean .
+```
+
+**KW:** For CQ7 to CQ12, we need to model data from various sources and their metadata. We already have "SensorData," "SatelliteData," and "SocialMediaData."
+
+**KE:** Let's add properties to capture metadata like creation date, location, and status.
+
+### Updated Ontology
+
+```turtle
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:dateTime .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :DataSource ;
+    rdfs:range :IncidentLocation .
+
+:hasStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range xsd:string .
+```
+
+**KW:** For CQ13 to CQ18, we need to model missions and their relationships with services and locations.
+
+### Updated Ontology
+
+```turtle
+:offersService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:followsMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :FirstResponder ;
+    rdfs:range :Mission .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:hasInvolvedPeople rdf:type owl:ObjectProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range :FirstResponder .
+```
+
+**KE:** I think we've covered all the competency questions and requirements. Let's review the ontology to ensure it's comprehensive.
+
+### Final Ontology in Turtle (TTL) format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Wildfire rdf:type owl:Class .
+:IncidentLocation rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:Temperature rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:FirstResponder rdf:type owl:Class .
+
+:occursAt rdf:type owl:ObjectProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range :IncidentLocation .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range :Impact .
+
+:hasPriority rdf:type owl:ObjectProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range :Priority .
+
+:influences rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Wildfire .
+
+:providesData rdf:type owl:ObjectProperty ;
+    rdfs:domain :DataSource ;
+    rdfs:range :Wildfire .
+
+:involves rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:executedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FirstResponder .
+
+:DataSource rdf:type owl:Class ;
+    owl:oneOf (:SensorData :SatelliteData :SocialMediaData) .
+
+:WeatherCondition rdf:type owl:Class ;
+    owl:oneOf (:Temperature :WindSpeed :Humidity :WeatherForecast) .
+
+:Incident rdf:type owl:Class ;
+    owl:oneOf (:Wildfire) .
+
+:hasTemperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:hasWeatherForecast rdf:type owl:ObjectProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range :WeatherForecast .
+
+:hasLatitude rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:hasLongitude rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:isUrgent rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range xsd:boolean .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:dateTime .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :DataSource ;
+    rdfs:range :IncidentLocation .
+
+:hasStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range xsd:string .
+
+:offersService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:followsMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :FirstResponder ;
+    rdfs:range :Mission .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range xsd:float .
+
+:hasInvolvedPeople rdf:type owl:ObjectProperty ;
+    rdfs:domain :IncidentLocation ;
+    rdfs:range :FirstResponder .
+```
+
+**KE:** I believe we've created a comprehensive ontology that meets all the requirements and answers all the competency questions. Any final thoughts?
+
+**DE:** It looks good to me. We've covered all the critical aspects of wildfire incidents and SAR missions.
+
+**KW:** Agreed. This ontology should be very useful for decision support during wildfire emergencies.
+
+**KE:** Excellent. Let's finalize this version and proceed with implementation.

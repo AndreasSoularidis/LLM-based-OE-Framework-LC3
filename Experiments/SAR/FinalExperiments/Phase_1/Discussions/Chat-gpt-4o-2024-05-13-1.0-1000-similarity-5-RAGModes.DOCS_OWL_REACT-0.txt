@@ -1,0 +1,220 @@
+### Iterative Discussion
+
+#### Sketching the Ontology
+
+**Knowledge Engineer:** 
+To structure our ontology effectively, let's begin by identifying the core classes based on the domain data and competency questions. The primary classes we need are "Incident," "WeatherCondition," "Observation," "Mission," "Service," "Location," and "DataSource."
+
+**Domain Expert:**
+I agree. To start, "Incident" should include attributes like "priority," "urgency," "type" (vertical, creeping, mixed), "starting point," and "positions" (forest, woodland, agricultural area, etc.). We also need to classify each incident based on the form of fire: "VerticalFire," "CreepingFire," "MixedFire."
+
+**Knowledge Worker:**
+We’ll need to gather information about “WeatherCondition” such as temperature, wind speed, humidity, and forecasts. It’s also important to capture the "HazardIndex."
+
+**Knowledge Engineer:**
+Correct. In addition, for "Observation," we can include data from "Sensors," "Satellites," and "SocialMedia." We'll model "Mission" and "Service" by including information on what services are offered during an incident and their relationships. This will help us answer questions about mission locations and involved services.
+
+#### First Refinements
+
+**Domain Expert:**
+We must add concepts like "Humidity," "WindSpeed," and "Temperature" under "WeatherCondition." These will help answer CQ1 and CQ2 about important weather variables and their measurements.
+
+**Knowledge Worker:**
+Let’s ensure "Observation" includes "CreationDate" and "Location" to answer CQ8 and CQ9. For "Incident," the "StartingPoint" should be linked to "Location," covering CQ4.
+
+**Knowledge Engineer:**
+Good. Now let’s define relationships, like "hasObservation" for linking "Incident" with "Observation," and "hasService" to link "Mission" with "Service." This will help answer multiple competency questions.
+
+#### Adding Relations and Checking Competency Questions
+
+**Domain Expert:**
+We need an "ObjectProperty" like "affects" to link "Incident" to affected areas or "VulnerableObject," and to handle CQ11. 
+
+**Knowledge Worker:**
+We can also add a "DataProperty" for each measurement under "WeatherCondition" to handle their current values and forecasts: “currentTemperature,” “forecastTemperature,” etc.
+
+**Knowledge Engineer:**
+For relationship axioms, we’ll use `rdfs:subClassOf`, `owl:equivalentProperty`, and `owl:inverseOf` where applicable, to interlink our ontology naturally. Also, `owl:propertyChainAxiom` for hierarchical roles in missions may come in handy.
+
+#### Iteration
+
+**Knowledge Engineer:**
+Let's refine and add more details, such as "hasPriority" and "hasUrgency" properties for `Incident` to handle CQ5 and CQ6, and ensure classes for exact and composite queries.
+
+**Domain Expert:**
+We must focus also on the "Service" relationships in missions to cover connectivity between recovery actions and response times. 
+
+**Knowledge Worker:**
+Ensure we address "PopulationDensity" in the ontology since it affects mission priorities (CQ17).
+
+**Knowledge Engineer:**
+Finally, we'll apply annotations and ensure everything is well-connected and labeled for clear comprehension.
+
+### Final Ontology in Turtle (TTL) Format
+
+```ttl
+@prefix : <http://example.com/search-and-rescue#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/owl/search-and-rescue> rdf:type owl:Ontology .
+
+:Incident rdf:type owl:Class ;
+    rdfs:comment "Represents any wildfire incident." ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasPriority ;
+        owl:someValuesFrom xsd:int
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasUrgency ;
+        owl:someValuesFrom xsd:int
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasStartingPoint ;
+        owl:someValuesFrom :Location
+    ] .
+
+:Location rdf:type owl:Class ;
+    rdfs:comment "Represents geographic locations." .
+
+:WeatherCondition rdf:type owl:Class ;
+    rdfs:comment "Represents weather conditions." ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasTemperature ;
+        owl:someValuesFrom xsd:float
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasWindSpeed ;
+        owl:someValuesFrom xsd:float
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasHumidity ;
+        owl:someValuesFrom xsd:float
+    ] .
+
+:Observation rdf:type owl:Class ;
+    rdfs:comment "Represents observations from sensors and other sources." ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCreationDate ;
+        owl:someValuesFrom xsd:dateTime
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :observes ;
+        owl:someValuesFrom :Location
+    ] .
+
+:Mission rdf:type owl:Class ;
+    rdfs:comment "Represents a SAR mission." ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :involvesService ;
+        owl:someValuesFrom :Service
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :takesPlaceAt ;
+        owl:someValuesFrom :Location
+    ] .
+
+:Service rdf:type owl:Class ;
+    rdfs:comment "Represents services provided during SAR missions." .
+
+:VerticalFire rdf:type owl:Class ;
+    rdfs:subClassOf :Incident .
+
+:CreepingFire rdf:type owl:Class ;
+    rdfs:subClassOf :Incident .
+
+:MixedFire rdf:type owl:Class ;
+    rdfs:subClassOf :Incident .
+
+:VulnerableObject rdf:type owl:Class ;
+    rdfs:comment "Represents any object or entity vulnerable during a wildfire incident." .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:int .
+
+:hasUrgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:int .
+
+:hasObservation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Observation .
+
+:observes rdf:type owl:ObjectProperty ;
+    rdfs:domain :Observation ;
+    rdfs:range :Location .
+
+:hasTemperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasStartingPoint rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:involvesService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:takesPlaceAt rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:dateTime .
+
+:affects rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :VulnerableObject .
+
+:temperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:humidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:windspeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:HazardIndex rdf:type owl:Class ;
+    rdfs:label "hazard index" ;
+    rdfs:comment "Represents the hazard index for a specific area." .
+
+:hasHazardIndex rdf:type owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :HazardIndex .
+
+:PopulationDensity rdf:type owl:Class ;
+    rdfs:label "population density" ;
+    rdfs:comment "Represents the population density in a specific area." .
+
+:hasPopulationDensity rdf:type owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :PopulationDensity .
+
+```
+
+This ontology comprehensively covers wildfire incidents, weather conditions, observations, missions, services, and locations, and it answers all the given competency questions.

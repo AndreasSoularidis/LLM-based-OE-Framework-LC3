@@ -1,0 +1,90 @@
+@prefix : <http://example.com/ontology/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:FirstResponderInput rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+:WildfireIncident rdf:type owl:Class ;
+                  rdfs:subClassOf :Incident .
+
+:Smoke rdf:type owl:Class ;
+       rdfs:subClassOf :Impact .
+
+:Damage rdf:type owl:Class ;
+        rdfs:subClassOf :Impact .
+
+:WeatherVariable rdf:type owl:Class .
+:Temperature rdf:type owl:Class ;
+             rdfs:subClassOf :WeatherVariable .
+:WindSpeed rdf:type owl:Class ;
+           rdfs:subClassOf :WeatherVariable .
+:Humidity rdf:type owl:Class ;
+          rdfs:subClassOf :WeatherVariable .
+
+:currentMeasurement rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :WeatherVariable ;
+                    rdfs:range xsd:float .
+
+:forecastMeasurement rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :WeatherCondition ;
+                     rdfs:range xsd:string .
+
+:incidentLocation rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Incident ;
+                  rdfs:range <http://www.geonames.org/ontology#Feature> .
+
+:incidentPriority rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Incident ;
+                  rdfs:range xsd:string .
+
+:isUrgent rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Incident ;
+         rdfs:range xsd:boolean .
+
+:dataSource rdf:type owl:ObjectProperty ;
+            rdfs:domain :SensorData, :SocialMediaData ;
+            rdfs:range xsd:string .
+
+:creationDate rdf:type owl:DatatypeProperty ;
+              rdfs:domain :SensorData, :SocialMediaData ;
+              rdfs:range xsd:dateTime .
+
+:dataLocation rdf:type owl:ObjectProperty ;
+              rdfs:domain :SensorData, :SocialMediaData ;
+              rdfs:range <http://www.geonames.org/ontology#Feature> .
+
+:classificationType rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Smoke ;
+                    rdfs:range xsd:string .
+
+:providedService rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Service ;
+                 rdfs:range xsd:string .
+
+:relatedMission rdf:type owl:ObjectProperty ;
+                rdfs:domain :Service ;
+                rdfs:range :Mission .
+
+:missionLocation rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Mission ;
+                 rdfs:range <http://www.geonames.org/ontology#Feature> .
+
+:populationDensity rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Mission ;
+                   rdfs:range xsd:float .
+
+:involvedPeopleLocation rdf:type owl:ObjectProperty ;
+                        rdfs:domain :Mission ;
+                        rdfs:range <http://www.geonames.org/ontology#Feature> .
+
+<http://example.com/ontology/sar> owl:imports <http://www.geonames.org/ontology#> .
+<http://example.com/ontology/sar> owl:imports <http://xmlns.com/foaf/0.1/> .

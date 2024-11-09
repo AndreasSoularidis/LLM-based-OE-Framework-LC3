@@ -1,0 +1,129 @@
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class ;
+    rdfs:label "Incident" ;
+    rdfs:comment "Represents a wildfire incident" .
+
+:priority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "priority" ;
+    rdfs:comment "Priority level of the incident" .
+
+:urgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "urgency" ;
+    rdfs:comment "Urgency level of the incident" .
+
+:location rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident, :Mission, :Service ;
+    rdfs:range :Location ;
+    rdfs:label "location" ;
+    rdfs:comment "Location of the incident or mission" .
+
+:WeatherCondition rdf:type owl:Class ;
+    rdfs:label "WeatherCondition" ;
+    rdfs:comment "Represents weather conditions during the wildfire" .
+
+:temperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "temperature" ;
+    rdfs:comment "Temperature during the wildfire" .
+
+:windSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "windSpeed" ;
+    rdfs:comment "Wind speed during the wildfire" .
+
+:humidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "humidity" ;
+    rdfs:comment "Humidity during the wildfire" .
+
+:forecast rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string ;
+    rdfs:label "forecast" ;
+    rdfs:comment "Weather forecast" .
+
+:SensorData rdf:type owl:Class ;
+    rdfs:label "SensorData" ;
+    rdfs:comment "Data collected from sensors" .
+
+:timestamp rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :HumanObservation ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "timestamp" ;
+    rdfs:comment "Timestamp of the data" .
+
+:source rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :HumanObservation ;
+    rdfs:range xsd:string ;
+    rdfs:label "source" ;
+    rdfs:comment "Source of the data" .
+
+:HumanObservation rdf:type owl:Class ;
+    rdfs:label "HumanObservation" ;
+    rdfs:comment "Observations made by humans, including social media" .
+
+:classificationType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :HumanObservation ;
+    rdfs:range xsd:string ;
+    rdfs:label "classificationType" ;
+    rdfs:comment "Type of classification, such as smoke type" .
+
+:Mission rdf:type owl:Class ;
+    rdfs:label "Mission" ;
+    rdfs:comment "Represents a mission in response to the wildfire" .
+
+:servicesInvolved rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service ;
+    rdfs:label "servicesInvolved" ;
+    rdfs:comment "Services involved in the mission" .
+
+:urgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string ;
+    rdfs:label "urgency" ;
+    rdfs:comment "Urgency level of the mission" .
+
+:Service rdf:type owl:Class ;
+    rdfs:label "Service" ;
+    rdfs:comment "Represents a service involved in wildfire management" .
+
+:Location rdf:type owl:Class ;
+    rdfs:label "Location" ;
+    rdfs:comment "Represents a geographical location" .
+
+:populationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float ;
+    rdfs:label "populationDensity" ;
+    rdfs:comment "Population density of the location" .
+
+:peopleLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :Location ;
+    rdfs:label "peopleLocation" ;
+    rdfs:comment "Location of the involved people" .
+
+:vulnerableObjects rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "vulnerableObjects" ;
+    rdfs:comment "Vulnerable objects involved in the incident" .
+
+:statusOfForestryWorks rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "statusOfForestryWorks" ;
+    rdfs:comment "Status of wildfire forestry works like firebreaks and access roads" .

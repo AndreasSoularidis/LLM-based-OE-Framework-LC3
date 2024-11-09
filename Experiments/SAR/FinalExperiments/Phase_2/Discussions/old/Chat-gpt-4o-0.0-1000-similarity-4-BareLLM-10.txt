@@ -1,0 +1,79 @@
+### Iterative Discussion
+
+#### Round 1: Initial Discussion
+
+**Knowledge Engineer (KE):** Let's start by identifying the core concepts for our ontology. We need to cover incidents, weather conditions, data from human and earth observations, and missions. I propose we start with defining the main classes: `Incident`, `WeatherCondition`, `ObservationData`, and `Mission`.
+
+**Domain Expert (DE):** Agreed. For `Incident`, we should include subclasses like `WildfireIncident` and `Impact`. For `WeatherCondition`, we need to capture variables like `Temperature`, `WindSpeed`, and `Humidity`.
+
+**Knowledge Worker (KW):** Don't forget about the data sources. We need classes for `SensorData`, `SatelliteData`, and `SocialMediaData` under `ObservationData`.
+
+#### Round 2: Refining Concepts
+
+**KE:** Let's add properties to link these classes. For `Incident`, we need properties like `hasLocation`, `hasPriority`, and `hasUrgency`. For `WeatherCondition`, we need `hasTemperature`, `hasWindSpeed`, and `hasHumidity`.
+
+**DE:** We should also consider the relationships between `Mission` and `Service`. A `Mission` can `involveService`, and each `Service` can `supportFirefighting`.
+
+**KW:** We need to ensure that `ObservationData` can be linked to `Incident` through properties like `observedAtLocation` and `hasCreationDate`.
+
+#### Round 3: Addressing Competency Questions
+
+**KE:** Let's ensure our ontology can answer the competency questions. For CQ1-CQ6, we need to ensure `WeatherCondition` is linked to `Incident` and can provide current and forecast data.
+
+**DE:** For CQ7-CQ12, `ObservationData` should have properties like `hasClassificationType` and `involvesVulnerableObject`.
+
+**KW:** For CQ13-CQ18, `Mission` should have properties like `hasLocation`, `isMostUrgent`, and `involvesPopulationDensity`.
+
+#### Round 4: Finalizing the Ontology
+
+**KE:** I think we have covered all the requirements. Let's finalize the ontology in Turtle format.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+:Incident rdf:type rdfs:Class .
+:WildfireIncident rdf:type rdfs:Class ; rdfs:subClassOf :Incident .
+:Impact rdf:type rdfs:Class ; rdfs:subClassOf :Incident .
+
+:WeatherCondition rdf:type rdfs:Class .
+:Temperature rdf:type rdfs:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type rdfs:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type rdfs:Class ; rdfs:subClassOf :WeatherCondition .
+
+:ObservationData rdf:type rdfs:Class .
+:SensorData rdf:type rdfs:Class ; rdfs:subClassOf :ObservationData .
+:SatelliteData rdf:type rdfs:Class ; rdfs:subClassOf :ObservationData .
+:SocialMediaData rdf:type rdfs:Class ; rdfs:subClassOf :ObservationData .
+
+:Mission rdf:type rdfs:Class .
+:Service rdf:type rdfs:Class .
+
+# Properties
+:hasLocation rdf:type rdf:Property ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasPriority rdf:type rdf:Property ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasUrgency rdf:type rdf:Property ; rdfs:domain :Incident ; rdfs:range xsd:string .
+
+:hasTemperature rdf:type rdf:Property ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasWindSpeed rdf:type rdf:Property ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasHumidity rdf:type rdf:Property ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+
+:observedAtLocation rdf:type rdf:Property ; rdfs:domain :ObservationData ; rdfs:range xsd:string .
+:hasCreationDate rdf:type rdf:Property ; rdfs:domain :ObservationData ; rdfs:range xsd:dateTime .
+:hasClassificationType rdf:type rdf:Property ; rdfs:domain :ObservationData ; rdfs:range xsd:string .
+:involvesVulnerableObject rdf:type rdf:Property ; rdfs:domain :ObservationData ; rdfs:range xsd:string .
+
+:involveService rdf:type rdf:Property ; rdfs:domain :Mission ; rdfs:range :Service .
+:supportFirefighting rdf:type rdf:Property ; rdfs:domain :Service ; rdfs:range xsd:string .
+
+:hasLocation rdf:type rdf:Property ; rdfs:domain :Mission ; rdfs:range xsd:string .
+:isMostUrgent rdf:type rdf:Property ; rdfs:domain :Mission ; rdfs:range xsd:boolean .
+:involvesPopulationDensity rdf:type rdf:Property ; rdfs:domain :Mission ; rdfs:range xsd:integer .
+```
+
+This ontology should be capable of answering all the competency questions and covering the requirements for modeling Search and Rescue missions in the context of wildfire incidents.

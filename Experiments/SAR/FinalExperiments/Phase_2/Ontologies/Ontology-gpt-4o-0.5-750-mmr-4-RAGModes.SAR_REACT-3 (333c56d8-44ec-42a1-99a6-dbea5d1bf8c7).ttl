@@ -1,0 +1,204 @@
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:WeatherCondition a owl:Class .
+:Temperature a owl:Class .
+:WindSpeed a owl:Class .
+:Humidity a owl:Class .
+:WeatherForecast a owl:Class .
+:Incident a owl:Class .
+:Impact a owl:Class .
+:Location a owl:Class .
+:Priority a owl:Class .
+:Urgency a owl:Class .
+:SensorData a owl:Class .
+:SatelliteData a owl:Class .
+:SocialMediaData a owl:Class .
+:Mission a owl:Class .
+:Service a owl:Class .
+:Support a owl:Class .
+:PopulationDensity a owl:Class .
+:InvolvedPeople a owl:Class .
+:Forest a owl:Class .
+:Swamp a owl:Class .
+:Woodland a owl:Class .
+:AgriculturalLand a owl:Class .
+:Grove a owl:Class .
+:CropResidue a owl:Class .
+:Grassland a owl:Class .
+:Building a owl:Class .
+:Vehicle a owl:Class .
+:Machinery a owl:Class .
+:Animal a owl:Class .
+:Bird a owl:Class .
+:Hive a owl:Class .
+:FireCause a owl:Class .
+:FirefightingResource a owl:Class .
+:Personnel a owl:Class .
+
+:hasTemperature a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Humidity .
+
+:hasForecast a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WeatherForecast .
+
+:affectedArea a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:burntArea a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:involvedBuilding a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Building .
+
+:involvedVehicle a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Vehicle .
+
+:involvedMachinery a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Machinery .
+
+:rescuedPerson a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :InvolvedPeople .
+
+:rescuedAnimal a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Animal .
+
+:fireCause a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :FireCause .
+
+:firefightingResource a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :FirefightingResource .
+
+:involvedPersonnel a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Personnel .
+
+:hasSource a owl:ObjectProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range :SatelliteData, :SocialMediaData .
+
+:creationDate a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:dateTime .
+
+:location a owl:ObjectProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range :Location .
+
+:offersSupport a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Support .
+
+:followsMission a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:missionLocation a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location .
+
+:urgentMissionLocation a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location .
+
+:populationDensity a owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :PopulationDensity .
+
+:involvedPeople a owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :InvolvedPeople .
+
+# Additional Classes and Properties based on Domain Data
+:FireOfficer a owl:Class .
+:VolunteerFirefighter a owl:Class .
+:ArmedForcesPersonnel a owl:Class .
+:ServicePersonnel a owl:Class .
+:MunicipalityStaff a owl:Class .
+:PublicSectorStaff a owl:Class .
+:ClubMember a owl:Class .
+:Individual a owl:Class .
+:Firetruck a owl:Class .
+:Tanker a owl:Class .
+:FireFightingVehicle a owl:Class .
+:PortableTool a owl:Class .
+:Machine a owl:Class .
+:AirInvolvement a owl:Class .
+
+:involvedFireOfficer a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :FireOfficer .
+
+:involvedVolunteerFirefighter a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :VolunteerFirefighter .
+
+:involvedArmedForcesPersonnel a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :ArmedForcesPersonnel .
+
+:involvedServicePersonnel a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :ServicePersonnel .
+
+:involvedMunicipalityStaff a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :MunicipalityStaff .
+
+:involvedPublicSectorStaff a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :PublicSectorStaff .
+
+:involvedClubMember a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :ClubMember .
+
+:involvedIndividual a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Individual .
+
+:involvedFiretruck a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Firetruck .
+
+:involvedTanker a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Tanker .
+
+:involvedFireFightingVehicle a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :FireFightingVehicle .
+
+:involvedPortableTool a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :PortableTool .
+
+:involvedMachine a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Machine .
+
+:involvedAirInvolvement a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :AirInvolvement .

@@ -1,0 +1,94 @@
+Certainly! I'll simulate the roles of Knowledge Engineer (KE), Domain Expert (DE), and Knowledge Worker (KW) to create an ontology for Search and Rescue (SAR) missions focusing on wildfire incidents. Let's begin the iterative discussion to develop a comprehensive ontology.
+
+KE: Hello, team. We're tasked with creating an ontology for SAR missions in wildfire incidents. Let's start by discussing the main concepts we need to include.
+
+DE: Certainly. From my experience, we should focus on key areas such as incident types, weather conditions, data sources, and mission details.
+
+KW: As a user, I'd like to emphasize the importance of including concepts related to real-time data integration from various sources like sensors and social media.
+
+KE: Great points. Let's start with the basic structure. I'll create the ontology and add some initial classes.
+
+```turtle
+@prefix : <http://example.com/sar-wildfire#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar-wildfire> rdf:type owl:Ontology .
+
+:Incident rdf:type owl:Class ;
+    rdfs:comment "Represents a wildfire incident"@en .
+
+:WeatherCondition rdf:type owl:Class ;
+    rdfs:comment "Represents weather conditions affecting the wildfire"@en .
+
+:DataSource rdf:type owl:Class ;
+    rdfs:comment "Represents sources of data for the SAR mission"@en .
+
+:Mission rdf:type owl:Class ;
+    rdfs:comment "Represents a Search and Rescue mission"@en .
+```
+
+DE: That's a good start. We should add more specific classes under these main concepts. For example, under WeatherCondition, we need temperature, wind speed, and humidity.
+
+KW: Agreed. And for DataSource, we should include classes for sensors, social media, and first responder inputs.
+
+KE: Excellent suggestions. I'll add these classes and some properties to connect them.
+
+```turtle
+:Temperature rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:WindSpeed rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:Humidity rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:Sensor rdf:type owl:Class ;
+    rdfs:subClassOf :DataSource .
+
+:SocialMedia rdf:type owl:Class ;
+    rdfs:subClassOf :DataSource .
+
+:FirstResponderInput rdf:type owl:Class ;
+    rdfs:subClassOf :DataSource .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasDataSource rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :DataSource .
+
+:hasMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Mission .
+```
+
+DE: We should also include classes for different types of incidents and their impacts.
+
+KW: Yes, and don't forget to add properties for location and priority of incidents.
+
+KE: Good points. I'll add those now.
+
+```turtle
+:WildfireIncident rdf:type owl:Class ;
+    rdfs:subClassOf :Incident .
+
+:Impact rdf:type owl:Class .
+
+:EnvironmentalImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+:SocialImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :

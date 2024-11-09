@@ -1,0 +1,116 @@
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:ObservationData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Person rdf:type owl:Class .
+
+:location rdf:type owl:DatatypeProperty .
+:priority rdf:type owl:DatatypeProperty .
+:urgency rdf:type owl:DatatypeProperty .
+:temperature rdf:type owl:DatatypeProperty .
+:windSpeed rdf:type owl:DatatypeProperty .
+:humidity rdf:type owl:DatatypeProperty .
+:forecast rdf:type owl:DatatypeProperty .
+:source rdf:type owl:DatatypeProperty .
+:creationDate rdf:type owl:DatatypeProperty .
+:smokeClassification rdf:type owl:DatatypeProperty .
+:supportsMission rdf:type owl:ObjectProperty .
+:involvedPeople rdf:type owl:ObjectProperty .
+:populationDensity rdf:type owl:DatatypeProperty .
+
+:Incident rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :location ;
+    owl:someValuesFrom xsd:string
+] .
+
+:Incident rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :priority ;
+    owl:someValuesFrom xsd:string
+] .
+
+:Incident rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :urgency ;
+    owl:someValuesFrom xsd:string
+] .
+
+:WeatherCondition rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :temperature ;
+    owl:someValuesFrom xsd:float
+] .
+
+:WeatherCondition rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :windSpeed ;
+    owl:someValuesFrom xsd:float
+] .
+
+:WeatherCondition rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :humidity ;
+    owl:someValuesFrom xsd:float
+] .
+
+:WeatherCondition rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :forecast ;
+    owl:someValuesFrom xsd:string
+] .
+
+:ObservationData rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :source ;
+    owl:someValuesFrom xsd:string
+] .
+
+:ObservationData rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :creationDate ;
+    owl:someValuesFrom xsd:dateTime
+] .
+
+:ObservationData rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :location ;
+    owl:someValuesFrom xsd:string
+] .
+
+:ObservationData rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :smokeClassification ;
+    owl:someValuesFrom xsd:string
+] .
+
+:Mission rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :location ;
+    owl:someValuesFrom xsd:string
+] .
+
+:Service rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :supportsMission ;
+    owl:someValuesFrom :Mission
+] .
+
+:Mission rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :involvedPeople ;
+    owl:someValuesFrom :Person
+] .
+
+:Mission rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :populationDensity ;
+    owl:someValuesFrom xsd:float
+] .

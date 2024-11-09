@@ -1,0 +1,97 @@
+@prefix : <http://example.com/ontology/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:WildfireIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:ResurgenceIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:FalseAdvertisementIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+
+:WeatherCondition rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+
+:Observation rdf:type owl:Class .
+:SensorObservation rdf:type owl:Class ; rdfs:subClassOf :Observation .
+:SatelliteObservation rdf:type owl:Class ; rdfs:subClassOf :Observation .
+:SocialMediaObservation rdf:type owl:Class ; rdfs:subClassOf :Observation .
+
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:DatatypeProperty .
+:hasUrgency rdf:type owl:DatatypeProperty .
+:hasTime rdf:type owl:DatatypeProperty .
+:hasDate rdf:type owl:DatatypeProperty .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty .
+:hasTemperature rdf:type owl:DatatypeProperty .
+:hasWindSpeed rdf:type owl:DatatypeProperty .
+:hasHumidity rdf:type owl:DatatypeProperty .
+:hasForecast rdf:type owl:ObjectProperty .
+
+:hasSource rdf:type owl:DatatypeProperty .
+:hasCreationDate rdf:type owl:DatatypeProperty .
+:hasClassificationType rdf:type owl:DatatypeProperty .
+
+:hasMission rdf:type owl:ObjectProperty .
+:supportsMission rdf:type owl:ObjectProperty .
+:hasService rdf:type owl:ObjectProperty .
+:hasPopulationDensity rdf:type owl:DatatypeProperty .
+:hasInvolvedPeople rdf:type owl:ObjectProperty .
+
+:Incident rdfs:comment "Represents any incident occurring during a wildfire."^^xsd:string .
+:WeatherCondition rdfs:comment "Represents weather conditions affecting wildfire behavior."^^xsd:string .
+:Observation rdfs:comment "Represents data collected from various sources during a wildfire."^^xsd:string .
+:Mission rdfs:comment "Represents missions undertaken during a wildfire."^^xsd:string .
+:Service rdfs:comment "Represents services provided during a wildfire."^^xsd:string .
+
+:hasLocation rdfs:comment "Indicates the location of an incident or observation."^^xsd:string .
+:hasPriority rdfs:comment "Indicates the priority level of an incident."^^xsd:string .
+:hasUrgency rdfs:comment "Indicates the urgency level of an incident."^^xsd:string .
+:hasTime rdfs:comment "Indicates the time of an incident or observation."^^xsd:string .
+:hasDate rdfs:comment "Indicates the date of an incident or observation."^^xsd:string .
+
+:hasWeatherCondition rdfs:comment "Indicates the weather conditions affecting an incident."^^xsd:string .
+:hasTemperature rdfs:comment "Indicates the temperature during a wildfire."^^xsd:string .
+:hasWindSpeed rdfs:comment "Indicates the wind speed during a wildfire."^^xsd:string .
+:hasHumidity rdfs:comment "Indicates the humidity during a wildfire."^^xsd:string .
+:hasForecast rdfs:comment "Indicates the weather forecast for a location."^^xsd:string .
+
+:hasSource rdfs:comment "Indicates the source of an observation."^^xsd:string .
+:hasCreationDate rdfs:comment "Indicates the creation date of an observation."^^xsd:string .
+:hasClassificationType rdfs:comment "Indicates the classification type of smoke."^^xsd:string .
+
+:hasMission rdfs:comment "Indicates the mission associated with a service."^^xsd:string .
+:supportsMission rdfs:comment "Indicates the service supporting a mission."^^xsd:string .
+:hasService rdfs:comment "Indicates the service provided during a mission."^^xsd:string .
+:hasPopulationDensity rdfs:comment "Indicates the population density in the area of a mission."^^xsd:string .
+:hasInvolvedPeople rdfs:comment "Indicates the people involved in an incident or mission."^^xsd:string .
+
+:Incident owl:hasKey (:hasLocation :hasDate :hasTime) .
+:WeatherCondition owl:hasKey (:hasDate :hasTime) .
+:Observation owl:hasKey (:hasSource :hasCreationDate :hasLocation) .
+:Mission owl:hasKey (:hasLocation :hasDate :hasTime) .
+:Service owl:hasKey (:hasMission :hasDate :hasTime) .
+
+:Incident owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:WildfireIncident :ResurgenceIncident :FalseAdvertisementIncident)
+] .
+
+:WeatherCondition owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:WeatherForecast)
+] .
+
+:Observation owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:SensorObservation :SatelliteObservation :SocialMediaObservation)
+] .
+
+:Mission owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:Service)
+] .

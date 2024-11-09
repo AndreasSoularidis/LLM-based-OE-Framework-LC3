@@ -1,0 +1,97 @@
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Wildfire rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Firefighting rdf:type owl:Class .
+:Evacuation rdf:type owl:Class .
+:MedicalSupport rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:SmokeClassification rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+:ForestryWorkStatus rdf:type owl:Class .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+           rdfs:domain :Wildfire ;
+           rdfs:range :Impact .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+             rdfs:domain :Wildfire ;
+             rdfs:range :Location .
+
+:influencedBy rdf:type owl:ObjectProperty ;
+              rdfs:domain :Wildfire ;
+              rdfs:range :WeatherCondition .
+
+:hasDataSource rdf:type owl:ObjectProperty ;
+               rdfs:domain :Wildfire ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( :SensorData :SatelliteData :SocialMediaData ) ] .
+
+:hasMission rdf:type owl:ObjectProperty ;
+            rdfs:domain :Wildfire ;
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( :Firefighting :Evacuation :MedicalSupport ) ] .
+
+:hasTemperature rdf:type owl:DatatypeProperty ;
+                rdfs:domain :WeatherCondition ;
+                rdfs:range xsd:float .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+              rdfs:domain :WeatherCondition ;
+              rdfs:range xsd:float .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+             rdfs:domain :WeatherCondition ;
+             rdfs:range xsd:float .
+
+:hasForecast rdf:type owl:ObjectProperty ;
+             rdfs:domain :WeatherCondition ;
+             rdfs:range :WeatherForecast .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Incident ;
+             rdfs:range xsd:string .
+
+:creationDate rdf:type owl:DatatypeProperty ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :SensorData :SatelliteData :SocialMediaData ) ] ;
+              rdfs:range xsd:dateTime .
+
+:hasSmokeClassification rdf:type owl:ObjectProperty ;
+                        rdfs:domain :Wildfire ;
+                        rdfs:range :SmokeClassification .
+
+:involvesVulnerableObject rdf:type owl:ObjectProperty ;
+                          rdfs:domain :Wildfire ;
+                          rdfs:range :VulnerableObject .
+
+:hasForestryWorkStatus rdf:type owl:ObjectProperty ;
+                       rdfs:domain :Wildfire ;
+                       rdfs:range :ForestryWorkStatus .
+
+:populationDensity rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Location ;
+                   rdfs:range xsd:float .
+
+:Temperature rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdfs:subClassOf :WeatherCondition .
+:Humidity rdfs:subClassOf :WeatherCondition .
+:WeatherForecast rdfs:subClassOf :WeatherCondition .
+
+:Wildfire owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:intersectionOf ( :Incident [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasImpact ;
+                                   owl:someValuesFrom :Impact ] )
+] .

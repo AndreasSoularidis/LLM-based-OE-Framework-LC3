@@ -1,0 +1,73 @@
+@prefix : <http://example.org/wildfire#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+
+:Wildfire rdf:type owl:Class ;
+  rdfs:subClassOf :Incident .
+
+:SmokeCondition rdf:type owl:Class ;
+  rdfs:subClassOf :Incident .
+
+:PropertyDamage rdf:type owl:Class ;
+  rdfs:subClassOf :Impact .
+
+:EnvironmentalDamage rdf:type owl:Class ;
+  rdfs:subClassOf :Impact .
+
+:Temperature rdf:type owl:Class ;
+  rdfs:subClassOf :WeatherCondition .
+
+:Humidity rdf:type owl:Class ;
+  rdfs:subClassOf :WeatherCondition .
+
+:WindSpeed rdf:type owl:Class ;
+  rdfs:subClassOf :WeatherCondition .
+
+:WeatherForecast rdf:type owl:Class ;
+  rdfs:subClassOf :WeatherCondition .
+
+:Sensor rdf:type owl:Class .
+:Satellite rdf:type owl:Class .
+:SocialMedia rdf:type owl:Class .
+
+:MeteorologicalService rdf:type owl:Class ;
+  rdfs:subClassOf :Service .
+
+:FirefightingService rdf:type owl:Class ;
+  rdfs:subClassOf :Service .
+
+:hasLocation rdf:type owl:ObjectProperty .
+:hasSeverity rdf:type owl:DatatypeProperty .
+:hasTemperature rdf:type owl:DatatypeProperty .
+:hasHumidity rdf:type owl:DatatypeProperty .
+:hasWindSpeed rdf:type owl:DatatypeProperty .
+:hasDate rdf:type owl:DatatypeProperty .
+:hasTime rdf:type owl:DatatypeProperty .
+
+:hasImpact rdf:type owl:ObjectProperty .
+:hasWeatherCondition rdf:type owl:ObjectProperty .
+:hasSensorData rdf:type owl:ObjectProperty .
+:hasSatelliteData rdf:type owl:ObjectProperty .
+:hasSocialMediaData rdf:type owl:ObjectProperty .
+:hasMission rdf:type owl:ObjectProperty .
+:hasService rdf:type owl:ObjectProperty .
+:hasVulnerability rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:DatatypeProperty .
+
+:hasClassificationType rdf:type owl:DatatypeProperty .
+:hasCreationDate rdf:type owl:DatatypeProperty .
+:hasStatus rdf:type owl:DatatypeProperty .
+:hasVulnerableObjects rdf:type owl:ObjectProperty .
+:hasUrgentMission rdf:type owl:ObjectProperty .
+:hasSupportService rdf:type owl:ObjectProperty .

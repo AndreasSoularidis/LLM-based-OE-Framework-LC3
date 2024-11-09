@@ -1,0 +1,91 @@
+@prefix : <http://example.com/sar-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar-ontology> rdf:type owl:Ontology .
+
+### Classes ###
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:HumanObservation rdf:type owl:Class .
+:EarthObservation rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Location rdf:type owl:Class .
+
+:VerticalFire rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:CreepingFire rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:LandsFire rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:MixedFire rdf:type owl:Class ; rdfs:subClassOf :Incident .
+
+:Forest rdf:type owl:Class ; rdfs:subClassOf :Location .
+:AgriculturalArea rdf:type owl:Class ; rdfs:subClassOf :Location .
+:PopulatedArea rdf:type owl:Class ; rdfs:subClassOf :Location .
+
+### Properties ###
+
+:hasTemperature rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasWindSpeed rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasHumidity rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:hasWeatherForecast rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:string .
+
+:hasPriority rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasUrgency rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasStatus rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasLocation rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Location .
+
+:hasDataSource rdf:type owl:DatatypeProperty ; rdfs:domain :HumanObservation, :EarthObservation ; rdfs:range xsd:string .
+:hasCreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :HumanObservation, :EarthObservation ; rdfs:range xsd:dateTime .
+:hasHazardIndex rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasNotificationMethod rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+
+:hasMission rdf:type owl:ObjectProperty ; rdfs:domain :Service ; rdfs:range :Mission .
+:hasService rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Service .
+
+### Relationships ###
+
+:hasImpact rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Impact .
+:hasWeatherCondition rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :WeatherCondition .
+:hasHumanObservation rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :HumanObservation .
+:hasEarthObservation rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :EarthObservation .
+:hasMissionLocation rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Location .
+
+### Example Data Properties ###
+
+:hasLongitude rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:float .
+:hasLatitude rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:float .
+:hasAltitude rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:float .
+
+### Equivalent Classes and Properties ###
+
+:Fire rdf:type owl:Class ; owl:equivalentClass :Incident .
+:Temperature rdf:type owl:DatatypeProperty ; owl:equivalentProperty :hasTemperature .
+:WindSpeed rdf:type owl:DatatypeProperty ; owl:equivalentProperty :hasWindSpeed .
+:Humidity rdf:type owl:DatatypeProperty ; owl:equivalentProperty :hasHumidity .
+:WeatherForecast rdf:type owl:DatatypeProperty ; owl:equivalentProperty :hasWeatherForecast .
+
+### Sample Annotations ###
+
+:Incident rdfs:comment "Represents an incident in a wildfire situation."^^xsd:string .
+:WeatherCondition rdfs:comment "Represents the weather conditions affecting a wildfire."^^xsd:string .
+
+### Disjoint Properties ###
+
+:hasPriority owl:propertyDisjointWith :hasUrgency .
+:hasLocation owl:inverseOf :isLocationOf .
+
+### Property Chains ###
+
+:hasImpact owl:propertyChainAxiom ( :hasIncident :hasImpact ) .
+:hasMissionLocation owl:propertyChainAxiom ( :hasMission :hasLocation ) .
+
+### Negative Property Assertions ###
+
+[] rdf:type owl:NegativePropertyAssertion ;
+   owl:sourceIndividual :Incident1 ;
+   owl:assertionProperty :hasPriority ;
+   owl:targetValue "Low" .

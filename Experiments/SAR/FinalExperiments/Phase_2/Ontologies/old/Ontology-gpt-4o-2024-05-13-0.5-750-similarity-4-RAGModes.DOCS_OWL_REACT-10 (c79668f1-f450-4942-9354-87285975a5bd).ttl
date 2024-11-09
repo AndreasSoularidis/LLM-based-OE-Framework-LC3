@@ -1,0 +1,123 @@
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar> owl:imports <http://example.org/otherOntologies/weather.owl> .
+
+:Wildfire rdf:type owl:Class .
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+
+:Sensor rdf:type owl:Class .
+:Satellite rdf:type owl:Class .
+:SocialMedia rdf:type owl:Class .
+:FirstResponder rdf:type owl:Class .
+
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Firefighting rdf:type owl:Class .
+:CrisisManagementCentre rdf:type owl:Class .
+
+:hasTemperature rdf:type owl:DatatypeProperty .
+:hasWindSpeed rdf:type owl:DatatypeProperty .
+:hasHumidity rdf:type owl:DatatypeProperty .
+:hasWeatherForecast rdf:type owl:ObjectProperty .
+
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:ObjectProperty .
+:hasSensorData rdf:type owl:ObjectProperty .
+:hasSocialMediaData rdf:type owl:ObjectProperty .
+:hasSatelliteData rdf:type owl:ObjectProperty .
+
+:hasMission rdf:type owl:ObjectProperty .
+:hasService rdf:type owl:ObjectProperty .
+:hasFirefighting rdf:type owl:ObjectProperty .
+:hasCrisisManagementCentre rdf:type owl:ObjectProperty .
+
+:Incident owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:unionOf (:Wildfire :Impact)
+] .
+
+:UrgentIncident rdf:type owl:Class ;
+  rdfs:subClassOf :Incident .
+
+:hasPriority rdf:type owl:ObjectProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range :Priority .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range xsd:string .
+
+:hasTemperature rdf:type owl:DatatypeProperty ;
+  rdfs:domain :WeatherForecast ;
+  rdfs:range xsd:float .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+  rdfs:domain :WeatherForecast ;
+  rdfs:range xsd:float .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+  rdfs:domain :WeatherForecast ;
+  rdfs:range xsd:float .
+
+:hasWeatherForecast rdf:type owl:ObjectProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range :WeatherForecast .
+
+:hasSensorData rdf:type owl:ObjectProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range :Sensor .
+
+:hasSocialMediaData rdf:type owl:ObjectProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range :SocialMedia .
+
+:hasSatelliteData rdf:type owl:ObjectProperty ;
+  rdfs:domain :Incident ;
+  rdfs:range :Satellite .
+
+:hasMission rdf:type owl:ObjectProperty ;
+  rdfs:domain :Service ;
+  rdfs:range :Mission .
+
+:hasService rdf:type owl:ObjectProperty ;
+  rdfs:domain :Mission ;
+  rdfs:range :Service .
+
+:hasFirefighting rdf:type owl:ObjectProperty ;
+  rdfs:domain :Mission ;
+  rdfs:range :Firefighting .
+
+:hasCrisisManagementCentre rdf:type owl:ObjectProperty ;
+  rdfs:domain :Mission ;
+  rdfs:range :CrisisManagementCentre .
+
+:Wildfire rdfs:comment "Represents a wildfire incident."^^xsd:string .
+:Incident rdfs:comment "Represents any incident related to a wildfire."^^xsd:string .
+:Impact rdfs:comment "Represents the impact of a wildfire."^^xsd:string .
+:Priority rdfs:comment "Represents the priority level of an incident."^^xsd:string .
+
+:Temperature rdfs:comment "Represents the temperature in weather conditions."^^xsd:string .
+:WindSpeed rdfs:comment "Represents the wind speed in weather conditions."^^xsd:string .
+:Humidity rdfs:comment "Represents the humidity level in weather conditions."^^xsd:string .
+:WeatherForecast rdfs:comment "Represents the weather forecast."^^xsd:string .
+
+:Sensor rdfs:comment "Represents a sensor data source."^^xsd:string .
+:Satellite rdfs:comment "Represents a satellite data source."^^xsd:string .
+:SocialMedia rdfs:comment "Represents a social media data source."^^xsd:string .
+:FirstResponder rdfs:comment "Represents a first responder data source."^^xsd:string .
+
+:Mission rdfs:comment "Represents a mission in wildfire management."^^xsd:string .
+:Service rdfs:comment "Represents a service involved in wildfire management."^^xsd:string .
+:Firefighting rdfs:comment "Represents a firefighting service."^^xsd:string .
+:CrisisManagementCentre rdfs:comment "Represents the crisis management centre."^^xsd:string .

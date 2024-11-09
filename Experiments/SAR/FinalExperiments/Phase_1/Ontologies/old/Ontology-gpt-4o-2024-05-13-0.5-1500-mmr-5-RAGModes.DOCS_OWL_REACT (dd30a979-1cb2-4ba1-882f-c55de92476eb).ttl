@@ -1,0 +1,196 @@
+@prefix : <http://example.com/sar-wildfire#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar-wildfire> rdf:type owl:Ontology .
+
+### Classes
+:WildfireIncident rdf:type owl:Class ;
+    rdfs:label "Wildfire Incident" ;
+    rdfs:comment "An event involving a wildfire." .
+
+:Impact rdf:type owl:Class ;
+    rdfs:label "Impact" ;
+    rdfs:comment "The effects or consequences of a wildfire incident." .
+
+:WeatherCondition rdf:type owl:Class ;
+    rdfs:label "Weather Condition" ;
+    rdfs:comment "Weather variables influencing wildfire behavior." .
+
+:SensorData rdf:type owl:Class ;
+    rdfs:label "Sensor Data" ;
+    rdfs:comment "Data collected from various sensors." .
+
+:SatelliteData rdf:type owl:Class ;
+    rdfs:label "Satellite Data" ;
+    rdfs:comment "Data collected from satellite observations." .
+
+:SocialMediaData rdf:type owl:Class ;
+    rdfs:label "Social Media Data" ;
+    rdfs:comment "Data collected from social media sources." .
+
+:Mission rdf:type owl:Class ;
+    rdfs:label "Mission" ;
+    rdfs:comment "A coordinated effort to manage a wildfire incident." .
+
+:Service rdf:type owl:Class ;
+    rdfs:label "Service" ;
+    rdfs:comment "A service involved in wildfire management." .
+
+:FirefightingService rdf:type owl:Class ;
+    rdfs:subClassOf :Service ;
+    rdfs:label "Firefighting Service" ;
+    rdfs:comment "A service responsible for firefighting efforts." .
+
+:SupportService rdf:type owl:Class ;
+    rdfs:subClassOf :Service ;
+    rdfs:label "Support Service" ;
+    rdfs:comment "A service providing support for wildfire management." .
+
+:Location rdf:type owl:Class ;
+    rdfs:label "Location" ;
+    rdfs:comment "Geographical location information." .
+
+:Coordinates rdf:type owl:Class ;
+    rdfs:label "Coordinates" ;
+    rdfs:comment "Geographical coordinates (latitude and longitude)." .
+
+:Altitude rdf:type owl:Class ;
+    rdfs:label "Altitude" ;
+    rdfs:comment "Elevation above sea level." .
+
+### Object Properties
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Impact ;
+    rdfs:label "has Impact" ;
+    rdfs:comment "Indicates the impact of a wildfire incident." .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :WeatherCondition ;
+    rdfs:label "has Weather Condition" ;
+    rdfs:comment "Indicates the weather conditions influencing a wildfire incident." .
+
+:hasSensorData rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :SensorData ;
+    rdfs:label "has Sensor Data" ;
+    rdfs:comment "Indicates the sensor data related to a wildfire incident." .
+
+:hasSatelliteData rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :SatelliteData ;
+    rdfs:label "has Satellite Data" ;
+    rdfs:comment "Indicates the satellite data related to a wildfire incident." .
+
+:hasSocialMediaData rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :SocialMediaData ;
+    rdfs:label "has Social Media Data" ;
+    rdfs:comment "Indicates the social media data related to a wildfire incident." .
+
+:involvesMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Mission ;
+    rdfs:label "involves Mission" ;
+    rdfs:comment "Indicates the missions involved in managing a wildfire incident." .
+
+:hasService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service ;
+    rdfs:label "has Service" ;
+    rdfs:comment "Indicates the services involved in a mission." .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Location ;
+    rdfs:label "has Location" ;
+    rdfs:comment "Indicates the location of a wildfire incident." .
+
+:hasCoordinates rdf:type owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :Coordinates ;
+    rdfs:label "has Coordinates" ;
+    rdfs:comment "Indicates the coordinates of a location." .
+
+:hasAltitude rdf:type owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :Altitude ;
+    rdfs:label "has Altitude" ;
+    rdfs:comment "Indicates the altitude of a location." .
+
+### Data Properties
+:hasTemperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Temperature" ;
+    rdfs:comment "Indicates the temperature in Celsius." .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Wind Speed" ;
+    rdfs:comment "Indicates the wind speed in km/h." .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Humidity" ;
+    rdfs:comment "Indicates the humidity percentage." .
+
+:hasForecast rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string ;
+    rdfs:label "has Forecast" ;
+    rdfs:comment "Indicates the weather forecast." .
+
+:hasLatitude rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Coordinates ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Latitude" ;
+    rdfs:comment "Indicates the latitude of the coordinates." .
+
+:hasLongitude rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Coordinates ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Longitude" ;
+    rdfs:comment "Indicates the longitude of the coordinates." .
+
+:hasAltitudeValue rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Altitude ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Altitude Value" ;
+    rdfs:comment "Indicates the altitude value in meters." .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string ;
+    rdfs:label "has Priority" ;
+    rdfs:comment "Indicates the priority of the incident." .
+
+:hasUrgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string ;
+    rdfs:label "has Urgency" ;
+    rdfs:comment "Indicates the urgency level of the impact." .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "has Creation Date" ;
+    rdfs:comment "Indicates the creation date of the data." .
+
+:hasStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string ;
+    rdfs:label "has Status" ;
+    rdfs:comment "Indicates the status of the mission." .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Population Density" ;
+    rdfs:comment "Indicates the population density of the area." .

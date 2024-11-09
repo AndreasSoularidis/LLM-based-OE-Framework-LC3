@@ -1,0 +1,145 @@
+@prefix : <http://example.org/sar-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:WildfireIncident a owl:Class ;
+    rdfs:label "Wildfire Incident" ;
+    rdfs:comment "An event involving a wildfire." .
+
+:Impact a owl:Class ;
+    rdfs:label "Impact" ;
+    rdfs:comment "The effects or consequences of a wildfire incident." .
+
+:WeatherCondition a owl:Class ;
+    rdfs:label "Weather Condition" ;
+    rdfs:comment "Weather variables that influence wildfire behavior." .
+
+:Temperature a owl:Class ;
+    rdfs:label "Temperature" ;
+    rdfs:comment "The degree of hotness or coldness measured by a thermometer." .
+
+:WindSpeed a owl:Class ;
+    rdfs:label "Wind Speed" ;
+    rdfs:comment "The speed at which wind is moving." .
+
+:Humidity a owl:Class ;
+    rdfs:label "Humidity" ;
+    rdfs:comment "The amount of water vapor in the air." .
+
+:WeatherForecast a owl:Class ;
+    rdfs:label "Weather Forecast" ;
+    rdfs:comment "Predicted weather conditions over a period." .
+
+:Location a owl:Class ;
+    rdfs:label "Location" ;
+    rdfs:comment "Geographical location of the incident." .
+
+:SensorData a owl:Class ;
+    rdfs:label "Sensor Data" ;
+    rdfs:comment "Data collected from sensors." .
+
+:SatelliteData a owl:Class ;
+    rdfs:label "Satellite Data" ;
+    rdfs:comment "Data collected from satellites." .
+
+:SocialMediaData a owl:Class ;
+    rdfs:label "Social Media Data" ;
+    rdfs:comment "Data collected from social media platforms." .
+
+:Mission a owl:Class ;
+    rdfs:label "Mission" ;
+    rdfs:comment "A task or operation undertaken to manage the wildfire." .
+
+:Service a owl:Class ;
+    rdfs:label "Service" ;
+    rdfs:comment "A service involved in wildfire management." .
+
+:Responder a owl:Class ;
+    rdfs:label "Responder" ;
+    rdfs:comment "A person or entity that responds to the wildfire." .
+
+:hasPriority a owl:ObjectProperty ;
+    rdfs:label "has Priority" ;
+    rdfs:comment "Indicates the priority of an incident." ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:int .
+
+:isUrgent a owl:ObjectProperty ;
+    rdfs:label "is Urgent" ;
+    rdfs:comment "Indicates whether an incident is urgent." ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:boolean .
+
+:hasTemperature a owl:ObjectProperty ;
+    rdfs:label "has Temperature" ;
+    rdfs:comment "Links to the temperature condition." ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed a owl:ObjectProperty ;
+    rdfs:label "has Wind Speed" ;
+    rdfs:comment "Links to the wind speed condition." ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity a owl:ObjectProperty ;
+    rdfs:label "has Humidity" ;
+    rdfs:comment "Links to the humidity condition." ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Humidity .
+
+:hasWeatherForecast a owl:ObjectProperty ;
+    rdfs:label "has Weather Forecast" ;
+    rdfs:comment "Links to the weather forecast." ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WeatherForecast .
+
+:occurredAt a owl:ObjectProperty ;
+    rdfs:label "occurred At" ;
+    rdfs:comment "Indicates the location where the incident occurred." ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Location .
+
+:reportedBy a owl:ObjectProperty ;
+    rdfs:label "reported By" ;
+    rdfs:comment "Indicates the source of the data." ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range :Responder .
+
+:hasData a owl:ObjectProperty ;
+    rdfs:label "has Data" ;
+    rdfs:comment "Links to data collected from various sources." ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :SensorData, :SatelliteData, :SocialMediaData .
+
+:involves a owl:ObjectProperty ;
+    rdfs:label "involves" ;
+    rdfs:comment "Indicates the services involved in a mission." ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:executedBy a owl:ObjectProperty ;
+    rdfs:label "executed By" ;
+    rdfs:comment "Indicates the responder executing a mission." ;
+    rdfs:domain :Mission ;
+    rdfs:range :Responder .
+
+:takesPlaceAt a owl:ObjectProperty ;
+    rdfs:label "takes Place At" ;
+    rdfs:comment "Indicates the location of a mission." ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location .
+
+:populationDensity a owl:DatatypeProperty ;
+    rdfs:label "population Density" ;
+    rdfs:comment "Indicates the population density of an area." ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:int .
+
+:involvesPeople a owl:ObjectProperty ;
+    rdfs:label "involves People" ;
+    rdfs:comment "Indicates the people involved in an incident." ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Responder .

@@ -1,0 +1,72 @@
+### Iterative Discussion
+
+#### Round 1: Initial Discussion
+
+**Knowledge Engineer (KE):** Let's start by identifying the core concepts for our ontology. We need to cover incidents, weather conditions, data from observations, and missions. I propose we start with defining the main classes: `Incident`, `WeatherCondition`, `ObservationData`, and `Mission`.
+
+**Domain Expert (DE):** Agreed. For `Incident`, we should include subclasses like `WildfireIncident` and `Impact`. We also need to define properties such as `hasLocation`, `hasPriority`, and `hasUrgency`.
+
+**Knowledge Worker (KW):** For `WeatherCondition`, we should include properties like `temperature`, `windSpeed`, `humidity`, and `weatherForecast`. These are crucial for understanding the fire's behavior.
+
+#### Round 2: Expanding the Ontology
+
+**KE:** Let's add more detail to `ObservationData`. We need subclasses for `SensorData`, `SatelliteData`, and `SocialMediaData`. Each should have properties like `creationDate` and `location`.
+
+**DE:** Good point. We should also include a class for `VulnerableObject` to capture data about objects affected by the fire. This can be linked to `Incident` through a property like `involvesVulnerableObject`.
+
+**KW:** For `Mission`, we need to define relationships with services. Let's add properties like `supportsService`, `followsMission`, and `missionLocation`.
+
+#### Round 3: Finalizing the Ontology
+
+**KE:** We should ensure our ontology can answer all competency questions. Let's add a class `Service` with properties like `offersSupport` and `serviceLocation`.
+
+**DE:** We also need to include `PopulationDensity` and `InvolvedPeople` to capture human-related data. These can be linked to `Mission` and `Incident`.
+
+**KW:** I think we have covered all the requirements. Let's finalize the ontology and ensure it can answer all the competency questions.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident a rdfs:Class .
+:WildfireIncident a rdfs:Class ; rdfs:subClassOf :Incident .
+:Impact a rdfs:Class ; rdfs:subClassOf :Incident .
+
+:WeatherCondition a rdfs:Class .
+:temperature a rdf:Property ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:windSpeed a rdf:Property ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:humidity a rdf:Property ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:weatherForecast a rdf:Property ; rdfs:domain :WeatherCondition ; rdfs:range xsd:string .
+
+:ObservationData a rdfs:Class .
+:SensorData a rdfs:Class ; rdfs:subClassOf :ObservationData .
+:SatelliteData a rdfs:Class ; rdfs:subClassOf :ObservationData .
+:SocialMediaData a rdfs:Class ; rdfs:subClassOf :ObservationData .
+:creationDate a rdf:Property ; rdfs:domain :ObservationData ; rdfs:range xsd:dateTime .
+:location a rdf:Property ; rdfs:domain :ObservationData ; rdfs:range xsd:string .
+
+:VulnerableObject a rdfs:Class .
+:involvesVulnerableObject a rdf:Property ; rdfs:domain :Incident ; rdfs:range :VulnerableObject .
+
+:Mission a rdfs:Class .
+:supportsService a rdf:Property ; rdfs:domain :Mission ; rdfs:range :Service .
+:followsMission a rdf:Property ; rdfs:domain :Mission ; rdfs:range xsd:string .
+:missionLocation a rdf:Property ; rdfs:domain :Mission ; rdfs:range xsd:string .
+
+:Service a rdfs:Class .
+:offersSupport a rdf:Property ; rdfs:domain :Service ; rdfs:range xsd:string .
+:serviceLocation a rdf:Property ; rdfs:domain :Service ; rdfs:range xsd:string .
+
+:PopulationDensity a rdfs:Class .
+:InvolvedPeople a rdfs:Class .
+
+:hasLocation a rdf:Property ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasPriority a rdf:Property ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:hasUrgency a rdf:Property ; rdfs:domain :Incident ; rdfs:range xsd:string .
+```
+
+This ontology is designed to answer all the competency questions and covers the requirements for modeling Search and Rescue (SAR) missions in the context of wildfire incidents.

@@ -1,0 +1,99 @@
+@prefix : <http://example.com/sar-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar-ontology> rdf:type owl:Ontology .
+
+### Classes
+:Incident rdf:type owl:Class .
+:Wildfire rdf:type owl:Class ;
+          rdfs:subClassOf :Incident .
+:Impact rdf:type owl:Class ;
+        rdfs:subClassOf :Incident .
+:Urgency rdf:type owl:Class ;
+         rdfs:subClassOf :Incident .
+
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class ;
+             rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ;
+           rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ;
+          rdfs:subClassOf :WeatherCondition .
+:Forecast rdf:type owl:Class ;
+          rdfs:subClassOf :WeatherCondition .
+
+:DataSource rdf:type owl:Class .
+:Sensor rdf:type owl:Class ;
+        rdfs:subClassOf :DataSource .
+:Satellite rdf:type owl:Class ;
+           rdfs:subClassOf :DataSource .
+:SocialMedia rdf:type owl:Class ;
+             rdfs:subClassOf :DataSource .
+
+:Mission rdf:type owl:Class .
+:Firefighting rdf:type owl:Class ;
+              rdfs:subClassOf :Mission .
+:Evacuation rdf:type owl:Class ;
+            rdfs:subClassOf :Mission .
+:MedicalAssistance rdf:type owl:Class ;
+                   rdfs:subClassOf :Mission .
+
+:Service rdf:type owl:Class .
+:SupportService rdf:type owl:Class ;
+                rdfs:subClassOf :Service .
+:CoordinationService rdf:type owl:Class ;
+                     rdfs:subClassOf :Service .
+
+### Object Properties
+:influences rdf:type owl:ObjectProperty ;
+            rdfs:domain :WeatherCondition ;
+            rdfs:range :Incident .
+:reportedBy rdf:type owl:ObjectProperty ;
+            rdfs:domain :Incident ;
+            rdfs:range :DataSource .
+:causes rdf:type owl:ObjectProperty ;
+        rdfs:domain :WeatherCondition ;
+        rdfs:range :Wildfire .
+:supports rdf:type owl:ObjectProperty ;
+          rdfs:domain :Service ;
+          rdfs:range :Mission .
+:isPartOf rdf:type owl:ObjectProperty ;
+          rdfs:domain :Mission ;
+          rdfs:range :Service .
+
+### Data Properties
+:temperatureValue rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Temperature ;
+                  rdfs:range xsd:float .
+:windSpeedValue rdf:type owl:DatatypeProperty ;
+                rdfs:domain :WindSpeed ;
+                rdfs:range xsd:float .
+:humidityValue rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Humidity ;
+               rdfs:range xsd:float .
+:forecastValue rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Forecast ;
+               rdfs:range xsd:string .
+
+:priority rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Incident ;
+          rdfs:range xsd:string .
+:urgencyLevel rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Incident ;
+              rdfs:range xsd:string .
+:creationDate rdf:type owl:DatatypeProperty ;
+              rdfs:domain :DataSource ;
+              rdfs:range xsd:dateTime .
+:dataLocation rdf:type owl:DatatypeProperty ;
+              rdfs:domain :DataSource ;
+              rdfs:range xsd:string .
+:incidentLocation rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Incident ;
+                  rdfs:range xsd:string .
+
+### Disjoint Classes
+[] rdf:type owl:AllDisjointClasses ;
+   owl:members (:Mother :Father :YoungChild) .

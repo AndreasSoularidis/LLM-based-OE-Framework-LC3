@@ -1,0 +1,128 @@
+### Iterative Discussion
+
+#### Knowledge Engineer (KE)
+Let's start by identifying the main classes and properties we need for our ontology. Based on the requirements, we should have classes for `Incident`, `WeatherCondition`, `ObservationData`, `Mission`, and `Service`. We also need to define properties that capture relationships and attributes, such as `hasLocation`, `hasPriority`, `hasWeatherVariable`, and so on.
+
+#### Domain Expert (DE)
+I agree. For `Incident`, we should include properties like `hasImpact`, `hasUrgency`, and `hasPriority`. For `WeatherCondition`, we need to capture variables like `temperature`, `windSpeed`, `humidity`, and `weatherForecast`. These are crucial for understanding the fire's behavior.
+
+#### Knowledge Worker (KW)
+From a user's perspective, it would be helpful to have properties that link `ObservationData` to its `source`, `creationDate`, and `location`. This will help in tracking the data's origin and relevance.
+
+#### KE
+Good point. We should also consider the relationships between `Mission` and `Service`. For example, a `Mission` can `involveService`, and each `Service` can `supportMission`. We also need to capture the `location` and `urgency` of each mission.
+
+#### DE
+Don't forget to include classes for `VulnerableObject` and `ForestryWorkStatus`. These are important for assessing the impact and readiness of the area.
+
+#### KW
+We should also have properties like `hasPopulationDensity` and `involvesPeople` to capture human factors in the affected area.
+
+#### KE
+Let's draft the ontology in Turtle format. We'll iterate and refine it as needed.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+:Incident rdf:type rdfs:Class .
+:WeatherCondition rdf:type rdfs:Class .
+:ObservationData rdf:type rdfs:Class .
+:Mission rdf:type rdfs:Class .
+:Service rdf:type rdfs:Class .
+:VulnerableObject rdf:type rdfs:Class .
+:ForestryWorkStatus rdf:type rdfs:Class .
+
+# Properties
+:hasLocation rdf:type rdf:Property ;
+    rdfs:domain :Incident, :ObservationData, :Mission ;
+    rdfs:range xsd:string .
+
+:hasPriority rdf:type rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasUrgency rdf:type rdf:Property ;
+    rdfs:domain :Incident, :Mission ;
+    rdfs:range xsd:string .
+
+:hasImpact rdf:type rdf:Property ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasWeatherVariable rdf:type rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:temperature rdf:type rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:windSpeed rdf:type rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:humidity rdf:type rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:weatherForecast rdf:type rdf:Property ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:source rdf:type rdf:Property ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string .
+
+:creationDate rdf:type rdf:Property ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:dateTime .
+
+:involveService rdf:type rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:supportMission rdf:type rdf:Property ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:hasPopulationDensity rdf:type rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:float .
+
+:involvesPeople rdf:type rdf:Property ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .
+
+:classificationType rdf:type rdf:Property ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string .
+
+:status rdf:type rdf:Property ;
+    rdfs:domain :ForestryWorkStatus ;
+    rdfs:range xsd:string .
+
+# Relationships
+:hasImpact rdfs:subPropertyOf :hasPriority .
+:hasUrgency rdfs:subPropertyOf :hasPriority .
+
+```
+
+### Final Discussion
+
+#### KE
+This draft covers the main requirements and competency questions. We have classes and properties that capture incidents, weather conditions, observation data, missions, and services.
+
+#### DE
+The ontology seems comprehensive. It includes domain-specific knowledge like vulnerable objects and forestry work status, which are crucial for SAR missions.
+
+#### KW
+From a user's perspective, the ontology is well-structured and should support decision-making during wildfire incidents. It answers all the competency questions effectively.
+
+#### KE
+Great! Let's finalize this version. The ontology is now capable of answering all the competency questions and covers the defined requirements.
