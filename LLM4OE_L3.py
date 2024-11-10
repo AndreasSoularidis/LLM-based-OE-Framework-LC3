@@ -28,6 +28,8 @@ SAR_DOCUMENTS = "data/SAR_docs_text"
 OWL_DOCUMENTATION = "https://www.w3.org/2007/OWL/draft/owl2-primer/#Classes.2C_Properties.2C_and_Individuals_.E2.80.93_And_Basic_Modeling_With_Them"
 REACT_DOCUMENTS = "data/ReAct-v2"
 
+# Path for results
+RESULTS_PATH ="SAR/Level3/Phase_2"
 
 def split_documents(docs, chunk_size, chunk_overlap):
   splitter = RecursiveCharacterTextSplitter(
@@ -79,9 +81,10 @@ if __name__ == '__main__':
     owl_retriever = owl_vector_store.as_retriever(search_type=SEARCH_TYPE, search_kwargs={"k":K})
 
   filename = f"{MODEL}-{TEMPERATURE}-{CHUNK_SIZE}-{SEARCH_TYPE}-{K}-{MODE}-{ITERATION}-Test"
-  ontology_extractor = OntologyExtractor("SAR/Level3/Phase_2/Ontologies", "Ontology-" + filename)
-  chat_extractor = ChatExtractor("SAR/Level3/Phase_2/Discussions", "Chat-" + filename)
+  ontology_extractor = OntologyExtractor(RESULTS_PATH + "/Ontologies", "Ontology-" + filename)
+  chat_extractor = ChatExtractor(RESULTS_PATH + "/Discussions", "Chat-" + filename)
   
+  response = None
   while True:
 
     user_input = input("You: ")
@@ -90,10 +93,10 @@ if __name__ == '__main__':
       break
 
     response = start_simulation(user_input, sar_retriever, owl_retriever, react_retriever) 
-
     print(response)
 
     ontology_extractor.export_to_ttl(response)
-  
+
+  print("Simulation completed!")
   chat_extractor.discussion_extractor(response)
 
