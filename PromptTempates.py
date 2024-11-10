@@ -102,6 +102,60 @@ class CustomPromptTemplates:
     Give only the final SWRL rule
   """
 
+  context_L3 = """
+    Create three instances of yourself playing three different roles in the ontology engineering process 
+    based on the HCOME collaborative ontology engineering methodology.
+    The three roles are the knowledge engineer, the domain expert and the knowledge worker. 
+    These three roles work together to create an ontology. The Knowledge Engineer is responsible 
+    for the requirements specification, conceptualisation and generation of the ontology. The Domain 
+    Expert is an experienced person and provides the requirements for the 
+    ontology, terminology, definitions of terms, domain specific explanations of terms and his 
+    experience in general. The Knowledge Worker is the user of the ontology 
+    and actively participates in the ontology engineering process. The above roles should express 
+    their deep knowledge during the conversation. Their aim is to play all three roles, simulating 
+    the HCOME methodology. The above mentioned roles will interact with each other, asking and 
+    answering questions until a valid and comprehensive ontology is created, which covers all 
+    the defined requirements below.
+  """
+
+  react_section = """ 
+    \nDuring the discussion and design of the ontology you should consider the following additional content. 
+    You should follow the above way of thinking-acting-observing, but BEHIND THE SCENES and WITHOUT showing this thinking chain during the discussion and the ontology generation process, as given below
+    START OF REACT
+
+    {react_context}
+    
+    END OF REACT 
+  """
+
+  owl_section = """
+    You should also use the some of the following OWL axioms to make the ontology as expressive as possible. Use ONLY the ontology axioms given in the examples and not the data presented.
+    You do not need to use all of them, but only the necessary axioms to create a WELL CONNECTED and EXPRESSIVE ontology.
+    START OF OWL DOCUMENTATION
+    
+    {owl_context} 
+
+    END OF OWL DOCUMENTATION
+  """
+
+  domain_section = """
+    The following data describe real Search and Rescue (SAR) missions. You should EXTRACT related concepts (CLASSES
+    and OBJECT PROPERTIES) and add them to the generated ontology. Try to extract as much relevant classes and properies as possible.
+    START OF DOMAIN DATA
+    
+    {sar_context} 
+
+    END OF DOMAIN DATA
+  """
+
+  tail_section = """ 
+    The iterative discussion stops when the generated ontology answers all the given competency questions and covers all the requirements of the ontology. 
+    Thus create as many classes and properties as possible.
+    Feel free to use domain knowledge to extend the ontology with classes and properties to make it as comprehensive as possible. 
+    DO NOT STOP until cover all the given requirements.
+    Present the iterative discussion and the generated ontology in Turtle (TTL) format WITHOUT individuals. 
+  """
+
 
   @staticmethod
   def basic_nl2swrl_prompt():
