@@ -14,7 +14,7 @@ from PromptBuilder import CustomPromptBuilder
 
 load_dotenv()
 # Hyperparameters
-MODEL = "gpt-4o"
+MODEL = "nvidia"
 TEMPERATURE = 0.5
 CHUNK_SIZE = 750
 CHUNK_OVERLAP = 0
