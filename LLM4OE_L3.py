@@ -14,14 +14,16 @@ from PromptBuilder import CustomPromptBuilder
 
 load_dotenv()
 # Hyperparameters
-MODEL = "nvidia"
+MODEL = "gpt-4o"
 TEMPERATURE = 0.5
 CHUNK_SIZE = 750
+DOMAIN_CHUNK_SIZE = 1500
 CHUNK_OVERLAP = 0
 SEARCH_TYPE = 'mmr'
 K = 4
-MODE = RAGModes.BARE_LLM
-ITERATION = 13
+MODE = RAGModes.SAR_REACT
+TYPE = ""
+ITERATION = 2
 
 # Data sources
 SAR_DOCUMENTS = "data/SAR_docs_text"
@@ -70,7 +72,7 @@ if __name__ == '__main__':
   
   if MODE.value == 1 or MODE.value == 2: # ReAct & Domain Data
     sar_docs = FileLoader.get_txt_loader(SAR_DOCUMENTS)
-    sar_docs = split_documents(sar_docs, CHUNK_SIZE, CHUNK_OVERLAP)
+    sar_docs = split_documents(sar_docs, DOMAIN_CHUNK_SIZE, CHUNK_OVERLAP)
     sar_vector_store = create_vector_store(sar_docs)
     sar_retriever = sar_vector_store.as_retriever(search_type=SEARCH_TYPE, search_kwargs={"k": K})
   
@@ -80,7 +82,7 @@ if __name__ == '__main__':
     owl_vector_store = create_vector_store(owl_docs)
     owl_retriever = owl_vector_store.as_retriever(search_type=SEARCH_TYPE, search_kwargs={"k":K})
 
-  filename = f"{MODEL}-{TEMPERATURE}-{CHUNK_SIZE}-{SEARCH_TYPE}-{K}-{MODE}-{ITERATION}-Test"
+  filename = f"{MODEL}-{TEMPERATURE}-{CHUNK_SIZE}-{SEARCH_TYPE}-{K}-{MODE}-{TYPE}-{ITERATION}"
   ontology_extractor = OntologyExtractor(RESULTS_PATH + "/Ontologies", "Ontology-" + filename)
   chat_extractor = ChatExtractor(RESULTS_PATH + "/Discussions", "Chat-" + filename)
   
