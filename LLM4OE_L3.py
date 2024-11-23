@@ -27,7 +27,7 @@ TYPE = "Test"
 ITERATION = 1
 
 # Data sources
-SAR_DOCUMENTS = "data/csv/test_data.csv"
+SAR_DOCUMENTS = "data/csv"
 # SAR_DOCUMENTS = "data/SAR_docs_text"
 OWL_DOCUMENTATION = "https://www.w3.org/2007/OWL/draft/owl2-primer/#Classes.2C_Properties.2C_and_Individuals_.E2.80.93_And_Basic_Modeling_With_Them"
 REACT_DOCUMENTS = "data/ReAct-v2"

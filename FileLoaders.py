@@ -18,6 +18,7 @@ class FileLoader:
     # web_loader.requests_kwargs = {'verify':False}
     return web_loader.load()
   
+  
   @staticmethod
   def get_pdf_loader(folder_name):
     files = glob.glob(f"{folder_name}/*.pdf")
@@ -27,26 +28,36 @@ class FileLoader:
       docs.append(text_loader.load()[0])
     return docs
   
+
   @staticmethod
-  def get_csv_loader(file_path, delimiter=",", quotechar='"', field_names = []):
-    if len(field_names) == 0:
-      loader = CSVLoader(
-      file_path=file_path,
-      csv_args={
-          "delimiter": delimiter,
-          "quotechar": quotechar,
-      })
-    else:
-       loader = CSVLoader(
-      file_path=file_path,
-      csv_args={
-          "delimiter": delimiter,
-          "quotechar": quotechar,
-          "fieldnames": field_names
-      })
+  def get_csv_loader(folder_name, delimiter=",", quotechar='"', field_names = []):
+    files = glob.glob(f"{folder_name}/*.csv")
+
+    documents = []
+    docs = []
+    for file in files:
+      if len(field_names) == 0:
+        csv_loader = CSVLoader(
+        file_path=file,
+        csv_args={
+            "delimiter": delimiter,
+            "quotechar": quotechar,
+        })
+      else:
+        csv_loader = CSVLoader(
+        file_path=file,
+        csv_args={
+            "delimiter": delimiter,
+            "quotechar": quotechar,
+            "fieldnames": field_names
+        })
+      data = csv_loader.load()
+      documents.append(data)
     
-    data = loader.load()
-    return data
+    for document in documents:
+      for line in document:
+        docs.append(line)
+    return docs
     
   
   @staticmethod
