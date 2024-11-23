@@ -1,5 +1,6 @@
 from langchain_community.document_loaders import WebBaseLoader, DirectoryLoader, TextLoader
 from langchain_community.document_loaders import PyMuPDFLoader
+from langchain_community.document_loaders.csv_loader import CSVLoader
 import bs4
 import glob
 
@@ -25,6 +26,28 @@ class FileLoader:
       text_loader = PyMuPDFLoader(file)
       docs.append(text_loader.load()[0])
     return docs
+  
+  @staticmethod
+  def get_csv_loader(file_path, delimiter=",", quotechar='"', field_names = []):
+    if len(field_names) == 0:
+      loader = CSVLoader(
+      file_path=file_path,
+      csv_args={
+          "delimiter": delimiter,
+          "quotechar": quotechar,
+      })
+    else:
+       loader = CSVLoader(
+      file_path=file_path,
+      csv_args={
+          "delimiter": delimiter,
+          "quotechar": quotechar,
+          "fieldnames": field_names
+      })
+    
+    data = loader.load()
+    return data
+    
   
   @staticmethod
   def get_txt_loader(folder_name):

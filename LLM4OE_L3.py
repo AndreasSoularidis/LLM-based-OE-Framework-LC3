@@ -27,9 +27,11 @@ TYPE = "Test"
 ITERATION = 1
 
 # Data sources
-SAR_DOCUMENTS = "data/SAR_docs_text"
+SAR_DOCUMENTS = "data/csv/test_data.csv"
+# SAR_DOCUMENTS = "data/SAR_docs_text"
 OWL_DOCUMENTATION = "https://www.w3.org/2007/OWL/draft/owl2-primer/#Classes.2C_Properties.2C_and_Individuals_.E2.80.93_And_Basic_Modeling_With_Them"
 REACT_DOCUMENTS = "data/ReAct-v2"
+
 
 # Path for results
 RESULTS_PATH ="SAR/Level3/Phase_2"
@@ -83,7 +85,8 @@ if __name__ == '__main__':
     react_retriever = react_vector_store.as_retriever(search_type=SEARCH_TYPE, search_kwargs={"k":K})
   
   if RAG_MODE.value == 1 or RAG_MODE.value == 2: # ReAct & Domain Data
-    sar_docs = FileLoader.get_txt_loader(SAR_DOCUMENTS)
+    #sar_docs = FileLoader.get_txt_loader(SAR_DOCUMENTS)
+    sar_docs = FileLoader.get_csv_loader(SAR_DOCUMENTS)
     sar_docs = split_documents(sar_docs, DOMAIN_CHUNK_SIZE, CHUNK_OVERLAP)
     sar_vector_store = create_vector_store(sar_docs)
     sar_retriever = sar_vector_store.as_retriever(search_type=SEARCH_TYPE, search_kwargs={"k": K})
