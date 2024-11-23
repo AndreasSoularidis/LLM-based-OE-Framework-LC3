@@ -6,3 +6,7 @@ class RAGModes(Enum):
     REACT = 3
     BARE_LLM = 4
     SAR = 5
+
+class FrameworkModes(Enum):
+    PARALLEL = 1
+    SEQUENTIAL = 2

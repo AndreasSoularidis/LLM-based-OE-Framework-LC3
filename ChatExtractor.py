@@ -12,7 +12,7 @@ class ChatExtractor:
     os.makedirs(self.path, exist_ok=True)
     
   def discussion_extractor(self, text):
-    if text == None:
+    if len(text) == 0:
       return
     filename = f"{self.filename}.txt"
     full_path = os.path.join(self.path, filename)

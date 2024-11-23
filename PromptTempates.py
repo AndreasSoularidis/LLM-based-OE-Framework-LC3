@@ -103,8 +103,8 @@ class CustomPromptTemplates:
   """
 
   context_L3 = """
-    Create three instances of yourself playing three different roles in the ontology engineering process 
-    based on the HCOME collaborative ontology engineering methodology.
+    Create three instances of yourself playing three different roles in the ontology engineering process
+    based on the HCOME collaborative ontology engineering methodology. 
     The three roles are the knowledge engineer, the domain expert and the knowledge worker. 
     These three roles work together to create an ontology. The Knowledge Engineer is responsible 
     for the requirements specification, conceptualisation and generation of the ontology. The Domain 
@@ -118,6 +118,12 @@ class CustomPromptTemplates:
     the defined requirements below.
   """
 
+  react_context = """
+    For now, your goal is to change the strucutre of the given ontology. Try to make only substantial changes to the structure of the ontology to 
+    make it more robust and expressive, adding necessary owl axioms. Try to improve the ontology using the guides you will be given, removing irrelevant concepts 
+    (e.g, classes, properties) focusing on making it more well-connected and well-structured in terms of the concepts that already exist.
+  """
+
   react_section = """ 
     \nDuring the discussion and design of the ontology you should consider the following additional content. 
     You should follow the above way of thinking-acting-observing, but BEHIND THE SCENES and WITHOUT showing this thinking chain during the discussion and the ontology generation process, as given below
@@ -127,9 +133,9 @@ class CustomPromptTemplates:
     
     END OF REACT 
   """
-
-  owl_section = """
-    You should also use the some of the following OWL axioms to make the ontology as expressive as possible. Use ONLY the ontology axioms given in the examples and not the data presented.
+  owl_section = "\nYour goal is to fine-tune the given ontology to make it more robust, expressive and well-structured."
+  owl_section += """
+    You should also use the some of the following OWL axioms to make the ontology as expressive as possible. Use ONLY THE ONTOLOGY AXIOMS given in the EXAMPLES and NOT the DATA PRESENTED.
     You do not need to use all of them, but only the necessary axioms to create a WELL CONNECTED and EXPRESSIVE ontology.
     START OF OWL DOCUMENTATION
     
@@ -148,11 +154,17 @@ class CustomPromptTemplates:
     END OF DOMAIN DATA
   """
 
-  tail_section = """ 
+  main_tail = """ 
     The iterative discussion stops when the generated ontology answers all the given competency questions and covers all the requirements of the ontology. 
     Thus create as many classes and properties as possible.
     Feel free to use domain knowledge to extend the ontology with classes and properties to make it as comprehensive as possible. 
     DO NOT STOP until cover all the given requirements.
+    Present the iterative discussion and the generated ontology in Turtle (TTL) format WITHOUT individuals. 
+  """
+
+  secondary_tail = """ The iterative discussion stops when the given ontology becomes well structured (e.g., related classes grouped under related superclasses), 
+    its concepts (e.g., classes) are well connected, and the ontology generally has a high level of expressiveness (using OWL axioms).
+    Feel free to use domain knowledge to extend the ontology with classes and properties to make it as comprehensive as possible.
     Present the iterative discussion and the generated ontology in Turtle (TTL) format WITHOUT individuals. 
   """
 

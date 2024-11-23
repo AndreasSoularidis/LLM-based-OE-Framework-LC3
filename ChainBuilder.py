@@ -93,3 +93,30 @@ class Builder():
             )
 
         return rag_chain
+    
+    def create_enhanced_rag_chain(mode, round, sar_retriver, owl_retriever, react_retriver, model, custom_rag_prompt):
+        builder = RagChain(sar_retriver, owl_retriever, react_retriver, model, custom_rag_prompt)
+        if round == 1:
+            return (
+                builder.add_sar_context().add_question()
+                    .add_custom_rag_prompt()
+                    .add_model()
+                    .add_output_parser()
+                    .build()
+            )
+        if round == 2:
+            return (
+                builder.add_owl_context().add_question()
+                    .add_custom_rag_prompt()
+                    .add_model()
+                    .add_output_parser()
+                    .build()
+            )
+        if round == 3:
+            return (
+                builder.add_react_context().add_question()
+                    .add_custom_rag_prompt()
+                    .add_model()
+                    .add_output_parser()
+                    .build()
+            )
