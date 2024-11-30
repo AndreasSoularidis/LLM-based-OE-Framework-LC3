@@ -97,7 +97,7 @@ if __name__ == '__main__':
     owl_vector_store = create_vector_store(owl_docs)
     owl_retriever = owl_vector_store.as_retriever(search_type=SEARCH_TYPE, search_kwargs={"k":K})
 
-  filename = f"{MODEL}-{TEMPERATURE}-{CHUNK_SIZE}-{SEARCH_TYPE}-{K}-{RAG_MODE}-{TYPE}-{ITERATION}"
+  filename = f"{MODE.name}-{MODEL}-{TEMPERATURE}-{CHUNK_SIZE}-{SEARCH_TYPE}-{K}-{RAG_MODE}-{TYPE}-{ITERATION}"
   ontology_extractor = OntologyExtractor(RESULTS_PATH + "/Ontologies", "Ontology-" + filename)
   chat_extractor = ChatExtractor(RESULTS_PATH + "/Discussions", "Chat-" + filename)
   
