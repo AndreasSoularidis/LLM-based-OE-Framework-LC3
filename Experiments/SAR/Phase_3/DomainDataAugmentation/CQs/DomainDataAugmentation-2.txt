@@ -1,0 +1,48 @@
+N   CQ1. What are the most important weather variables that can cause forest fire?
+
+N   CQ2. What are the current measurements for these weather variables?
+
+N   CQ3. What is the forecast for the weather in this location?
+
+N   CQ4. Where did the incident take place?
+
+Y   CQ5. What is the priority of an incident during a forest fire disaster?
+    SELECT ?incident ?priority
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:hasPriority ?priority .
+        ?priority a sar:Priority .
+    }
+
+Y   CQ6. What incidents during forest fires are the most urgent?
+
+
+N   CQ7. What data from the source are depicted?
+
+N   CQ8. Which is the creation date of these data?
+
+N   CQ9. What is the location of this item?
+
+N   CQ10. Which is the classification type of smoke?
+
+N   CQ11. Which vulnerable objects were involved in the incident?
+
+N   CQ12. What is the status of wildfire forestry works (firebreaks, access to forest roads, etc.)?
+
+N   CQ13. What services or support do you offer for firefighting?
+
+Y   CQ14. Which mission do you follow for this support/service?
+    SELECT ?mission ?support
+    WHERE {
+        ?support a sar:Support ;
+            sar:followsMission ?mission .
+        ?mission a sar:Mission .
+    }
+
+N   CQ15. What is the location where this mission is taking place?
+
+N   CQ16. Where is the most urgent mission taking place?
+
+N   CQ17. What is the population density in the area?
+
+N   CQ18. What is the location of the involved people?

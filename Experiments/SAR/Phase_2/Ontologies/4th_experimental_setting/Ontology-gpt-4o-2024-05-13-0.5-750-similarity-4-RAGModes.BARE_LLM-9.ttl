@@ -1,0 +1,90 @@
+@prefix : <http://example.org/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+:Incident a owl:Class .
+:WeatherCondition a owl:Class .
+:SensorData a owl:Class .
+:SocialMediaData a owl:Class .
+:FirstResponderInput a owl:Class .
+:Mission a owl:Class .
+:Service a owl:Class .
+:VulnerableObject a owl:Class .
+
+:hasLocation a owl:ObjectProperty ;
+    rdfs:domain :Incident, :Mission, :SensorData, :SocialMediaData, :FirstResponderInput ;
+    rdfs:range xsd:string .
+
+:hasPriority a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasUrgency a owl:DatatypeProperty ;
+    rdfs:domain :Incident, :Mission ;
+    rdfs:range xsd:string .
+
+:hasTemperature a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasWindSpeed a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasHumidity a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasForecast a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:hasCurrentMeasurement a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:hasForecastMeasurement a owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:hasCreationDate a owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :SocialMediaData, :FirstResponderInput ;
+    rdfs:range xsd:dateTime .
+
+:hasClassificationType a owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :SocialMediaData, :FirstResponderInput ;
+    rdfs:range xsd:string .
+
+:involvesVulnerableObject a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :VulnerableObject .
+
+:hasImpact a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasStatus a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:followsService a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:offersSupport a owl:DatatypeProperty ;
+    rdfs:domain :Service ;
+    rdfs:range xsd:string .
+
+:relatedToMission a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:hasPopulationDensity a owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:float .
+
+:hasInvolvedPeopleLocation a owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string .

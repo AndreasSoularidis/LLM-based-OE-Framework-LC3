@@ -1,0 +1,102 @@
+I'll simulate a conversation between the three roles to create the SAR ontology for wildfire incidents. Let's begin:
+
+Knowledge Engineer (KE): Hello! I'm the knowledge engineer responsible for creating the SAR ontology. Let's start by discussing the key requirements and scope.
+
+Domain Expert (DE): Hello! As a domain expert in SAR operations and wildfire management, I can provide detailed domain knowledge. From the requirements, we need to focus on four main aspects: incidents/impacts, weather conditions, observation data, and mission coordination.
+
+Knowledge Worker (KW): Hi! As someone who will use this ontology, I need it to effectively support decision-making during wildfire incidents. The competency questions suggest we need detailed information about weather, incidents, observations, and mission coordination.
+
+KE: Let's start with the core concepts. DE, what are the primary entities we should model for wildfire incidents?
+
+DE: We should model:
+1. Wildfire incidents and their characteristics
+2. Weather conditions that affect fires
+3. Different types of impacts (on land, buildings, people)
+4. Mission resources and coordination
+5. Observation sources (sensors, social media, first responders)
+
+KW: From my perspective, we also need to track:
+- Priority levels of incidents
+- Real-time sensor data
+- Population density in affected areas
+- Mission status and urgency
+
+KE: I'll start creating the ontology structure. Here's the initial version in Turtle format:
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+:Incident rdf:type owl:Class ;
+    rdfs:comment "Represents a wildfire incident"@en .
+
+:WeatherCondition rdf:type owl:Class ;
+    rdfs:comment "Weather conditions affecting the wildfire"@en .
+
+:Impact rdf:type owl:Class .
+
+:Mission rdf:type owl:Class .
+
+:ObservationSource rdf:type owl:Class .
+
+:Location rdf:type owl:Class .
+
+:AffectedArea rdf:type owl:Class .
+
+:EmergencyService rdf:type owl:Class .
+
+# Weather-related classes
+:Temperature rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:WindSpeed rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+:Humidity rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherCondition .
+
+# Impact-related classes
+:LandImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+:StructuralImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+:HumanImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+:WildlifeImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+
+# Observation sources
+:Sensor rdf:type owl:Class ;
+    rdfs:subClassOf :ObservationSource .
+
+:SocialMedia rdf:type owl:Class ;
+    rdfs:subClassOf :ObservationSource .
+
+:FirstResponderReport rdf:type owl:Class ;
+    rdfs:subClassOf :ObservationSource .
+
+# Properties
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasPriority rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+
+:involvesMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :

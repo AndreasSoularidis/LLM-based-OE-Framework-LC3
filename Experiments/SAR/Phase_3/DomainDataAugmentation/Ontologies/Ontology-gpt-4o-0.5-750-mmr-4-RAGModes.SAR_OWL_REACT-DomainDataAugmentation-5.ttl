@@ -1,0 +1,420 @@
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar> rdf:type owl:Ontology .
+
+:WildfireIncident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:Urgency rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:PopulationDensity rdf:type owl:Class .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Impact .
+
+:hasPriority rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :Priority .
+
+:hasUrgency rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :Urgency .
+
+:affectedArea rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:hasTemperature rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Humidity .
+
+:hasWeatherForecast rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :WeatherForecast .
+
+:isCausedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :WeatherCondition .
+
+:capturedBySensor rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :SensorData .
+
+:postedOnSocialMedia rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :SocialMediaData .
+
+:occurredAt rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Location .
+
+:involvesService rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Service .
+
+:relatedToMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:missionLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:integer .
+
+:Vertical rdf:type owl:Class .
+:Creeping rdf:type owl:Class .
+:Mixed rdf:type owl:Class .
+:Forest rdf:type owl:Class .
+:Woodland rdf:type owl:Class .
+:AgriculturalLand rdf:type owl:Class .
+:Grassland rdf:type owl:Class .
+:ReedSwamp rdf:type owl:Class .
+:PopulatedArea rdf:type owl:Class .
+:FireOfficer rdf:type owl:Class .
+:VolunteerFirefighter rdf:type owl:Class .
+:ArmedForcesPersonnel rdf:type owl:Class .
+:ServicePersonnel rdf:type owl:Class .
+:FireTruck rdf:type owl:Class .
+:Tanker rdf:type owl:Class .
+:FireFightingVehicle rdf:type owl:Class .
+:PortableTool rdf:type owl:Class .
+:Machine rdf:type owl:Class .
+:AirInvolvement rdf:type owl:Class .
+:GroundSection rdf:type owl:Class .
+:PedestrianSection rdf:type owl:Class .
+:Backfire rdf:type owl:Class .
+:Incineration rdf:type owl:Class .
+:WaterUse rdf:type owl:Class .
+:FoamUse rdf:type owl:Class .
+:RetarderUse rdf:type owl:Class .
+:Notification rdf:type owl:Class .
+:DateTime rdf:type owl:DatatypeProperty .
+
+:hasCause rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :CauseOfFire .
+
+:LightningStrike rdf:type owl:Class ;
+    rdfs:subClassOf :CauseOfFire .
+
+:Arson rdf:type owl:Class ;
+    rdfs:subClassOf :CauseOfFire .
+
+:SelfishAction rdf:type owl:Class ;
+    rdfs:subClassOf :Arson .
+
+:MaliciousAction rdf:type owl:Class ;
+    rdfs:subClassOf :Arson .
+
+:ConcealingCrime rdf:type owl:Class ;
+    rdfs:subClassOf :Arson .
+
+:PsychopathEnergy rdf:type owl:Class ;
+    rdfs:subClassOf :Arson .
+
+:MentalRetardation rdf:type owl:Class ;
+    rdfs:subClassOf :Arson .
+
+:PyromaniacEnergy rdf:type owl:Class ;
+    rdfs:subClassOf :Arson .
+
+:ArsonByNegligence rdf:type owl:Class ;
+    rdfs:subClassOf :CauseOfFire .
+
+:IncinerationOfWaste rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:SparkMachinery rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:Hiker rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:Camper rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:Hunter rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:ArmyShot rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:ExplosiveUse rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:SmokingResidue rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:CropBurning rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:FieldWorker rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:ShortCircuit rdf:type owl:Class ;
+    rdfs:subClassOf :ArsonByNegligence .
+
+:BurntArea rdf:type owl:Class .
+
+:Forest rdf:type owl:Class ;
+    rdfs:subClassOf :BurntArea .
+
+:Swamp rdf:type owl:Class ;
+    rdfs:subClassOf :BurntArea .
+
+:Woodland rdf:type owl:Class ;
+    rdfs:subClassOf :BurntArea .
+
+:AgriculturalLand rdf:type owl:Class ;
+    rdfs:subClassOf :BurntArea .
+
+:CropResidue rdf:type owl:Class ;
+    rdfs:subClassOf :BurntArea .
+
+:Grassland rdf:type owl:Class ;
+    rdfs:subClassOf :BurntArea .
+
+:OtherLand rdf:type owl:Class ;
+    rdfs:subClassOf :BurntArea .
+
+:TotalBurntArea rdf:type owl:DatatypeProperty ;
+    rdfs:domain :BurntArea ;
+    rdfs:range xsd:integer .
+
+:Building rdf:type owl:Class .
+:Vehicle rdf:type owl:Class .
+:Machinery rdf:type owl:Class .
+:Rescue rdf:type owl:Class .
+:Person rdf:type owl:Class .
+:Animal rdf:type owl:Class .
+:Bird rdf:type owl:Class .
+:Hive rdf:type owl:Class .
+:Accident rdf:type owl:Class .
+:Death rdf:type owl:Class .
+:Ticket rdf:type owl:Class .
+:ServiceTitle rdf:type owl:DatatypeProperty .
+:BulletinEditor rdf:type owl:DatatypeProperty .
+:GeneralInformation rdf:type owl:Class .
+:Inception rdf:type owl:DatatypeProperty .
+:Marking rdf:type owl:DatatypeProperty .
+:Announcement rdf:type owl:DatatypeProperty .
+:Intervention rdf:type owl:DatatypeProperty .
+:PartialControl rdf:type owl:DatatypeProperty .
+:Resurgence rdf:type owl:DatatypeProperty .
+:Repayment rdf:type owl:DatatypeProperty .
+:FullExtinguishing rdf:type owl:DatatypeProperty .
+:FalseAdvertisement rdf:type owl:DatatypeProperty .
+:Malicious rdf:type owl:DatatypeProperty .
+:ByMistake rdf:type owl:DatatypeProperty .
+:NotificationMethod rdf:type owl:DatatypeProperty .
+:DistanceFromFireVehicle rdf:type owl:DatatypeProperty .
+:HazardIndex rdf:type owl:DatatypeProperty .
+:Responsibility rdf:type owl:Class .
+:Vertical rdf:type owl:Class ;
+    rdfs:subClassOf :Responsibility .
+
+:Creeping rdf:type owl:Class ;
+    rdfs:subClassOf :Responsibility .
+
+:Mixed rdf:type owl:Class ;
+    rdfs:subClassOf :Responsibility .
+
+:StartingPoint rdf:type owl:Class .
+:Regional rdf:type owl:DatatypeProperty .
+:Municipality rdf:type owl:DatatypeProperty .
+:AreaLocation rdf:type owl:DatatypeProperty .
+:Longitude rdf:type owl:DatatypeProperty .
+:Latitude rdf:type owl:DatatypeProperty .
+:Altitude rdf:type owl:DatatypeProperty .
+
+:StartingPosition rdf:type owl:Class .
+:Grove rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:Forest rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:Woodland rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:AgriculturalArea rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:GrasslandArea rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:ReedSwamp rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:PopulatedArea rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:AgriculturalFacility rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:LivestockFacility rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:GarbageLandfill rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:IndustryCraftsmanship rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:ConstructionSite rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:RoadSlope rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:AnotherPosition rdf:type owl:Class ;
+    rdfs:subClassOf :StartingPosition .
+
+:ForcesInvolved rdf:type owl:Class .
+:Permanent rdf:type owl:Class ;
+    rdfs:subClassOf :ForcesInvolved .
+
+:Seasonal rdf:type owl:Class ;
+    rdfs:subClassOf :ForcesInvolved .
+
+:VolunteerFirefighter rdf:type owl:Class ;
+    rdfs:subClassOf :ForcesInvolved .
+
+:ArmedForcesPersonnel rdf:type owl:Class ;
+    rdfs:subClassOf :ForcesInvolved .
+
+:ServicePersonnel rdf:type owl:Class ;
+    rdfs:subClassOf :ForcesInvolved .
+
+:MunicipalityStaff rdf:type owl:Class ;
+    rdfs:subClassOf :ForcesInvolved .
+
+:PublicSectorStaff rdf:type owl:Class ;
+    rdfs:subClassOf :ForcesInvolved .
+
+:ClubMember rdf:type owl:Class ;
+    rdfs:subClassOf :ForcesInvolved .
+
+:Individual rdf:type owl:Class ;
+    rdfs:subClassOf :ForcesInvolved .
+
+:InvestmentInstrument rdf:type owl:Class .
+:FireTruck rdf:type owl:Class ;
+    rdfs:subClassOf :InvestmentInstrument .
+
+:Tanker rdf:type owl:Class ;
+    rdfs:subClassOf :InvestmentInstrument .
+
+:FireFightingVehicle rdf:type owl:Class ;
+    rdfs:subClassOf :InvestmentInstrument .
+
+:VariousMachine rdf:type owl:Class ;
+    rdfs:subClassOf :InvestmentInstrument .
+
+:PortableTool rdf:type owl:Class ;
+    rdfs:subClassOf :InvestmentInstrument .
+
+:AirInvolvement rdf:type owl:Class .
+:Canadair rdf:type owl:Class ;
+    rdfs:subClassOf :AirInvolvement .
+
+:MethodOfDeposit rdf:type owl:Class .
+:AerialMeans rdf:type owl:Class ;
+    rdfs:subClassOf :MethodOfDeposit .
+
+:SelfExtinguishing rdf:type owl:Class ;
+    rdfs:subClassOf :MethodOfDeposit .
+
+:GroundSection rdf:type owl:Class ;
+    rdfs:subClassOf :MethodOfDeposit .
+
+:PedestrianSection rdf:type owl:Class ;
+    rdfs:subClassOf :MethodOfDeposit .
+
+:Backfire rdf:type owl:Class ;
+    rdfs:subClassOf :MethodOfDeposit .
+
+:Incineration rdf:type owl:Class ;
+    rdfs:subClassOf :MethodOfDeposit .
+
+:WaterUse rdf:type owl:Class ;
+    rdfs:subClassOf :MethodOfDeposit .
+
+:FoamUse rdf:type owl:Class ;
+    rdfs:subClassOf :MethodOfDeposit .
+
+:RetarderUse rdf:type owl:Class ;
+    rdfs:subClassOf :MethodOfDeposit .
+
+:Employment rdf:type owl:Class .
+:VehicleNumber rdf:type owl:Class ;
+    rdfs:subClassOf :Employment .
+
+:NotificationDateTime rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Employment ;
+    rdfs:range xsd:dateTime .
+
+:DepartureDateTime rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Employment ;
+    rdfs:range xsd:dateTime .
+
+:ArrivalDateTime rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Employment ;
+    rdfs:range xsd:dateTime .
+
+:DepartureFromEventDateTime rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Employment ;
+    rdfs:range xsd:dateTime .
+
+:ReturnDateTime rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Employment ;
+    rdfs:range xsd:dateTime .
+
+:PersonnelNumber rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Employment ;
+    rdfs:range xsd:integer .
+
+:Mileage rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Employment ;
+    rdfs:range xsd:integer .
+
+:ArmedForcesPersonnel rdf:type owl:Class ;
+    rdfs:subClassOf :Employment .
+
+:Slope rdf:type owl:Class ;
+    rdfs:subClassOf :ArmedForcesPersonnel .
+
+:Arrival rdf:type owl:Class ;
+    rdfs:subClassOf :ArmedForcesPersonnel .
+
+:HoursOfEmployment rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ArmedForcesPersonnel ;
+    rdfs:range xsd:integer .
+
+:Comments rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ArmedForcesPersonnel ;
+    rdfs:range xsd:string .

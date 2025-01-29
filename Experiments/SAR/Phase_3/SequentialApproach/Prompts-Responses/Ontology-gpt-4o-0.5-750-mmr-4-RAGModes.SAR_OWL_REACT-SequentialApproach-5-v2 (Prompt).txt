@@ -1,0 +1,395 @@
+
+    Create three instances of yourself playing three different roles in the ontology engineering process
+    based on the HCOME collaborative ontology engineering methodology. 
+    The three roles are the knowledge engineer, the domain expert and the knowledge worker. 
+    These three roles work together to create an ontology. The Knowledge Engineer is responsible 
+    for the requirements specification, conceptualisation and generation of the ontology. The Domain 
+    Expert is an experienced person and provides the requirements for the 
+    ontology, terminology, definitions of terms, domain specific explanations of terms and his 
+    experience in general. The Knowledge Worker is the user of the ontology 
+    and actively participates in the ontology engineering process. The above roles should express 
+    their deep knowledge during the conversation. Their aim is to play all three roles, simulating 
+    the HCOME methodology. The above mentioned roles will interact with each other, asking and 
+    answering questions until a valid and comprehensive ontology is created, which covers all 
+    the defined requirements below.
+  The aim of the ontology is to model all the necessary concepts and their relationships for Search and Rescue (SAR) missions. The scope of the ontology is wildfire incidents. The generated ontology is the following.
+START OF ONTOLOGY
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Support rdf:type owl:Class .
+:FireOfficer rdf:type owl:Class .
+:VolunteerFirefighter rdf:type owl:Class .
+:ArmedForcesPersonnel rdf:type owl:Class .
+:ServicePersonnel rdf:type owl:Class .
+:MunicipalityStaff rdf:type owl:Class .
+:PublicSectorStaff rdf:type owl:Class .
+:ClubMember rdf:type owl:Class .
+:Individual rdf:type owl:Class .
+
+:hasSource rdf:type owl:ObjectProperty ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range xsd:string .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range xsd:dateTime .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident, :Mission, :Service ;
+    rdfs:range :Location .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasTemperature rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Humidity .
+
+:hasWeatherForecast rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WeatherForecast .
+
+:hasService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:hasMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:hasSupport rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Support .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasUrgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasMeasurement rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:hasVulnerableObject rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+
+:hasStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:hasFireOfficer rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FireOfficer .
+
+:hasVolunteerFirefighter rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :VolunteerFirefighter .
+
+:hasArmedForcesPersonnel rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :ArmedForcesPersonnel .
+
+:hasServicePersonnel rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :ServicePersonnel .
+
+:hasMunicipalityStaff rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :MunicipalityStaff .
+
+:hasPublicSectorStaff rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :PublicSectorStaff .
+
+:hasClubMember rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :ClubMember .
+
+:hasIndividual rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Individual .
+
+:AreaBurnt rdf:type owl:Class .
+:Forests rdf:type owl:Class .
+:SwampsReeds rdf:type owl:Class .
+:Woodland rdf:type owl:Class .
+:AgriculturalLands rdf:type owl:Class .
+:Grove rdf:type owl:Class .
+:CropResidues rdf:type owl:Class .
+:Grasslands rdf:type owl:Class .
+:OtherLands rdf:type owl:Class .
+
+:hasAreaBurnt rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :AreaBurnt .
+
+:hasForests rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :Forests .
+
+:hasSwampsReeds rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :SwampsReeds .
+
+:hasWoodland rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :Woodland .
+
+:hasAgriculturalLands rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :AgriculturalLands .
+
+:hasGrove rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :Grove .
+
+:hasCropResidues rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :CropResidues .
+
+:hasGrasslands rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :Grasslands .
+
+:hasOtherLands rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :OtherLands .
+
+:Building rdf:type owl:Class .
+:VehicleMachinery rdf:type owl:Class .
+:Insurance rdf:type owl:Class .
+:OperatorName rdf:type owl:Class .
+
+:hasBuilding rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :Building .
+
+:hasVehicleMachinery rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :VehicleMachinery .
+
+:hasInsurance rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :Insurance .
+
+:hasOperatorName rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :OperatorName .
+
+:Rescue rdf:type owl:Class .
+:Person rdf:type owl:Class .
+:Animal rdf:type owl:Class .
+:Bird rdf:type owl:Class .
+:Hive rdf:type owl:Class .
+
+:hasRescue rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Rescue .
+
+:hasPerson rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range :Person .
+
+:hasAnimal rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range :Animal .
+
+:hasBird rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range :Bird .
+
+:hasHive rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range :Hive .
+
+:AccidentDeath rdf:type owl:Class .
+
+:hasAccidentDeath rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :AccidentDeath .
+
+:PossibleCauseOfFire rdf:type owl:Class .
+:Physics rdf:type owl:Class .
+:ArsonWithIntent rdf:type owl:Class .
+:ArsonByNegligence rdf:type owl:Class .
+
+:hasPossibleCauseOfFire rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :PossibleCauseOfFire .
+
+:hasPhysics rdf:type owl:ObjectProperty ;
+    rdfs:domain :PossibleCauseOfFire ;
+    rdfs:range :Physics .
+
+:hasArsonWithIntent rdf:type owl:ObjectProperty ;
+    rdfs:domain :PossibleCauseOfFire ;
+    rdfs:range :ArsonWithIntent .
+
+:hasArsonByNegligence rdf:type owl:ObjectProperty ;
+    rdfs:domain :PossibleCauseOfFire ;
+    rdfs:range :ArsonByNegligence .
+
+:DeterminationOfOffender rdf:type owl:Class .
+
+:hasDeterminationOfOffender rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :DeterminationOfOffender .
+
+:ForceInvolvement rdf:type owl:Class .
+:PermanentForce rdf:type owl:Class .
+:SeasonalForce rdf:type owl:Class .
+
+:hasForceInvolvement rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :ForceInvolvement .
+
+:hasPermanentForce rdf:type owl:ObjectProperty ;
+    rdfs:domain :ForceInvolvement ;
+    rdfs:range :PermanentForce .
+
+:hasSeasonalForce rdf:type owl:ObjectProperty ;
+    rdfs:domain :ForceInvolvement ;
+    rdfs:range :SeasonalForce .
+
+:InvestmentInstrument rdf:type owl:Class .
+:Firetruck rdf:type owl:Class .
+:Tanker rdf:type owl:Class .
+:FireFightingVehicle rdf:type owl:Class .
+:VariousMachine rdf:type owl:Class .
+
+:hasInvestmentInstrument rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :InvestmentInstrument .
+
+:hasFiretruck rdf:type owl:ObjectProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range :Firetruck .
+
+:hasTanker rdf:type owl:ObjectProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range :Tanker .
+
+:hasFireFightingVehicle rdf:type owl:ObjectProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range :FireFightingVehicle .
+
+:hasVariousMachine rdf:type owl:ObjectProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range :VariousMachine .
+
+:PortableToolMachine rdf:type owl:Class .
+
+:hasPortableToolMachine rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :PortableToolMachine .
+
+:AirInvolvement rdf:type owl:Class .
+
+:hasAirInvolvement rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :AirInvolvement .
+
+:hasType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :AirInvolvement ;
+    rdfs:range xsd:string .
+
+:hasNumber rdf:type owl:DatatypeProperty ;
+    rdfs:domain :AirInvolvement ;
+    rdfs:range xsd:integer .The generated ontology is the following.
+ END OF ONTOLOGY
+Your goal is to fine-tune the given ontology to make it more robust, expressive and well-structured.
+    You should also use the some of the following OWL axioms to make the ontology as expressive as possible. Use ONLY THE ONTOLOGY AXIOMS given in the EXAMPLES and NOT the DATA PRESENTED.
+    You do not need to use all of them, but only the necessary axioms to create a WELL CONNECTED and EXPRESSIVE ontology.
+    START OF OWL DOCUMENTATION
+    
+    Turtle Syntax
+ <http://example.com/owl/families> owl:imports <http://example.org/otherOntologies/families.owl> .
+
+Turtle Syntax
+ :Mary      owl:sameAs              otherOnt:MaryBrown .
+ :John      owl:sameAs              otherOnt:JohnBrown .
+ :Adult     owl:equivalentClass     otherOnt:Grownup .
+ :hasChild  owl:equivalentProperty  otherOnt:child .
+ :hasAge    owl:equivalentProperty  otherOnt:age .
+
+Turtle Syntax
+ :John    rdf:type owl:NamedIndividual .
+ :Person  rdf:type owl:Class .
+ :hasWife rdf:type owl:ObjectProperty .
+ :hasAge  rdf:type owl:DatatypeProperty .
+
+Turtle Syntax
+:John rdf:type :Father .
+:Father rdf:type :SocialRole .
+
+owl:targetIndividual   :Susan .
+
+:NarcisticPerson owl:equivalentClass  [
+  rdf:type        owl:Restriction ;
+  owl:onProperty  :loves ;
+  owl:hasSelf     "true"^^xsd:boolean .
+] .
+
+:MyBirthdayGuests  owl:equivalentClass  [
+  rdf:type   owl:Class ;
+  owl:oneOf  ( :Bill  :John  :Mary )
+] .
+:Orphan  owl:equivalentClass  [
+  rdf:type           owl:Restriction ;
+  owl:onProperty     [ owl:inverseOf  :hasChild ] ;
+  owl:allValuesFrom  :Dead 
+] .
+
+owl:qualifiedCardinality  "3"^^xsd:nonNegativeInteger ;
+  owl:onProperty            :hasChild ;
+  owl:onClass               :Parent
+] .
+:John  rdf:type  [
+  rdf:type         owl:Restriction ;
+  owl:cardinality  "5"^^xsd:nonNegativeInteger ;
+  owl:onProperty   :hasChild
+] . 
+
+    END OF OWL DOCUMENTATION
+   The iterative discussion stops when the given ontology becomes well structured (e.g., related classes grouped under related superclasses), 
+    its concepts (e.g., classes) are well connected, and the ontology generally has a high level of expressiveness (using OWL axioms).
+    Feel free to use domain knowledge to extend the ontology with classes and properties to make it as comprehensive as possible.
+    Present the iterative discussion and the generated ontology in Turtle (TTL) format WITHOUT individuals. 
+  

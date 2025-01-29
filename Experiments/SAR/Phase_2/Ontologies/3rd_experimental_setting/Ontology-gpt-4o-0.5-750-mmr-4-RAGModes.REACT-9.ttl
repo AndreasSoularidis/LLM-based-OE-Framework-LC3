@@ -1,0 +1,158 @@
+@prefix : <http://example.org/sar-ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:WeatherVariable rdf:type owl:Class .
+:Temperature rdf:type owl:Class ; rdfs:subClassOf :WeatherVariable .
+:WindSpeed rdf:type owl:Class ; rdfs:subClassOf :WeatherVariable .
+:Humidity rdf:type owl:Class ; rdfs:subClassOf :WeatherVariable .
+:WeatherForecast rdf:type owl:Class ; rdfs:subClassOf :WeatherVariable .
+
+:Incident rdf:type owl:Class .
+:FireIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:Location rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:UrgentIncident rdf:type owl:Class ; rdfs:subClassOf :Incident .
+
+:DataSource rdf:type owl:Class .
+:Sensor rdf:type owl:Class ; rdfs:subClassOf :DataSource .
+:Satellite rdf:type owl:Class ; rdfs:subClassOf :DataSource .
+:SocialMedia rdf:type owl:Class ; rdfs:subClassOf :DataSource .
+
+:DataItem rdf:type owl:Class .
+:CreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :DataItem ; rdfs:range xsd:dateTime .
+:Location rdf:type owl:ObjectProperty ; rdfs:domain :DataItem ; rdfs:range :Location .
+:SmokeClassification rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+
+:Mission rdf:type owl:Class .
+:FireSuppression rdf:type owl:Class ; rdfs:subClassOf :Mission .
+:EvacuationSupport rdf:type owl:Class ; rdfs:subClassOf :Mission .
+:MedicalAssistance rdf:type owl:Class ; rdfs:subClassOf :Mission .
+
+:Service rdf:type owl:Class .
+:FireSuppressionService rdf:type owl:Class ; rdfs:subClassOf :Service .
+:EvacuationService rdf:type owl:Class ; rdfs:subClassOf :Service .
+:MedicalService rdf:type owl:Class ; rdfs:subClassOf :Service .
+
+:hasPriority rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Priority .
+:hasLocation rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Location .
+:hasUrgency rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :UrgentIncident .
+:hasWeatherVariable rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :WeatherVariable .
+:hasWeatherForecast rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :WeatherForecast .
+:hasDataSource rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :DataSource .
+:hasDataItem rdf:type owl:ObjectProperty ; rdfs:domain :DataSource ; rdfs:range :DataItem .
+:hasCreationDate rdf:type owl:DatatypeProperty ; rdfs:domain :DataItem ; rdfs:range xsd:dateTime .
+:hasSmokeClassification rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :SmokeClassification .
+:hasVulnerableObject rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :VulnerableObject .
+:hasMission rdf:type owl:ObjectProperty ; rdfs:domain :Service ; rdfs:range :Mission .
+:hasService rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Service .
+:hasPopulationDensity rdf:type owl:DatatypeProperty ; rdfs:domain :Location ; rdfs:range xsd:integer .
+:hasInvolvedPeople rdf:type owl:ObjectProperty ; rdfs:domain :Location ; rdfs:range :Incident .
+
+:FireIncident rdfs:label "Fire Incident" .
+:FireIncident rdfs:comment "An incident involving a wildfire." .
+
+:Temperature rdfs:label "Temperature" .
+:Temperature rdfs:comment "A weather variable representing temperature." .
+
+:WindSpeed rdfs:label "Wind Speed" .
+:WindSpeed rdfs:comment "A weather variable representing wind speed." .
+
+:Humidity rdfs:label "Humidity" .
+:Humidity rdfs:comment "A weather variable representing humidity." .
+
+:WeatherForecast rdfs:label "Weather Forecast" .
+:WeatherForecast rdfs:comment "A prediction of future weather conditions." .
+
+:Location rdfs:label "Location" .
+:Location rdfs:comment "The geographical location of an incident." .
+
+:Priority rdfs:label "Priority" .
+:Priority rdfs:comment "The priority level of an incident." .
+
+:UrgentIncident rdfs:label "Urgent Incident" .
+:UrgentIncident rdfs:comment "An incident that requires immediate attention." .
+
+:Sensor rdfs:label "Sensor" .
+:Sensor rdfs:comment "A device that detects or measures a physical property." .
+
+:Satellite rdfs:label "Satellite" .
+:Satellite rdfs:comment "An artificial body placed in orbit around the earth or moon or another planet." .
+
+:SocialMedia rdfs:label "Social Media" .
+:SocialMedia rdfs:comment "Websites and applications that enable users to create and share content." .
+
+:DataItem rdfs:label "Data Item" .
+:DataItem rdfs:comment "A piece of data collected from a source." .
+
+:CreationDate rdfs:label "Creation Date" .
+:CreationDate rdfs:comment "The date and time when the data item was created." .
+
+:SmokeClassification rdfs:label "Smoke Classification" .
+:SmokeClassification rdfs:comment "The classification type of smoke detected." .
+
+:VulnerableObject rdfs:label "Vulnerable Object" .
+:VulnerableObject rdfs:comment "An object that is vulnerable to fire damage." .
+
+:FireSuppression rdfs:label "Fire Suppression" .
+:FireSuppression rdfs:comment "A mission aimed at extinguishing the fire." .
+
+:EvacuationSupport rdfs:label "Evacuation Support" .
+:EvacuationSupport rdfs:comment "A mission aimed at supporting the evacuation of people." .
+
+:MedicalAssistance rdfs:label "Medical Assistance" .
+:MedicalAssistance rdfs:comment "A mission aimed at providing medical assistance." .
+
+:FireSuppressionService rdfs:label "Fire Suppression Service" .
+:FireSuppressionService rdfs:comment "A service that provides fire suppression." .
+
+:EvacuationService rdfs:label "Evacuation Service" .
+:EvacuationService rdfs:comment "A service that provides evacuation support." .
+
+:MedicalService rdfs:label "Medical Service" .
+:MedicalService rdfs:comment "A service that provides medical assistance." .
+
+:hasPriority rdfs:label "has Priority" .
+:hasPriority rdfs:comment "Relates an incident to its priority level." .
+
+:hasLocation rdfs:label "has Location" .
+:hasLocation rdfs:comment "Relates an incident to its geographical location." .
+
+:hasUrgency rdfs:label "has Urgency" .
+:hasUrgency rdfs:comment "Relates an incident to its urgency level." .
+
+:hasWeatherVariable rdfs:label "has Weather Variable" .
+:hasWeatherVariable rdfs:comment "Relates an incident to relevant weather variables." .
+
+:hasWeatherForecast rdfs:label "has Weather Forecast" .
+:hasWeatherForecast rdfs:comment "Relates an incident to a weather forecast." .
+
+:hasDataSource rdfs:label "has Data Source" .
+:hasDataSource rdfs:comment "Relates an incident to its data sources." .
+
+:hasDataItem rdfs:label "has Data Item" .
+:hasDataItem rdfs:comment "Relates a data source to its data items." .
+
+:hasCreationDate rdfs:label "has Creation Date" .
+:hasCreationDate rdfs:comment "Relates a data item to its creation date." .
+
+:hasSmokeClassification rdfs:label "has Smoke Classification" .
+:hasSmokeClassification rdfs:comment "Relates an incident to its smoke classification." .
+
+:hasVulnerableObject rdfs:label "has Vulnerable Object" .
+:hasVulnerableObject rdfs:comment "Relates an incident to vulnerable objects involved." .
+
+:hasMission rdfs:label "has Mission" .
+:hasMission rdfs:comment "Relates a service to its mission." .
+
+:hasService rdfs:label "has Service" .
+:hasService rdfs:comment "Relates a mission to its service." .
+
+:hasPopulationDensity rdfs:label "has Population Density" .
+:hasPopulationDensity rdfs:comment "Relates a location to its population density." .
+
+:hasInvolvedPeople rdfs:label "has Involved People" .
+:hasInvolvedPeople rdfs:comment "Relates a location to the people involved in the incident." .

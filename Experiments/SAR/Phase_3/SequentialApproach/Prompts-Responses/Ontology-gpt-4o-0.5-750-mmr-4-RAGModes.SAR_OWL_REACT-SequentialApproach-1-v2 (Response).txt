@@ -1,0 +1,556 @@
+### Iterative Discussion
+
+#### Knowledge Engineer (KE): 
+Alright, team, we have a robust initial ontology for Search and Rescue (SAR) missions focused on wildfire incidents. However, it needs fine-tuning to make it more expressive and well-structured. Let's start by identifying areas to improve.
+
+#### Domain Expert (DE):
+I agree. One thing I noticed is the lack of hierarchical structure among some classes. For example, `Firetruck`, `Tanker`, and `FireFightingVehicle` should be grouped under a superclass like `Vehicle`.
+
+#### Knowledge Worker (KW):
+Good point. Also, some properties can be made more expressive. For instance, we could use restrictions to define specific relationships more precisely. 
+
+#### KE:
+Great suggestions. Let's start by creating a superclass `Vehicle` and grouping `Firetruck`, `Tanker`, and `FireFightingVehicle` under it. We can also use `owl:equivalentClass` to define some classes more precisely.
+
+### Iteration 1
+
+#### KE:
+I’ve added the superclass `Vehicle` and grouped related classes under it. Let's also add some restrictions and equivalent classes.
+
+```ttl
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Incident a owl:Class .
+:Impact a owl:Class .
+:Location a owl:Class .
+:Priority a owl:Class .
+:WeatherCondition a owl:Class .
+:Temperature a owl:Class .
+:WindSpeed a owl:Class .
+:Humidity a owl:Class .
+:WeatherForecast a owl:Class .
+:SensorData a owl:Class .
+:SatelliteData a owl:Class .
+:SocialMediaData a owl:Class .
+:Mission a owl:Class .
+:Service a owl:Class .
+:Support a owl:Class .
+:PopulationDensity a owl:Class .
+:InvestmentInstrument a owl:Class .
+:Vehicle a owl:Class .
+:Firetruck a owl:Class ;
+    rdfs:subClassOf :Vehicle .
+:Tanker a owl:Class ;
+    rdfs:subClassOf :Vehicle .
+:FireFightingVehicle a owl:Class ;
+    rdfs:subClassOf :Vehicle .
+:Machine a owl:Class .
+:Rescue a owl:Class .
+:Animal a owl:Class .
+:Bird a owl:Class .
+:Hive a owl:Class .
+:Accident a owl:Class .
+:Cause a owl:Class .
+:LightningStrike a owl:Class ;
+    rdfs:subClassOf :Cause .
+:Arson a owl:Class ;
+    rdfs:subClassOf :Cause .
+:Negligence a owl:Class ;
+    rdfs:subClassOf :Cause .
+:SelfishAction a owl:Class ;
+    rdfs:subClassOf :Cause .
+:MaliciousAction a owl:Class ;
+    rdfs:subClassOf :Cause .
+
+:hasLocation a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasPriority a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Priority .
+
+:hasWeatherCondition a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasTemperature a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Humidity .
+
+:hasWeatherForecast a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WeatherForecast .
+
+:hasSensorData a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SensorData .
+
+:hasSatelliteData a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SatelliteData .
+
+:hasSocialMediaData a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SocialMediaData .
+
+:hasMission a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:hasService a owl:ObjectProperty ;
+    rdfs:domain :Support ;
+    rdfs:range :Service .
+
+:hasSupport a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Support .
+
+:hasPopulationDensity a owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :PopulationDensity .
+
+:hasImpact a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+
+:hasIncident a owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :Incident .
+
+:hasInvestigation a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Cause .
+
+:hasCause a owl:ObjectProperty ;
+    rdfs:domain :Cause ;
+    rdfs:range :Incident .
+
+:hasRescue a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Rescue .
+
+:hasAnimal a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Animal .
+
+:hasBird a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Bird .
+
+:hasHive a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Hive .
+
+:hasAccident a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Accident .
+
+:creationDate a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:dateTime .
+
+:location a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range :Location .
+
+:classificationType a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string .
+
+:status a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:areaBurntInAcres a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:integer .
+
+:buildingKind a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:vehicleKind a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:insuranceStatus a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:operatorName a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:rescueFullName a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:rescueCapacity a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:rescueAge a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:integer .
+
+:rescueCause a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:accidentFullName a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:string .
+
+:accidentCapacity a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:string .
+
+:accidentAge a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:integer .
+
+:accidentCause a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:string .
+
+:forceType a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:forceCount a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:integer .
+
+:investmentInstrumentType a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:string .
+
+:investmentInstrumentCount a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:integer .
+
+:portableToolType a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:string .
+
+:portableToolCount a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:integer .
+
+:airInvolvementType a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:airInvolvementCount a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:integer .
+```
+
+#### DE:
+This looks better. However, I think we should also add some equivalent classes and properties to make it more expressive. For instance, `Impact` could be equivalent to a class that involves area burnt, building kind, etc.
+
+#### KW:
+I agree. We should also consider adding some restrictions to make properties more specific. For example, `Incident` could have a restriction that it must have at least one `Location`.
+
+### Iteration 2
+
+#### KE:
+I’ve added equivalent classes and some restrictions. Let’s review the updated ontology.
+
+```ttl
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Incident a owl:Class ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasLocation ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:Impact a owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :Impact
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty :areaBurntInAcres ;
+                owl:someValuesFrom xsd:integer
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty :buildingKind ;
+                owl:someValuesFrom xsd:string
+            ]
+        )
+    ] .
+
+:Location a owl:Class .
+:Priority a owl:Class .
+:WeatherCondition a owl:Class .
+:Temperature a owl:Class .
+:WindSpeed a owl:Class .
+:Humidity a owl:Class .
+:WeatherForecast a owl:Class .
+:SensorData a owl:Class .
+:SatelliteData a owl:Class .
+:SocialMediaData a owl:Class .
+:Mission a owl:Class .
+:Service a owl:Class .
+:Support a owl:Class .
+:PopulationDensity a owl:Class .
+:InvestmentInstrument a owl:Class .
+:Vehicle a owl:Class .
+:Firetruck a owl:Class ;
+    rdfs:subClassOf :Vehicle .
+:Tanker a owl:Class ;
+    rdfs:subClassOf :Vehicle .
+:FireFightingVehicle a owl:Class ;
+    rdfs:subClassOf :Vehicle .
+:Machine a owl:Class .
+:Rescue a owl:Class .
+:Animal a owl:Class .
+:Bird a owl:Class .
+:Hive a owl:Class .
+:Accident a owl:Class .
+:Cause a owl:Class .
+:LightningStrike a owl:Class ;
+    rdfs:subClassOf :Cause .
+:Arson a owl:Class ;
+    rdfs:subClassOf :Cause .
+:Negligence a owl:Class ;
+    rdfs:subClassOf :Cause .
+:SelfishAction a owl:Class ;
+    rdfs:subClassOf :Cause .
+:MaliciousAction a owl:Class ;
+    rdfs:subClassOf :Cause .
+
+:hasLocation a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasPriority a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Priority .
+
+:hasWeatherCondition a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasTemperature a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Humidity .
+
+:hasWeatherForecast a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WeatherForecast .
+
+:hasSensorData a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SensorData .
+
+:hasSatelliteData a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SatelliteData .
+
+:hasSocialMediaData a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SocialMediaData .
+
+:hasMission a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:hasService a owl:ObjectProperty ;
+    rdfs:domain :Support ;
+    rdfs:range :Service .
+
+:hasSupport a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Support .
+
+:hasPopulationDensity a owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :PopulationDensity .
+
+:hasImpact a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+
+:hasIncident a owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :Incident .
+
+:hasInvestigation a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Cause .
+
+:hasCause a owl:ObjectProperty ;
+    rdfs:domain :Cause ;
+    rdfs:range :Incident .
+
+:hasRescue a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Rescue .
+
+:hasAnimal a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Animal .
+
+:hasBird a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Bird .
+
+:hasHive a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Hive .
+
+:hasAccident a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Accident .
+
+:creationDate a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:dateTime .
+
+:location a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range :Location .
+
+:classificationType a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string .
+
+:status a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:areaBurntInAcres a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:integer .
+
+:buildingKind a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:vehicleKind a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:insuranceStatus a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:operatorName a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:rescueFullName a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:rescueCapacity a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:rescueAge a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:integer .
+
+:rescueCause a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:accidentFullName a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:string .
+
+:accidentCapacity a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:string .
+
+:accidentAge a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:integer .
+
+:accidentCause a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:string .
+
+:forceType a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:forceCount a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:integer .
+
+:investmentInstrumentType a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:string .
+
+:investmentInstrumentCount a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:integer .
+
+:portableToolType a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:string .
+
+:portableToolCount a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:integer .
+
+:airInvolvementType a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:airInvolvementCount a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:integer .
+```
+
+#### DE:
+This looks much better. We have a more structured hierarchy and added some needed expressiveness. I think we are close to finalizing.
+
+#### KW:
+Agreed. The ontology now looks more comprehensive and well-structured. I think we can consider it well-tuned.
+
+### Final Ontology
+
+```ttl
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Incident a owl:Class ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty

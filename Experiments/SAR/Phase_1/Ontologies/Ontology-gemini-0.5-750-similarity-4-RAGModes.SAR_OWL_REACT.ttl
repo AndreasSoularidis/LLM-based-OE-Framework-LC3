@@ -1,0 +1,126 @@
+@prefix : <http://example.com/sar_ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:WildfireIncident rdf:type owl:Class ;
+    rdfs:label "Wildfire Incident" ;
+    rdfs:comment "Represents a wildfire incident." .
+
+:WeatherCondition rdf:type owl:Class ;
+    rdfs:label "Weather Condition" ;
+    rdfs:comment "Represents the weather condition during a wildfire incident." .
+
+:Data rdf:type owl:Class ;
+    rdfs:label "Data" ;
+    rdfs:comment "Represents data related to a wildfire incident." .
+
+:Mission rdf:type owl:Class ;
+    rdfs:label "Mission" ;
+    rdfs:comment "Represents a mission during a wildfire incident." .
+
+:Service rdf:type owl:Class ;
+    rdfs:label "Service" ;
+    rdfs:comment "Represents a service involved in a wildfire incident." .
+
+# Land Types
+:Forest rdf:type owl:Class ;
+    rdfs:subClassOf :LandType .
+
+:Grassland rdf:type owl:Class ;
+    rdfs:subClassOf :LandType .
+
+:AgriculturalLand rdf:type owl:Class ;
+    rdfs:subClassOf :LandType .
+
+# Disasters
+:BuildingDamage rdf:type owl:Class ;
+    rdfs:subClassOf :Disaster .
+
+:VehicleDamage rdf:type owl:Class ;
+    rdfs:subClassOf :Disaster .
+
+# Data Sources
+:SensorData rdf:type owl:Class ;
+    rdfs:subClassOf :Data .
+
+:SocialMediaData rdf:type owl:Class ;
+    rdfs:subClassOf :Data .
+
+:FirstResponderReport rdf:type owl:Class ;
+    rdfs:subClassOf :Data .
+
+# Human Impact
+:Rescue rdf:type owl:Class ;
+    rdfs:comment "Represents a rescue operation during a wildfire incident." .
+
+:AnimalRescue rdf:type owl:Class ;
+    rdfs:subClassOf :Rescue ;
+    rdfs:comment "Represents an animal rescue operation during a wildfire incident." .
+
+:Accident rdf:type owl:Class ;
+    rdfs:comment "Represents an accident during a wildfire incident." .
+
+# Weather Variables
+:WeatherVariable rdf:type owl:Class ;
+    rdfs:comment "Represents a weather variable." .
+
+:Temperature rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherVariable .
+
+:WindSpeed rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherVariable .
+
+:Humidity rdf:type owl:Class ;
+    rdfs:subClassOf :WeatherVariable .
+
+# Object Properties
+
+:hasAreaBurned rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :LandType .
+
+:affectsLandType rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :LandType .
+
+:causesDisaster rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Disaster .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :WeatherCondition .
+
+:hasSensorType rdf:type owl:ObjectProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range :SensorType .
+
+:depicts rdf:type owl:ObjectProperty ;
+    rdfs:domain :Data ;
+    rdfs:range owl:Thing .
+
+:hasAccident rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Accident .
+
+:influencedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :WeatherVariable .
+
+# Data Properties
+
+:numberOfPeopleRescued rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:integer .
+
+:animalType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :AnimalRescue ;
+    rdfs:range xsd:string .
+
+:riskLevel rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherVariable ;
+    rdfs:range xsd:string .
+
+# ... (Add more classes, properties, and axioms as needed)

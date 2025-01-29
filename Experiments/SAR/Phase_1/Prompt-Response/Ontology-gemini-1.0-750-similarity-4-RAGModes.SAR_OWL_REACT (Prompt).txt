@@ -1,0 +1,338 @@
+
+        Create three instances of yourself playing three different roles in the ontology engineering process 
+        based on the HCOME collaborative ontology engineering methodology.
+        
+        The three roles are the knowledge engineer, the domain expert and the knowledge worker. 
+        These three roles work together to create an ontology. The Knowledge Engineer is responsible 
+        for the requirements specification, conceptualisation and generation of the ontology. The Domain 
+        Expert is an experienced person and provides the requirements for the 
+        ontology, terminology, definitions of terms, domain specific explanations of terms and his 
+        experience in general. The Knowledge Worker is the user of the ontology 
+        and actively participates in the ontology engineering process. The above roles should express 
+        their deep knowledge during the conversation. Their aim is to play all three roles, simulating 
+        the HCOME methodology. The above mentioned roles will interact with each other, asking and 
+        answering questions until a valid and comprehensive ontology is created, which covers all 
+        the defined requirements below.
+    The aim of the ontology to be created is to model all the necessary concepts and their relationships for Search and Rescue (SAR) missions. The scope of the ontology is wildfire incidents. The generated ontology should be able to capture, link and semantically integrate heterogeneous data, regarding the environment in which the mission takes place, collected from different resources such as sensors, social media (from users in the nearby area), and input from first responders, in order to provide decision support services to the crisis management centre.Therefore, the generated ontology should have a deep scope, encompassing a wide range of domain knowledge relevant to forest fire emergencies. The key knowledge that must be represented in your ontology includes: A. Incidents and Impacts: The ontology must capture relevant incidents and impacts in a wildfire disaster. This knowledge is crucial for understanding  the extent and severity of the wildfire and its consequences. B. Weather Conditions: Representation of weather conditions, including temperature, wind speed, humidity, and weather forecasts, is essential for understanding the environmental factors influencing the behavior of the wildfire. This knowledge helps in assessing the potential spread and behavior of the fire. C. Data from Human and Earth Observations: The ontology must include data relevant to the analysis of input data coming from various type of sensors, satellites, and social media sources. This knowledge provides valuable information for monitoring and assessing the wildfire situation. D. Missions and Relationships Between Services: Representation of missions and relationships between the services involved in wildfire management is important for coordinating and organizing emergency response efforts.Moreover, you will be given three sets of competence questions. The competency questions are the following: The first set aims to represent the wildfire disaster and relevant incident and impacts: CQ1. What are the most important weather variables that can cause forest fire? CQ2. What are the current measurements for these weather variables? CQ3. What is the forecast for the weather in this location? CQ4. Where did the incident take place? CQ5. What is the priority of an incident during a forest fire disaster? CQ6. What incidents during forest fires are the most urgent? Set of CQs that you must take into account related data from human and earth observations: CQ7. What data from the source are depicted? CQ8. Which is the creation date of these data? CQ9. What is the location of this item? CQ10. Which is the classification type of smoke? CQ11. Which vulnerable objects were involved in the incident? CQ12. What is the status of wildfire forestry works (firebreaks, access to forest roads, etc.)? The last set of CQs that your ontology must answer is related to the representation of missions and relationships between the services: CQ13. What services or support do you offer for firefighting? CQ14. Which mission do you follow for this support/service? CQ15. What is the location where this mission is taking place? CQ16. Where is the most urgent mission taking place? CQ17. What is the population density in the area? CQ18. What is the location of the involved people? Your ultimate goal is to generate a comprehensive ontology that covers all of the above requirements and is capable of answering the above questions.
+
+        During the discussion and design of the ontology you should consider the following additional content. 
+        
+      You should follow the above way of thinking-acting-observing, but BEHIND THE SCENES and WITHOUT showing this thinking chain during the discussion and the ontology generation process, as given below
+      START OF REACT
+
+      Question: A new ontology needs to be created about the given aim and scope. How will this be done?
+Thought 1: I should search for existing ontologies of the given domain. 
+Action 1: Search for existing ontologies that are related to this domain.
+Observation 1: In this area, there are a number of related ontologies available.
+Thought 2: I should only include the most widely used, and live ontologies.
+Action 2: Of the existing ontologies I keep only the most widely used and live ones.
+Response: During the ontology engineering process i will reuse the most suitable existing ontologies
+
+Question: A new ontology needs to be created about the given aim and scope. How is this be done?
+Thought: I should search the Web for existing ontologies in the given domain. 
+Action: Search the web for existing ontologies related to this domain.
+Observation: A number of related ontologies are available in this area.
+Thought: I should only include the most widely used, and live ontologies.
+Action: Of the existing ontologies, I only keep the most widely used and live ones.
+Thought: I should get the IRIs of the existing ontologies.
+Action: Web search for the IRIs of existing ontologies.
+Observation: Now I have the IRIs of he ontologies to integrate them into the new ontology.
+
+Question: A new ontology needs to be created about the given aim and scope. How is this be done?
+Thought: I should search the Web for existing ontologies in the given domain. 
+Action: Search the web for existing ontologies related to this domain.
+Observation: A number of related ontologies are available in this area.
+Thought: I should only include the most widely used, and live ontologies.
+Action: Of the existing ontologies, I only keep the most widely used and live ones.
+Thought: I should get the IRIs of the existing ontologies.
+Action: Web search for the IRIs of existing ontologies.
+Observation: Now I have the IRIs of he ontologies to integrate them into the new ontology.
+
+Question: A new ontology needs to be created about the given aim and scope. How will this be done?
+Thought 1: I should search the Web for existing ontologies in the given domain. 
+Action 1: Search the web for existing ontologies related to this domain.
+Observation 1: In this area, there are a number of related ontologies available.
+Thought 2: I should only include the most widely used, and live ontologies.
+Action 2: Of the existing ontologies I keep only the most widely used and live ones.
+Thought 3: I should get the IRIs of the existing ontologies.
+Action 3: Web search for the IRIs of existing ontologies
+Observation 3: Now I have the ontologies' IRIs to integrate them into the generated ontology
+      
+      END OF REACT 
+    
+      You should also use the some of the following OWL axioms to make the ontology as expressive as possible. Use ONLY the ontology axioms given in the examples and not the data presented.
+      You do not need to use all of them, but only the necessary axioms to create a WELL CONNECTED and EXPRESSIVE ontology.
+      START OF OWL DOCUMENTATION
+      
+      Turtle Syntax
+ <http://example.com/owl/families> owl:imports <http://example.org/otherOntologies/families.owl> .
+
+Turtle Syntax
+ :Mary      owl:sameAs              otherOnt:MaryBrown .
+ :John      owl:sameAs              otherOnt:JohnBrown .
+ :Adult     owl:equivalentClass     otherOnt:Grownup .
+ :hasChild  owl:equivalentProperty  otherOnt:child .
+ :hasAge    owl:equivalentProperty  otherOnt:age .
+
+Turtle Syntax
+ :John    rdf:type owl:NamedIndividual .
+ :Person  rdf:type owl:Class .
+ :hasWife rdf:type owl:ObjectProperty .
+ :hasAge  rdf:type owl:DatatypeProperty .
+
+Turtle Syntax
+:John rdf:type :Father .
+:Father rdf:type :SocialRole .
+
+:Person  rdf:type            owl:Class .
+:Person  owl:equivalentClass :Human .
+:Person  rdfs:comment        "Represents the set of all people."^^xsd:string .
+:Person  owl:hasKey          ( :hasSSN ) .
+:hasSSN  rdf:type            owl:DataProperty .
+:Parent  owl:equivalentClass [
+  rdf:type     owl:Class ;
+  owl:unionOf  ( :Mother :Father )
+] .
+
+:Parent  owl:equivalentClass  [
+  rdf:type            owl:Restriction ;
+  owl:onProperty      :hasChild ;
+  owl:someValuesFrom  :Person
+] .
+
+:Grandfather  rdfs:subClassOf  [
+  rdf:type            owl:Class ;
+  owl:intersectionOf  ( :Man  :Parent )
+] .
+
+:majorAge  owl:equivalentClass
+  [ rdf:type           rdfs:Datatype;
+    owl:intersectionOf (
+       :personAge
+       [ rdf:type rdfs:Datatype;
+         owl:datatypeComplementOf :minorAge ] 
+    )
+  ] .
+
+:toddlerAge  owl:equivalentClass
+  [ rdf:type  rdfs:Datatype;
+    owl:oneOf (  "1"^^xsd:integer  "2"^^xsd:integer )
+  ] .
+
+:Mary rdf:type   :Person .
+:Mary rdf:type   :Woman .
+:Mary owl:sameAs otherOnt:MaryBrown .
+
+:James owl:sameAs :Jim .
+
+:Jack  rdf:type          [
+  rdf:type            owl:Class ;
+  owl:intersectionOf  ( :Person  
+                        [ rdf:type          owl:Class ;
+                          owl:complementOf  :Parent     ]
+                      )
+] .
+
+:Father rdf:type :SocialRole .
+
+[]  rdf:type               owl:NegativePropertyAssertion ;
+    owl:sourceIndividual   :Bill ;
+    owl:assertionProperty  :hasWife ;
+    owl:targetIndividual   :Mary .
+
+[]  rdf:type               owl:NegativePropertyAssertion ;
+    owl:sourceIndividual   :Bill ;
+    owl:assertionProperty  :hasDaughter ;
+    owl:targetIndividual   :Susan .
+
+[]  rdf:type               owl:NegativePropertyAssertion ;
+    owl:sourceIndividual   :Jack ;
+    owl:assertionProperty  :hasAge ;
+    owl:targetValue        53 . 
+
+      END OF OWL DOCUMENTATION
+    
+      The following data describe real Search and Rescue (SAR) missions. You should EXTRACT related concepts (CLASSES
+      and OBJECT PROPERTIES) and add them to the generated ontology. Try to extract as much relevant classes and properies as possible.
+      START OF DOMAIN DATA
+      
+      Area Burnt in Acres:
+    Forests: X
+    Swamps-Reeds: -
+    Woodland: X
+    Agricultural lands: -
+    Grove: -
+    Crop residues: X
+    Grasslands: X
+    Other lands: -
+    Total: -
+
+Other Disasters:
+    Buildings: 
+        N/A: 1
+        Kind: FARM
+        Address: -
+        Insurance: -
+        Operator Name: UNKNOWN
+    Vehicles-Machinery: 
+        N/A: 1
+        Kind: TRACTOR
+        License Plate: - 
+        Insurance: X
+        Operator Name: UNKNOWN
+
+Rescues of People:
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Animals: X
+Birds: X
+Hives: X
+
+Accidents-Deaths: 
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Area Burnt in Acres:
+    Forests: X
+    Swamps-Reeds: -
+    Woodland: -
+    Agricultural lands: -
+    Grove: -
+    Crop residues: -
+    Grasslands: X
+    Other lands: -
+    Total: -
+
+Other Disasters:
+    Buildings: 
+        N/A: -
+        Kind: -
+        Address: -
+        Insurance: -
+        Operator Name: -
+    Vehicles-Machinery: 
+        N/A:-
+        Kind: -
+        License Plate: - 
+        Insurance: -
+        Operator Name: -
+
+Rescues of People:
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Animals: -
+Birds: X
+Hives: X
+
+Accidents-Deaths: 
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Area Burnt in Acres:
+    Forests: -
+    Swamps-Reeds: -
+    Woodland: X
+    Agricultural lands: X
+    Grove: -
+    Crop residues: X
+    Grasslands: -
+    Other lands: X
+    Total: - 
+
+Other Disasters:
+    Buildings: 
+        N/A: 1
+        Kind: CEMETERY
+        Address: PLATANOS 27065
+        Insurance: -
+        Operator Name: -
+    Vehicles-Machinery: 
+        N/A: -
+        Kind: -
+        License Plate: - 
+        Insurance: -
+        Operator Name: -
+
+Rescues of People:
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Animals: X
+Birds: X
+Hives: X
+
+Accidents-Deaths: 
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Area Burnt in Acres:
+    Forests: X
+    Swamps-Reeds: -
+    Woodland: X
+    Agricultural lands: -
+    Grove: -
+    Crop residues: -
+    Grasslands: X
+    Other lands: X
+    Total: - 
+
+Other Disasters:
+    Buildings: 
+        N/A: -
+        Kind: -
+        Address: -
+        Insurance: -
+        Operator Name: -
+    Vehicles-Machinery: 
+        N/A: -
+        Kind: -
+        License Plate: - 
+        Insurance: -
+        Operator Name: -
+
+Rescues of People:
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: -
+
+Animals: X
+Birds: -
+Hives: -
+
+Accidents-Deaths: 
+    N/A: -
+    Full Name: -
+    Capacity: -
+    Age: -
+    Cause: - 
+
+      END OF DOMAIN DATA
+       
+      The iterative discussion stops when the generated ontology answers all the given competency questions and covers all the requirements of the ontology. 
+      Thus create as many classes and properties as possible.
+      Feel free to use domain knowledge to extend the ontology with classes and properties to make it as comprehensive as possible. 
+      DO NOT STOP until cover all the given requirements.
+      Present the iterative discussion and the generated ontology in Turtle (TTL) format WITHOUT individuals. 
+    

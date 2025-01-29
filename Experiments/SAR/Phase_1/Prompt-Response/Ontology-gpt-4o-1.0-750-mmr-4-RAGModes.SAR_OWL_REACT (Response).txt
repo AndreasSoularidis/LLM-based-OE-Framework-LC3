@@ -1,0 +1,104 @@
+### Iterative Discussion
+
+#### Stage 1: Requirements Specification and Conceptualization
+
+**Knowledge Engineer (KE):** Let's start by laying out the primary concepts we need in our ontology. Based on the competency questions and domain data, the key classes appear to be related to incidents, weather conditions, human and earth observations, and missions.
+
+**Domain Expert (DE):** Agreed. We need to make sure that we cover incidents and impacts thoroughly, including types of land affected, buildings, and rescue operations.
+
+**Knowledge Worker (KW):** We should also ensure our ontology can capture weather data, sensor inputs, social media data, and cross-reference these with incident data.
+
+**KE:** Let's list out some preliminary classes: `Incident`, `WeatherCondition`, `Observation`, `Mission`, `Service`, `Impact`, `Location`, `Animal`, `Building`, `Vehicle`, `Person`.
+
+#### Stage 2: Iterative Development
+
+**KE:** Given our primary concepts, let's start fleshing out some of these classes with their properties. For instance, `WeatherCondition` should have properties like `temperature`, `windSpeed`, `humidity`, and `forecast`.
+
+**DE:** Good. We'll also need `Location` properties such as `latitude` and `longitude`. For `Incident`, we can have `priority`, `urgency`, and a relationship to `Impact`.
+
+**KW:** Don't forget we need to link `Observations` from various data sources to these classes.
+
+**KE:** Correct. We should have relationships like `hasObservation` between `Incident` and `Observation`.
+
+#### Stage 3: Example Classes and Properties
+
+**KE:** Let's use the domain data to extract more specific classes. For example, `Impact` can have subclasses like `BurntArea`, `BuildingImpact`, `VehicleImpact`, and `AnimalImpact`.
+
+**DE:** Yes, `BurntArea` itself can include various types like `Forests`, `Woodland`, `CropResidues`, `Grasslands`.
+
+**KW:** What about specific properties for `Mission`? We need properties for `serviceOffered`, `location`, and `urgency`.
+
+**KE:** Absolutely, let's define those properties.
+
+#### Stage 4: Iteration and Finalization
+
+**KE:** Now, let's make sure our ontology can answer all the competency questions. We must cross-check each question against our ontology structure.
+
+**DE:** For instance, CQ1 to CQ3 can be answered by our `WeatherCondition` class. CQ4 to CQ6 relate to `Incident` and `Impact`.
+
+**KW:** For CQ7 to CQ12, our `Observation` class with its subproperties should suffice. CQ13 to CQ18 involve `Mission` and `Service`.
+
+**KE:** Seems like we're on the right track. Let's formalize these classes and properties in Turtle format.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```ttl
+@prefix : <http://example.com/sar-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:SearchAndRescueOnt rdf:type owl:Ontology .
+
+:Incident rdf:type owl:Class .
+:priority rdf:type owl:DatatypeProperty .
+:urgency rdf:type owl:DatatypeProperty .
+:location rdf:type owl:ObjectProperty ; rdfs:range :Location .
+
+:Impact rdf:type owl:Class .
+:hasImpact rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Impact .
+
+:BurntArea rdf:type owl:Class ; rdfs:subClassOf :Impact .
+:Forests rdf:type owl:Class ; rdfs:subClassOf :BurntArea .
+:Woodland rdf:type owl:Class ; rdfs:subClassOf :BurntArea .
+:CropResidues rdf:type owl:Class ; rdfs:subClassOf :BurntArea .
+:Grasslands rdf:type owl:Class ; rdfs:subClassOf :BurntArea .
+
+:BuildingImpact rdf:type owl:Class ; rdfs:subClassOf :Impact .
+:VehicleImpact rdf:type owl:Class ; rdfs:subClassOf :Impact .
+:AnimalImpact rdf:type owl:Class ; rdfs:subClassOf :Impact .
+
+:WeatherCondition rdf:type owl:Class .
+:temperature rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition .
+:windSpeed rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition .
+:humidity rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition .
+:forecast rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition .
+
+:Observation rdf:type owl:Class .
+:hasObservation rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Observation .
+:creationDate rdf:type owl:DatatypeProperty ; rdfs:domain :Observation .
+:classificationType rdf:type owl:DatatypeProperty ; rdfs:domain :Observation .
+:source rdf:type owl:ObjectProperty ; rdfs:range :Person .
+
+:Mission rdf:type owl:Class .
+:serviceOffered rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Service .
+:location rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Location .
+:urgency rdf:type owl:DatatypeProperty ; rdfs:domain :Mission .
+
+:Service rdf:type owl:Class .
+
+:Location rdf:type owl:Class .
+:latitude rdf:type owl:DatatypeProperty ; rdfs:domain :Location .
+:longitude rdf:type owl:DatatypeProperty ; rdfs:domain :Location .
+
+:Animal rdf:type owl:Class .
+
+:Building rdf:type owl:Class .
+
+:Vehicle rdf:type owl:Class .
+
+:Person rdf:type owl:Class .
+```
+
+This ontology now includes fundamental classes and properties needed to model the necessary concepts for Search and Rescue missions related to wildfire incidents.

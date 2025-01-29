@@ -1,0 +1,330 @@
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+:Incident rdf:type owl:Class .
+:Wildfire rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:HouseFire rdf:type owl:Class ; rdfs:subClassOf :Incident .
+:Impact rdf:type owl:Class .
+:EnvironmentalImpact rdf:type owl:Class ; rdfs:subClassOf :Impact .
+:HumanImpact rdf:type owl:Class ; rdfs:subClassOf :Impact .
+:Location rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Support rdf:type owl:Class .
+:Personnel rdf:type owl:Class .
+:FireOfficer rdf:type owl:Class ; rdfs:subClassOf :Personnel .
+:VolunteerFirefighter rdf:type owl:Class ; rdfs:subClassOf :Personnel .
+:ArmedForcesPersonnel rdf:type owl:Class ; rdfs:subClassOf :Personnel .
+:ServicePersonnel rdf:type owl:Class ; rdfs:subClassOf :Personnel .
+:MunicipalityStaff rdf:type owl:Class ; rdfs:subClassOf :Personnel .
+:PublicSectorStaff rdf:type owl:Class ; rdfs:subClassOf :Personnel .
+:ClubMember rdf:type owl:Class ; rdfs:subClassOf :Personnel .
+:Individual rdf:type owl:Class ; rdfs:subClassOf :Personnel .
+:Force rdf:type owl:Class .
+:PermanentForce rdf:type owl:Class ; rdfs:subClassOf :Force .
+:SeasonalForce rdf:type owl:Class ; rdfs:subClassOf :Force .
+:AreaBurnt rdf:type owl:Class .
+:Forests rdf:type owl:Class ; rdfs:subClassOf :AreaBurnt .
+:SwampsReeds rdf:type owl:Class ; rdfs:subClassOf :AreaBurnt .
+:Woodland rdf:type owl:Class ; rdfs:subClassOf :AreaBurnt .
+:AgriculturalLands rdf:type owl:Class ; rdfs:subClassOf :AreaBurnt .
+:Grove rdf:type owl:Class ; rdfs:subClassOf :AreaBurnt .
+:CropResidues rdf:type owl:Class ; rdfs:subClassOf :AreaBurnt .
+:Grasslands rdf:type owl:Class ; rdfs:subClassOf :AreaBurnt .
+:OtherLands rdf:type owl:Class ; rdfs:subClassOf :AreaBurnt .
+:Building rdf:type owl:Class .
+:VehicleMachinery rdf:type owl:Class .
+:Insurance rdf:type owl:Class .
+:OperatorName rdf:type owl:Class .
+:Rescue rdf:type owl:Class .
+:Person rdf:type owl:Class .
+:Animal rdf:type owl:Class .
+:Bird rdf:type owl:Class .
+:Hive rdf:type owl:Class .
+:AccidentDeath rdf:type owl:Class .
+:PossibleCauseOfFire rdf:type owl:Class .
+:Physics rdf:type owl:Class ; rdfs:subClassOf :PossibleCauseOfFire .
+:ArsonWithIntent rdf:type owl:Class ; rdfs:subClassOf :PossibleCauseOfFire .
+:ArsonByNegligence rdf:type owl:Class ; rdfs:subClassOf :PossibleCauseOfFire .
+:DeterminationOfOffender rdf:type owl:Class .
+:InvestmentInstrument rdf:type owl:Class .
+:Firetruck rdf:type owl:Class ; rdfs:subClassOf :InvestmentInstrument .
+:Tanker rdf:type owl:Class ; rdfs:subClassOf :InvestmentInstrument .
+:FireFightingVehicle rdf:type owl:Class ; rdfs:subClassOf :InvestmentInstrument .
+:VariousMachine rdf:type owl:Class ; rdfs:subClassOf :InvestmentInstrument .
+:PortableToolMachine rdf:type owl:Class .
+:AirInvolvement rdf:type owl:Class .
+
+# Object Properties
+:hasSource rdf:type owl:ObjectProperty ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range xsd:string .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range xsd:dateTime .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident, :Mission, :Service ;
+    rdfs:range :Location ;
+    owl:inverseOf :isLocationOf .
+
+:isLocationOf rdf:type owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :Incident, :Mission, :Service .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasTemperature rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Humidity .
+
+:hasWeatherForecast rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WeatherForecast .
+
+:hasService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:hasMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:hasSupport rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Support .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasUrgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasSeverity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:hasDuration rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:duration .
+
+:hasMeasurement rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:hasVulnerableObject rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+
+:hasStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:hasFireOfficer rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FireOfficer .
+
+:hasVolunteerFirefighter rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :VolunteerFirefighter .
+
+:hasArmedForcesPersonnel rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :ArmedForcesPersonnel .
+
+:hasServicePersonnel rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :ServicePersonnel .
+
+:hasMunicipalityStaff rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :MunicipalityStaff .
+
+:hasPublicSectorStaff rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :PublicSectorStaff .
+
+:hasClubMember rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :ClubMember .
+
+:hasIndividual rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Individual .
+
+:hasAreaBurnt rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :AreaBurnt .
+
+:hasForests rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :Forests .
+
+:hasSwampsReeds rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :SwampsReeds .
+
+:hasWoodland rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :Woodland .
+
+:hasAgriculturalLands rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :AgriculturalLands .
+
+:hasGrove rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :Grove .
+
+:hasCropResidues rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :CropResidues .
+
+:hasGrasslands rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :Grasslands .
+
+:hasOtherLands rdf:type owl:ObjectProperty ;
+    rdfs:domain :AreaBurnt ;
+    rdfs:range :OtherLands .
+
+:hasBuilding rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :Building .
+
+:hasVehicleMachinery rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :VehicleMachinery .
+
+:hasInsurance rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :Insurance .
+
+:hasOperatorName rdf:type owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :OperatorName .
+
+:hasRescue rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Rescue .
+
+:hasPerson rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range :Person .
+
+:hasAnimal rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range :Animal .
+
+:hasBird rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range :Bird .
+
+:hasHive rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range :Hive .
+
+:hasAccidentDeath rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :AccidentDeath .
+
+:hasPossibleCauseOfFire rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :PossibleCauseOfFire .
+
+:hasPhysics rdf:type owl:ObjectProperty ;
+    rdfs:domain :PossibleCauseOfFire ;
+    rdfs:range :Physics .
+
+:hasArsonWithIntent rdf:type owl:ObjectProperty ;
+    rdfs:domain :PossibleCauseOfFire ;
+    rdfs:range :ArsonWithIntent .
+
+:hasArsonByNegligence rdf:type owl:ObjectProperty ;
+    rdfs:domain :PossibleCauseOfFire ;
+    rdfs:range :ArsonByNegligence .
+
+:hasDeterminationOfOffender rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :DeterminationOfOffender .
+
+:hasForceInvolvement rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :ForceInvolvement .
+
+:hasPermanentForce rdf:type owl:ObjectProperty ;
+    rdfs:domain :ForceInvolvement ;
+    rdfs:range :PermanentForce .
+
+:hasSeasonalForce rdf:type owl:ObjectProperty ;
+    rdfs:domain :ForceInvolvement ;
+    rdfs:range :SeasonalForce .
+
+:hasInvestmentInstrument rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :InvestmentInstrument .
+
+:hasFiretruck rdf:type owl:ObjectProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range :Firetruck .
+
+:hasTanker rdf:type owl:ObjectProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range :Tanker .
+
+:hasFireFightingVehicle rdf:type owl:ObjectProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range :FireFightingVehicle .
+
+:hasVariousMachine rdf:type owl:ObjectProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range :VariousMachine .
+
+:hasPortableToolMachine rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :PortableToolMachine .
+
+:hasAirInvolvement rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :AirInvolvement .
+
+:hasType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :AirInvolvement ;
+    rdfs:range xsd:string .
+
+:hasNumber rdf:type owl:DatatypeProperty ;
+    rdfs:domain :AirInvolvement ;
+    rdfs:range xsd:integer .

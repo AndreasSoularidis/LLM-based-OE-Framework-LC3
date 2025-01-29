@@ -1,0 +1,81 @@
+N   CQ1. What are the most important weather variables that can cause forest fire?
+
+N   CQ2. What are the current measurements for these weather variables?
+
+N   CQ3. What is the forecast for the weather in this location?
+
+Y   CQ4. Where did the incident take place?
+    SELECT ?incindent ?location 
+    WHERE {
+        ?location a sar:Location .
+        ?incident a sar:Incident ;
+            sar:incidentLocation ?location .
+    }
+
+Y   CQ5. What is the priority of an incident during a forest fire disaster?
+    SELECT ?incident ?priority
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:incidentPriority ?priority .
+    }
+
+Y   CQ6. What incidents during forest fires are the most urgent?
+    SELECT ?urgent_incident 
+    WHERE {
+        ?urgent_incident a sar:Incident ;
+            sar:incidentUrgency ?urgency .
+        FILTER(?urgency == 'HIGH')
+    }
+
+N   CQ7. What data from the source are depicted?
+
+N   CQ8. Which is the creation date of these data?
+
+N   CQ9. What is the location of this item?
+
+N   CQ10. Which is the classification type of smoke?
+
+Y   CQ11. Which vulnerable objects were involved in the incident?
+    SELECT ?incident ?vulnerable_object
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:involvedObject ?vulnerable_object . 
+        ?vulnerable_object a sar:VulnerableObject . 
+    }
+
+Y   CQ12. What is the status of wildfire forestry works (firebreaks, access to forest roads, etc.)?
+    SELECT ?incident ?status 
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:forestryWorkStatus ?status .
+    }
+
+N   CQ13. What services or support do you offer for firefighting?
+
+N   CQ14. Which mission do you follow for this support/service?
+
+Y   CQ15. What is the location where this mission is taking place?
+    SELECT ?mission ?location
+    WHERE {
+        ?mission a sar:Mission .
+            sar:missionLocation ?location .
+        ?location a sar:Location .
+    }
+
+N   CQ16. Where is the most urgent mission taking place?
+
+Y   CQ17. What is the population density in the area?
+    SELECT ?location ?popularion_density
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:incidentLocation ?location .
+        ?location a sar:Location ;
+            sar:populationDensity ?popularion_density .
+    }
+
+Y   CQ18. What is the location of the involved people?
+    SELECT ?incident ?people_location
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:involvedPeopleLocation ?people_location .
+    }

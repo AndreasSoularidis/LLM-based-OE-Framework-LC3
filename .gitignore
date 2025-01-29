@@ -1,4 +1,7 @@
 LangChainEnv
 __pycache__
 .env
-Experiments
+data\csv
+data\HCOME
+data\Refined
+NL2SWRL.py

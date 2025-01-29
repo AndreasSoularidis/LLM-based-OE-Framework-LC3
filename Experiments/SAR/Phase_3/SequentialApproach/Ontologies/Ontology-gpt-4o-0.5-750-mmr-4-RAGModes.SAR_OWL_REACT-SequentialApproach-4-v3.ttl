@@ -1,0 +1,180 @@
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Wildfire rdf:type owl:Class .
+:Incident rdf:type owl:Class .
+:Evacuation rdf:type owl:Class ;
+            rdfs:subClassOf :Incident .
+:Impact rdf:type owl:Class .
+:Casualty rdf:type owl:Class ;
+          rdfs:subClassOf :Impact .
+:Severity rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+
+:WeatherCondition rdf:type owl:Class .
+:Rain rdf:type owl:Class ;
+      rdfs:subClassOf :WeatherCondition .
+:Snow rdf:type owl:Class ;
+      rdfs:subClassOf :WeatherCondition .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:CreationDate rdf:type owl:Class .
+:Location rdf:type owl:Class .
+
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Support rdf:type owl:Class .
+:Coordination rdf:type owl:Class .
+
+:AreaBurnt rdf:type owl:Class .
+:Damage rdf:type owl:Class .
+:BuildingDamage rdf:type owl:Class ;
+                rdfs:subClassOf :Damage .
+:VehicleDamage rdf:type owl:Class ;
+               rdfs:subClassOf :Damage .
+:SmokeClassification rdf:type owl:Class .
+:VulnerableObject rdf:type owl:Class .
+
+:Forest rdf:type owl:Class .
+:Swamp rdf:type owl:Class .
+:Woodland rdf:type owl:Class .
+:AgriculturalLand rdf:type owl:Class .
+:Grove rdf:type owl:Class .
+:CropResidue rdf:type owl:Class .
+:Grassland rdf:type owl:Class .
+
+:Building rdf:type owl:Class .
+:Vehicle rdf:type owl:Class .
+:Person rdf:type owl:Class .
+:Animal rdf:type owl:Class .
+
+:CauseOfFire rdf:type owl:Class .
+:Physics rdf:type owl:Class .
+:ArsonWithIntent rdf:type owl:Class .
+:ArsonByNegligence rdf:type owl:Class .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+           rdfs:domain :Incident ;
+           rdfs:range :Impact ;
+           owl:equivalentProperty :affects ;
+           owl:inverseOf :impactedBy .
+
+:hasSeverity rdf:type owl:ObjectProperty ;
+             rdfs:domain :Impact ;
+             rdfs:range :Severity .
+
+:hasPriority rdf:type owl:ObjectProperty ;
+             rdfs:domain :Incident ;
+             rdfs:range :Priority .
+
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Wildfire ;
+                     rdfs:range :WeatherCondition ;
+                     owl:minCardinality "1"^^xsd:nonNegativeInteger .
+
+:hasTemperatureValue rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Temperature ;
+                     rdfs:range xsd:float .
+
+:hasWindSpeedValue rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :WindSpeed ;
+                   rdfs:range xsd:float .
+
+:hasHumidityValue rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Humidity ;
+                  rdfs:range xsd:float .
+
+:affectsIncident rdf:type owl:ObjectProperty ;
+                 rdfs:domain :WeatherCondition ;
+                 rdfs:range :Incident ;
+                 owl:inverseOf :affectedBy .
+
+:reportedBy rdf:type owl:ObjectProperty ;
+            rdfs:domain :Incident ;
+            rdfs:range :SensorData, :SatelliteData, :SocialMediaData .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+                 rdfs:range xsd:dateTime .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+             rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+             rdfs:range :Location .
+
+:hasSmokeClassification rdf:type owl:ObjectProperty ;
+                        rdfs:domain :SensorData ;
+                        rdfs:range :SmokeClassification .
+
+:hasRescue rdf:type owl:ObjectProperty ;
+           rdfs:domain :Incident ;
+           rdfs:range :Person .
+
+:hasDamage rdf:type owl:ObjectProperty ;
+           rdfs:domain :Incident ;
+           rdfs:range :Damage .
+
+:hasCause rdf:type owl:ObjectProperty ;
+          rdfs:domain :Wildfire ;
+          rdfs:range :CauseOfFire .
+
+:hasOperator rdf:type owl:ObjectProperty ;
+             rdfs:domain :Vehicle ;
+             rdfs:range :Person .
+
+:hasInsurance rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Vehicle ;
+              rdfs:range xsd:boolean .
+
+:hasLicensePlate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Vehicle ;
+                 rdfs:range xsd:string .
+
+:offersSupport rdf:type owl:ObjectProperty ;
+               rdfs:domain :Service ;
+               rdfs:range :Support .
+
+:followsMission rdf:type owl:ObjectProperty ;
+                rdfs:domain :Support ;
+                rdfs:range :Mission .
+
+:takesPlaceAt rdf:type owl:ObjectProperty ;
+              rdfs:domain :Mission ;
+              rdfs:range :Location .
+
+:respondsToIncident rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Mission ;
+                    rdfs:range :Incident .
+
+:occursAtLocation rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Incident ;
+                  rdfs:range :Location .
+
+:hasAreaBurnt rdf:type owl:ObjectProperty ;
+              rdfs:domain :Impact ;
+              rdfs:range :AreaBurnt .
+
+:involvedIn rdf:type owl:ObjectProperty ;
+            rdfs:domain :Person ;
+            rdfs:range :Incident .
+
+:hasVulnerableObject rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Incident ;
+                     rdfs:range :VulnerableObject .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Location ;
+                      rdfs:range xsd:int .
+
+:hasStatus rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Wildfire ;
+           rdfs:range xsd:string .
+
+:EmergencyEvent owl:equivalentClass :Incident .

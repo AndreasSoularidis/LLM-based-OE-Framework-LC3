@@ -1,0 +1,306 @@
+
+    Create three instances of yourself playing three different roles in the ontology engineering process
+    based on the HCOME collaborative ontology engineering methodology. 
+    The three roles are the knowledge engineer, the domain expert and the knowledge worker. 
+    These three roles work together to create an ontology. The Knowledge Engineer is responsible 
+    for the requirements specification, conceptualisation and generation of the ontology. The Domain 
+    Expert is an experienced person and provides the requirements for the 
+    ontology, terminology, definitions of terms, domain specific explanations of terms and his 
+    experience in general. The Knowledge Worker is the user of the ontology 
+    and actively participates in the ontology engineering process. The above roles should express 
+    their deep knowledge during the conversation. Their aim is to play all three roles, simulating 
+    the HCOME methodology. The above mentioned roles will interact with each other, asking and 
+    answering questions until a valid and comprehensive ontology is created, which covers all 
+    the defined requirements below.
+  The aim of the ontology is to model all the necessary concepts and their relationships for Search and Rescue (SAR) missions. The scope of the ontology is wildfire incidents. The generated ontology is the following.
+START OF ONTOLOGY
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Incident a owl:Class .
+:Impact a owl:Class .
+:Location a owl:Class .
+:Priority a owl:Class .
+:WeatherCondition a owl:Class .
+:Temperature a owl:Class .
+:WindSpeed a owl:Class .
+:Humidity a owl:Class .
+:WeatherForecast a owl:Class .
+:SensorData a owl:Class .
+:SatelliteData a owl:Class .
+:SocialMediaData a owl:Class .
+:Mission a owl:Class .
+:Service a owl:Class .
+:Support a owl:Class .
+:PopulationDensity a owl:Class .
+:InvestmentInstrument a owl:Class .
+:Firetruck a owl:Class .
+:Tanker a owl:Class .
+:FireFightingVehicle a owl:Class .
+:Machine a owl:Class .
+:Rescue a owl:Class .
+:Animal a owl:Class .
+:Bird a owl:Class .
+:Hive a owl:Class .
+:Accident a owl:Class .
+:Cause a owl:Class .
+:LightningStrike a owl:Class .
+:Arson a owl:Class .
+:Negligence a owl:Class .
+:SelfishAction a owl:Class .
+:MaliciousAction a owl:Class .
+
+:hasLocation a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+
+:hasPriority a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Priority .
+
+:hasWeatherCondition a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+
+:hasTemperature a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Temperature .
+
+:hasWindSpeed a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WindSpeed .
+
+:hasHumidity a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :Humidity .
+
+:hasWeatherForecast a owl:ObjectProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range :WeatherForecast .
+
+:hasSensorData a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SensorData .
+
+:hasSatelliteData a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SatelliteData .
+
+:hasSocialMediaData a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SocialMediaData .
+
+:hasMission a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+
+:hasService a owl:ObjectProperty ;
+    rdfs:domain :Support ;
+    rdfs:range :Service .
+
+:hasSupport a owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Support .
+
+:hasPopulationDensity a owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range :PopulationDensity .
+
+:hasImpact a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+
+:hasIncident a owl:ObjectProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range :Incident .
+
+:hasInvestigation a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Cause .
+
+:hasCause a owl:ObjectProperty ;
+    rdfs:domain :Cause ;
+    rdfs:range :Incident .
+
+:hasRescue a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Rescue .
+
+:hasAnimal a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Animal .
+
+:hasBird a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Bird .
+
+:hasHive a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Hive .
+
+:hasAccident a owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Accident .
+
+:creationDate a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:dateTime .
+
+:location a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range :Location .
+
+:classificationType a owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string .
+
+:status a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:areaBurntInAcres a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:integer .
+
+:buildingKind a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:vehicleKind a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:insuranceStatus a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:operatorName a owl:DatatypeProperty ;
+    rdfs:domain :Impact ;
+    rdfs:range xsd:string .
+
+:rescueFullName a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:rescueCapacity a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:rescueAge a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:integer .
+
+:rescueCause a owl:DatatypeProperty ;
+    rdfs:domain :Rescue ;
+    rdfs:range xsd:string .
+
+:accidentFullName a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:string .
+
+:accidentCapacity a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:string .
+
+:accidentAge a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:integer .
+
+:accidentCause a owl:DatatypeProperty ;
+    rdfs:domain :Accident ;
+    rdfs:range xsd:string .
+
+:forceType a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:forceCount a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:integer .
+
+:investmentInstrumentType a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:string .
+
+:investmentInstrumentCount a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:integer .
+
+:portableToolType a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:string .
+
+:portableToolCount a owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:integer .
+
+:airInvolvementType a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:airInvolvementCount a owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:integer .The generated ontology is the following.
+ END OF ONTOLOGY
+Your goal is to fine-tune the given ontology to make it more robust, expressive and well-structured.
+    You should also use the some of the following OWL axioms to make the ontology as expressive as possible. Use ONLY THE ONTOLOGY AXIOMS given in the EXAMPLES and NOT the DATA PRESENTED.
+    You do not need to use all of them, but only the necessary axioms to create a WELL CONNECTED and EXPRESSIVE ontology.
+    START OF OWL DOCUMENTATION
+    
+    Turtle Syntax
+ <http://example.com/owl/families> owl:imports <http://example.org/otherOntologies/families.owl> .
+
+Turtle Syntax
+ :Mary      owl:sameAs              otherOnt:MaryBrown .
+ :John      owl:sameAs              otherOnt:JohnBrown .
+ :Adult     owl:equivalentClass     otherOnt:Grownup .
+ :hasChild  owl:equivalentProperty  otherOnt:child .
+ :hasAge    owl:equivalentProperty  otherOnt:age .
+
+Turtle Syntax
+ :John    rdf:type owl:NamedIndividual .
+ :Person  rdf:type owl:Class .
+ :hasWife rdf:type owl:ObjectProperty .
+ :hasAge  rdf:type owl:DatatypeProperty .
+
+Turtle Syntax
+:John rdf:type :Father .
+:Father rdf:type :SocialRole .
+
+owl:targetIndividual   :Susan .
+
+:NarcisticPerson owl:equivalentClass  [
+  rdf:type        owl:Restriction ;
+  owl:onProperty  :loves ;
+  owl:hasSelf     "true"^^xsd:boolean .
+] .
+
+:MyBirthdayGuests  owl:equivalentClass  [
+  rdf:type   owl:Class ;
+  owl:oneOf  ( :Bill  :John  :Mary )
+] .
+:Orphan  owl:equivalentClass  [
+  rdf:type           owl:Restriction ;
+  owl:onProperty     [ owl:inverseOf  :hasChild ] ;
+  owl:allValuesFrom  :Dead 
+] .
+
+owl:qualifiedCardinality  "3"^^xsd:nonNegativeInteger ;
+  owl:onProperty            :hasChild ;
+  owl:onClass               :Parent
+] .
+:John  rdf:type  [
+  rdf:type         owl:Restriction ;
+  owl:cardinality  "5"^^xsd:nonNegativeInteger ;
+  owl:onProperty   :hasChild
+] . 
+
+    END OF OWL DOCUMENTATION
+   The iterative discussion stops when the given ontology becomes well structured (e.g., related classes grouped under related superclasses), 
+    its concepts (e.g., classes) are well connected, and the ontology generally has a high level of expressiveness (using OWL axioms).
+    Feel free to use domain knowledge to extend the ontology with classes and properties to make it as comprehensive as possible.
+    Present the iterative discussion and the generated ontology in Turtle (TTL) format WITHOUT individuals. 
+  

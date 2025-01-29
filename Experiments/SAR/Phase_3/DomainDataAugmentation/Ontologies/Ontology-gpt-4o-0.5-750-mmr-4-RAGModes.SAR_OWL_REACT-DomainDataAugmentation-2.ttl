@@ -1,0 +1,121 @@
+@prefix : <http://example.com/sar-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://example.com/sar-ontology> rdf:type owl:Ontology .
+
+# Classes
+:Wildfire rdf:type owl:Class .
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:Priority rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdf:type owl:Class .
+:WindSpeed rdf:type owl:Class .
+:Humidity rdf:type owl:Class .
+:WeatherForecast rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Support rdf:type owl:Class .
+:CauseOfFire rdf:type owl:Class .
+:Arson rdf:type :CauseOfFire .
+:Negligence rdf:type :CauseOfFire .
+:NaturalCause rdf:type :CauseOfFire .
+:EnvironmentalImpact rdf:type :Impact .
+:EconomicImpact rdf:type :Impact .
+:HumanImpact rdf:type :Impact .
+:FireTruck rdf:type owl:Class .
+:Water rdf:type owl:Class .
+:Foam rdf:type owl:Class .
+:Retarder rdf:type owl:Class .
+
+# Object Properties
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range :Location .
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :Wildfire ;
+    rdfs:range :Impact .
+:hasPriority rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Priority .
+:hasTemperature rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherForecast ;
+    rdfs:range :Temperature .
+:hasWindSpeed rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherForecast ;
+    rdfs:range :WindSpeed .
+:hasHumidity rdf:type owl:ObjectProperty ;
+    rdfs:domain :WeatherForecast ;
+    rdfs:range :Humidity .
+:hasCreationDate rdf:type owl:ObjectProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:dateTime .
+:hasDataType rdf:type owl:ObjectProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string .
+:isPartOf rdf:type owl:ObjectProperty .
+:isRelatedTo rdf:type owl:ObjectProperty .
+:isLocatedAt rdf:type owl:ObjectProperty .
+:supports rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Support .
+:followsMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :Support ;
+    rdfs:range :Mission .
+:hasPopulationDensity rdf:type owl:ObjectProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:integer .
+
+# Data Properties
+:hasLongitude rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+:hasLatitude rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+:hasAltitude rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+# Equivalence and Inverse Properties
+:hasLocation owl:inverseOf :isLocatedAt .
+:hasImpact owl:inverseOf :isRelatedTo .
+
+# Example of a property chain
+:hasUncle owl:propertyChainAxiom (:hasFather :hasBrother) .
+
+# Comments and Labels
+:Wildfire rdfs:comment "Represents a wildfire incident."^^xsd:string .
+:Incident rdfs:comment "Represents an incident during a wildfire."^^xsd:string .
+:Impact rdfs:comment "Represents the impact of a wildfire."^^xsd:string .
+:Location rdfs:comment "Represents the location of an incident."^^xsd:string .
+:Priority rdfs:comment "Represents the priority level of an incident."^^xsd:string .
+:WeatherCondition rdfs:comment "Represents weather conditions affecting a wildfire."^^xsd:string .
+:Temperature rdfs:comment "Represents the temperature in a weather forecast."^^xsd:string .
+:WindSpeed rdfs:comment "Represents the wind speed in a weather forecast."^^xsd:string .
+:Humidity rdfs:comment "Represents the humidity in a weather forecast."^^xsd:string .
+:WeatherForecast rdfs:comment "Represents a weather forecast."^^xsd:string .
+:SensorData rdfs:comment "Represents data collected from sensors."^^xsd:string .
+:SatelliteData rdfs:comment "Represents data collected from satellites."^^xsd:string .
+:SocialMediaData rdfs:comment "Represents data collected from social media."^^xsd:string .
+:Mission rdfs:comment "Represents a mission in a wildfire response."^^xsd:string .
+:Service rdfs:comment "Represents a service involved in wildfire response."^^xsd:string .
+:Support rdfs:comment "Represents support provided during a wildfire response."^^xsd:string .
+:CauseOfFire rdfs:comment "Represents the cause of a wildfire."^^xsd:string .
+:Arson rdfs:comment "Represents arson as a cause of wildfire."^^xsd:string .
+:Negligence rdfs:comment "Represents negligence as a cause of wildfire."^^xsd:string .
+:NaturalCause rdfs:comment "Represents natural causes of wildfire."^^xsd:string .
+:EnvironmentalImpact rdfs:comment "Represents the environmental impact of a wildfire."^^xsd:string .
+:EconomicImpact rdfs:comment "Represents the economic impact of a wildfire."^^xsd:string .
+:HumanImpact rdfs:comment "Represents the human impact of a wildfire."^^xsd:string .
+:FireTruck rdfs:comment "Represents a fire truck used in wildfire response."^^xsd:string .
+:Water rdfs:comment "Represents water used in wildfire response."^^xsd:string .
+:Foam rdfs:comment "Represents foam used in wildfire response."^^xsd:string .
+:Retarder rdfs:comment "Represents a fire retardant used in wildfire response."^^xsd:string .

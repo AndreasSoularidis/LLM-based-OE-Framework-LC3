@@ -1,0 +1,195 @@
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Incident rdf:type owl:Class .
+:WildfireIncident rdf:type owl:Class ;
+    rdfs:subClassOf :Incident .
+:Impact rdf:type owl:Class .
+:EnvironmentalImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+:EconomicImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+:SocialImpact rdf:type owl:Class ;
+    rdfs:subClassOf :Impact .
+:WeatherCondition rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:FireFighter rdf:type owl:Class .
+:IncidentCommander rdf:type owl:Class ;
+    rdfs:subClassOf :FireFighter .
+:FireChief rdf:type owl:Class ;
+    rdfs:subClassOf :FireFighter .
+:FirstResponder rdf:type owl:Class ;
+    rdfs:subClassOf :FireFighter .
+:Volunteer rdf:type owl:Class .
+:FireTruck rdf:type owl:Class .
+:Tanker rdf:type owl:Class .
+:PortableTool rdf:type owl:Class .
+:AirInvolvement rdf:type owl:Class .
+:Helicopter rdf:type owl:Class ;
+    rdfs:subClassOf :AirInvolvement .
+:Drone rdf:type owl:Class ;
+    rdfs:subClassOf :AirInvolvement .
+:InvestmentInstrument rdf:type owl:Class .
+
+:hasImpact rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Impact .
+:hasWeatherCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :WeatherCondition .
+:hasSensorData rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :SensorData .
+:hasMission rdf:type owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Mission .
+:hasService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range :Location .
+:isLocationOf rdf:type owl:ObjectProperty ;
+    owl:inverseOf :hasLocation .
+
+:isManagedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :IncidentCommander .
+:hasResponder rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FirstResponder .
+
+:incidentType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+:incidentDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:dateTime .
+:incidentLocation rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+:incidentPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string .
+
+:temperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+:windSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+:humidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+:weatherForecast rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:sensorType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string .
+:sensorReading rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string .
+:readingDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:dateTime .
+:readingLocation rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData ;
+    rdfs:range xsd:string .
+
+:areaBurnt rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:float .
+:affectedBuildings rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+:affectedVehicles rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+:rescuedPeople rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+:affectedAnimals rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+:possibleCause rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+
+:involvementType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :AirInvolvement ;
+    rdfs:range xsd:string .
+:involvementNumber rdf:type owl:DatatypeProperty ;
+    rdfs:domain :AirInvolvement ;
+    rdfs:range xsd:integer .
+
+:investmentType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:string .
+:investmentNumber rdf:type owl:DatatypeProperty ;
+    rdfs:domain :InvestmentInstrument ;
+    rdfs:range xsd:integer .
+
+:hasFireFighter rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FireFighter .
+:hasVolunteer rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Volunteer .
+:hasFireTruck rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FireTruck .
+:hasTanker rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Tanker .
+:hasPortableTool rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :PortableTool .
+
+:populationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+:location rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:string .
+:involvedPeople rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:string .
+
+:FireChief owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:intersectionOf ( :FireFighter [
+        rdf:type owl:Restriction ;
+        owl:onProperty :manages ;
+        owl:someValuesFrom :FireStation
+    ])
+].
+
+:Mission rdf:type owl:Class ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :isManagedBy ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass :IncidentCommander
+    ].
+
+:PortableTool owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:oneOf ( :FireHose :Axe :Extinguisher )
+].
+
+:WeatherCondition owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:intersectionOf ( :WeatherCondition [
+        rdf:type owl:Restriction ;
+        owl:onProperty :influences ;
+        owl:someValuesFrom :WildfireIncident
+    ])
+].

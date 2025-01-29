@@ -1,0 +1,278 @@
+### Iterative Discussion
+
+#### Knowledge Engineer (KE): 
+Alright team, let's get started on building this ontology for Search and Rescue (SAR) missions focused on wildfire incidents. Our goal is to model all necessary concepts and relationships to capture, link, and semantically integrate heterogeneous data from various sources for decision support.
+
+#### Domain Expert (DE): 
+Absolutely. We need to ensure we cover incidents and impacts, weather conditions, data from human and earth observations, and missions and relationships between services involved in wildfire management.
+
+#### Knowledge Worker (KW): 
+Got it. Let's start by identifying the key concepts and relationships. For incidents and impacts, we need to capture causes of fire, affected areas, and the severity of incidents.
+
+#### KE: 
+Let's define a class `Incident` and subclasses for different types of incidents, such as `WildfireIncident`. We also need to capture the cause of the fire. 
+
+#### DE: 
+We should also include classes for `WeatherCondition` with properties for temperature, wind speed, and humidity. These are crucial for understanding the behavior of the wildfire.
+
+#### KW: 
+For data from human and earth observations, we need classes to represent sensor data, satellite data, and social media inputs. 
+
+#### KE: 
+Let's create classes `SensorData`, `SatelliteData`, and `SocialMediaData`. We also need properties to link these data sources to incidents and locations.
+
+#### DE: 
+For missions and relationships between services, we should have classes like `Mission`, `Service`, and `Support`. We need properties to link these to incidents and locations as well.
+
+#### KW: 
+Agreed. Let's also consider the competence questions. For example, CQ1 asks about important weather variables causing forest fires. We need to ensure our ontology can answer this.
+
+#### KE: 
+We can create data properties like `hasTemperature`, `hasWindSpeed`, and `hasHumidity` for the `WeatherCondition` class. 
+
+#### DE: 
+For CQ4, which asks about the location of the incident, we need a property `hasLocation` linking `Incident` to `Location`.
+
+#### KW: 
+For CQ6, which asks about the priority of incidents, we can add a property `hasPriority` to the `Incident` class.
+
+#### KE: 
+Let's also ensure we can answer questions related to human and earth observations. For CQ7, we need properties like `hasSource` and `hasCreationDate` for data classes.
+
+#### DE: 
+For missions, we need properties like `hasMissionType`, `hasLocation`, and `hasUrgency` to answer questions like CQ13 and CQ16.
+
+#### KW: 
+Great. Let's start defining these classes and properties in Turtle format.
+
+### Generated Ontology in Turtle (TTL) Format
+
+```ttl
+@prefix : <http://example.com/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/sar> rdf:type owl:Ontology .
+
+### Classes
+:Incident rdf:type owl:Class ;
+    rdfs:label "Incident" ;
+    rdfs:comment "Represents an incident in a wildfire disaster." .
+
+:WildfireIncident rdf:type owl:Class ;
+    rdfs:subClassOf :Incident ;
+    rdfs:label "Wildfire Incident" ;
+    rdfs:comment "Represents a wildfire incident." .
+
+:WeatherCondition rdf:type owl:Class ;
+    rdfs:label "Weather Condition" ;
+    rdfs:comment "Represents weather conditions affecting wildfire behavior." .
+
+:SensorData rdf:type owl:Class ;
+    rdfs:label "Sensor Data" ;
+    rdfs:comment "Represents data collected from sensors." .
+
+:SatelliteData rdf:type owl:Class ;
+    rdfs:label "Satellite Data" ;
+    rdfs:comment "Represents data collected from satellites." .
+
+:SocialMediaData rdf:type owl:Class ;
+    rdfs:label "Social Media Data" ;
+    rdfs:comment "Represents data collected from social media." .
+
+:Mission rdf:type owl:Class ;
+    rdfs:label "Mission" ;
+    rdfs:comment "Represents a mission in wildfire management." .
+
+:Service rdf:type owl:Class ;
+    rdfs:label "Service" ;
+    rdfs:comment "Represents a service involved in wildfire management." .
+
+:Location rdf:type owl:Class ;
+    rdfs:label "Location" ;
+    rdfs:comment "Represents a geographical location." .
+
+### Data Properties
+:hasTemperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Temperature" ;
+    rdfs:comment "Represents the temperature in weather conditions." .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Wind Speed" ;
+    rdfs:comment "Represents the wind speed in weather conditions." .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Humidity" ;
+    rdfs:comment "Represents the humidity in weather conditions." .
+
+:hasCreationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "has Creation Date" ;
+    rdfs:comment "Represents the creation date of the data." .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Incident ;
+    rdfs:range xsd:string ;
+    rdfs:label "has Priority" ;
+    rdfs:comment "Represents the priority of an incident." .
+
+:hasUrgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range xsd:string ;
+    rdfs:label "has Urgency" ;
+    rdfs:comment "Represents the urgency of a mission." .
+
+### Object Properties
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Incident, :Mission ;
+    rdfs:range :Location ;
+    rdfs:label "has Location" ;
+    rdfs:comment "Links an incident or mission to a location." .
+
+:hasSource rdf:type owl:ObjectProperty ;
+    rdfs:domain :SensorData, :SatelliteData, :SocialMediaData ;
+    rdfs:range :Incident ;
+    rdfs:label "has Source" ;
+    rdfs:comment "Links data to its source incident." .
+
+:hasMissionType rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service ;
+    rdfs:label "has Mission Type" ;
+    rdfs:comment "Links a mission to its type of service." .
+
+### Additional Classes and Properties from Domain Data
+:CauseOfFire rdf:type owl:Class ;
+    rdfs:label "Cause of Fire" ;
+    rdfs:comment "Represents the cause of a wildfire." .
+
+:Arson rdf:type owl:Class ;
+    rdfs:subClassOf :CauseOfFire ;
+    rdfs:label "Arson" ;
+    rdfs:comment "Represents arson as a cause of wildfire." .
+
+:Negligence rdf:type owl:Class ;
+    rdfs:subClassOf :CauseOfFire ;
+    rdfs:label "Negligence" ;
+    rdfs:comment "Represents negligence as a cause of wildfire." .
+
+:IncinerationOfWaste rdf:type owl:Class ;
+    rdfs:subClassOf :Negligence ;
+    rdfs:label "Incineration of Waste" ;
+    rdfs:comment "Represents incineration of waste as a cause of wildfire." .
+
+:AreaBurnt rdf:type owl:Class ;
+    rdfs:label "Area Burnt" ;
+    rdfs:comment "Represents areas burnt in the wildfire." .
+
+:AgriculturalLand rdf:type owl:Class ;
+    rdfs:subClassOf :AreaBurnt ;
+    rdfs:label "Agricultural Land" ;
+    rdfs:comment "Represents agricultural land burnt in the wildfire." .
+
+:CropResidues rdf:type owl:Class ;
+    rdfs:subClassOf :AreaBurnt ;
+    rdfs:label "Crop Residues" ;
+    rdfs:comment "Represents crop residues burnt in the wildfire." .
+
+:FireOfficer rdf:type owl:Class ;
+    rdfs:label "Fire Officer" ;
+    rdfs:comment "Represents a fire officer involved in wildfire management." .
+
+:VolunteerFirefighter rdf:type owl:Class ;
+    rdfs:label "Volunteer Firefighter" ;
+    rdfs:comment "Represents a volunteer firefighter involved in wildfire management." .
+
+:FireTruck rdf:type owl:Class ;
+    rdfs:label "Fire Truck" ;
+    rdfs:comment "Represents a fire truck used in wildfire management." .
+
+:AirInvolvement rdf:type owl:Class ;
+    rdfs:label "Air Involvement" ;
+    rdfs:comment "Represents air involvement in wildfire management." .
+
+:Canadair rdf:type owl:Class ;
+    rdfs:subClassOf :AirInvolvement ;
+    rdfs:label "Canadair" ;
+    rdfs:comment "Represents a Canadair aircraft used in wildfire management." .
+
+:hasQuantity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WaterUse, :FoamUse, :RetarderUse ;
+    rdfs:range xsd:float ;
+    rdfs:label "has Quantity" ;
+    rdfs:comment "Represents the quantity used in wildfire management." .
+
+:WaterUse rdf:type owl:Class ;
+    rdfs:label "Water Use" ;
+    rdfs:comment "Represents water use in wildfire management." .
+
+:FoamUse rdf:type owl:Class ;
+    rdfs:label "Foam Use" ;
+    rdfs:comment "Represents foam use in wildfire management." .
+
+:RetarderUse rdf:type owl:Class ;
+    rdfs:label "Retarder Use" ;
+    rdfs:comment "Represents retarder use in wildfire management." .
+
+:hasFireOfficer rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FireOfficer ;
+    rdfs:label "has Fire Officer" ;
+    rdfs:comment "Links a mission to its fire officer." .
+
+:hasVolunteerFirefighter rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :VolunteerFirefighter ;
+    rdfs:label "has Volunteer Firefighter" ;
+    rdfs:comment "Links a mission to its volunteer firefighter." .
+
+:hasFireTruck rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FireTruck ;
+    rdfs:label "has Fire Truck" ;
+    rdfs:comment "Links a mission to its fire truck." .
+
+:hasAirInvolvement rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :AirInvolvement ;
+    rdfs:label "has Air Involvement" ;
+    rdfs:comment "Links a mission to its air involvement." .
+
+:hasWaterUse rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :WaterUse ;
+    rdfs:label "has Water Use" ;
+    rdfs:comment "Links a mission to its water use." .
+
+:hasFoamUse rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :FoamUse ;
+    rdfs:label "has Foam Use" ;
+    rdfs:comment "Links a mission to its foam use." .
+
+:hasRetarderUse rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :RetarderUse ;
+    rdfs:label "has Retarder Use" ;
+    rdfs:comment "Links a mission to its retarder use." .
+```
+
+### Closing Discussion
+
+#### KE: 
+I believe we have covered all the necessary requirements and can answer all the competency questions with this ontology. 
+
+#### DE: 
+Yes, we have included classes and properties for incidents, weather conditions, data sources, and missions. 
+
+#### KW: 
+Great work team! This ontology should provide comprehensive support for decision-making in wildfire SAR missions.

@@ -1,0 +1,112 @@
+N   CQ1. What are the most important weather variables that can cause forest fire?
+
+Y   CQ2. What are the current measurements for these weather variables?
+    SELECT ?incident ?humidity ?temperature ?wind_speed 
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:hasWeatherCondition ?weather_condition .
+        ?weather_condition a sar:WeatherCondition ;
+            sar:hasHumidity ?humidity ;
+            sar:hasTemperature ?temperature ;
+            sar:hasWindSpeed ?wind_speed .
+    }
+
+Y   CQ3. What is the forecast for the weather in this location?
+    SELECT ?incident ?forecast 
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:hasWeatherCondition ?weather_condition .
+        ?weather_condition a sar:WeatherCondition ;
+            sar:hasForecast ?forecast .
+    }
+
+Y   CQ4. Where did the incident take place?
+    SELECT ?incident ?location 
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:location ?location .
+    }
+
+Y   CQ5. What is the priority of an incident during a forest fire disaster?
+    SELECT ?incident ?priority
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:priority ?priority .
+    }
+
+Y  CQ6. What incidents during forest fires are the most urgent?
+    SELECT ?incident ?urgency
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:urgency ?urgency .
+        FILTER(?urgency == 'High')
+    }
+
+Y   CQ7. What data from the source are depicted?
+    SELECT ?data
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:SensorData ?data .
+        ?data a sar:SensorData .
+    }
+
+Y   CQ8. Which is the creation date of these data?
+    SELECT ?data ?datetime
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:SensorData ?data .
+        ?data a sar:SensorData ;
+            sar:creationdate ?datetime . 
+    }
+
+Y   CQ9. What is the location of this item?
+    SELECT ?data ?location
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:SensorData ?data .
+        ?data a sar:SensorData ;
+            sar:dataLocation ?location . 
+    }
+
+
+Y   CQ10. Which is the classification type of smoke?
+    SELECT ?incident ?smoke_type
+    WHERE {
+        ?incident a sar:Incident ;
+            sar:SensorData ?data .
+        ?data a sar:SensorData ;
+            sar:smokeClassification ?smoke_type .
+    }
+
+N   CQ11. Which vulnerable objects were involved in the incident?
+
+N   CQ12. What is the status of wildfire forestry works (firebreaks, access to forest roads, etc.)?
+
+Y   CQ13. What services or support do you offer for firefighting?
+    SELECT ?mission ?service
+    WHERE {
+        ?service a sar:Service ;
+            sar:hasMission ?mission .
+        ?mission a sar:Mission .
+    }
+
+N   CQ14. Which mission do you follow for this support/service?
+
+Y   CQ15. What is the location where this mission is taking place?
+    SELECT ?mission ?location
+    WHERE {
+        ?mission a sar:Mission ;
+            sar:missionLocation ?location .
+    }
+
+N   CQ16. Where is the most urgent mission taking place?
+
+Y   CQ17. What is the population density in the area?
+    SELECT ?mission ?population_density
+    WHERE {
+        ?mission a sar:Mission ;
+            sar:populationDensity ?population_density .
+    }
+
+N   CQ18. What is the location of the involved people?
+    

@@ -1,0 +1,107 @@
+### Iterative Discussion
+
+#### Initial Meeting
+
+**Knowledge Engineer (KE):**
+"Alright, team. We need to create an ontology for Search and Rescue (SAR) missions specifically focused on wildfire incidents. Let's start by identifying the key concepts and relationships we need to include."
+
+**Domain Expert (DE):**
+"Absolutely. We need to include incidents and impacts, weather conditions, data from human and earth observations, and the missions and relationships between services. For incidents, we should capture the location, severity, and priority."
+
+**Knowledge Worker (KW):**
+"Don't forget about the data sources. We need to integrate data from sensors, satellites, and social media. Also, we should represent the status of firefighting resources and the missions."
+
+**KE:**
+"Good points. Let's start by defining some high-level classes: `Incident`, `Impact`, `WeatherCondition`, `ObservationData`, `Mission`, and `Service`. Each of these will have specific properties."
+
+#### Defining Classes and Properties
+
+**DE:**
+"For `Incident`, we need properties like `location`, `priority`, and `severity`. For `Impact`, we need `affectedArea` and `damageType`."
+
+**KW:**
+"For `WeatherCondition`, we should include `temperature`, `windSpeed`, `humidity`, and `forecast`. For `ObservationData`, we need `source`, `creationDate`, and `location`."
+
+**KE:**
+"Let's also define relationships. For example, an `Incident` can have multiple `Impacts` and be influenced by `WeatherCondition`. `Mission` should be related to `Service` and have properties like `missionType` and `location`."
+
+#### Adding Competency Questions
+
+**KE:**
+"Now, let's ensure our ontology can answer the competency questions. For instance, CQ1 asks about the most important weather variables that can cause forest fires. We need a class `WeatherVariable` with instances like `temperature`, `windSpeed`, and `humidity`."
+
+**DE:**
+"Agreed. For CQ4, we need to ensure `Incident` has a `location` property. For CQ6, `Incident` should have a `priority` property to determine urgency."
+
+**KW:**
+"For CQ10, we need a class `SmokeClassification` to represent different types of smoke. For CQ12, a property `status` for `FirefightingResource` will help."
+
+#### Refining and Finalizing
+
+**KE:**
+"Let's refine our ontology by adding subclasses where necessary. For example, `WeatherCondition` can have subclasses like `Temperature`, `WindSpeed`, and `Humidity`. Also, `ObservationData` can have subclasses like `SensorData`, `SatelliteData`, and `SocialMediaData`."
+
+**DE:**
+"Good idea. For `Mission`, we can have subclasses like `FireSuppression`, `Evacuation`, and `MedicalSupport`. Each subclass can have specific properties."
+
+**KW:**
+"Let's also ensure we have properties to link classes. For example, `Mission` should be linked to `Incident` and `Service`. `ObservationData` should be linked to `Incident` and `WeatherCondition`."
+
+**KE:**
+"Perfect. I think we have a comprehensive ontology now. I'll generate it in Turtle format."
+
+### Generated Ontology (Turtle Format)
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Classes
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:ObservationData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:WeatherVariable rdf:type owl:Class .
+:SmokeClassification rdf:type owl:Class .
+:FirefightingResource rdf:type owl:Class .
+
+# Subclasses
+:Temperature rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:Humidity rdf:type owl:Class ; rdfs:subClassOf :WeatherCondition .
+:SensorData rdf:type owl:Class ; rdfs:subClassOf :ObservationData .
+:SatelliteData rdf:type owl:Class ; rdfs:subClassOf :ObservationData .
+:SocialMediaData rdf:type owl:Class ; rdfs:subClassOf :ObservationData .
+:FireSuppression rdf:type owl:Class ; rdfs:subClassOf :Mission .
+:Evacuation rdf:type owl:Class ; rdfs:subClassOf :Mission .
+:MedicalSupport rdf:type owl:Class ; rdfs:subClassOf :Mission .
+
+# Properties
+:location rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Location .
+:priority rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:severity rdf:type owl:DatatypeProperty ; rdfs:domain :Incident ; rdfs:range xsd:string .
+:affectedArea rdf:type owl:DatatypeProperty ; rdfs:domain :Impact ; rdfs:range xsd:string .
+:damageType rdf:type owl:DatatypeProperty ; rdfs:domain :Impact ; rdfs:range xsd:string .
+:temperature rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:windSpeed rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:humidity rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:float .
+:forecast rdf:type owl:DatatypeProperty ; rdfs:domain :WeatherCondition ; rdfs:range xsd:string .
+:source rdf:type owl:DatatypeProperty ; rdfs:domain :ObservationData ; rdfs:range xsd:string .
+:creationDate rdf:type owl:DatatypeProperty ; rdfs:domain :ObservationData ; rdfs:range xsd:dateTime .
+:missionType rdf:type owl:DatatypeProperty ; rdfs:domain :Mission ; rdfs:range xsd:string .
+:status rdf:type owl:DatatypeProperty ; rdfs:domain :FirefightingResource ; rdfs:range xsd:string .
+
+# Relationships
+:hasImpact rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :Impact .
+:hasWeatherCondition rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :WeatherCondition .
+:hasObservationData rdf:type owl:ObjectProperty ; rdfs:domain :Incident ; rdfs:range :ObservationData .
+:hasMission rdf:type owl:ObjectProperty ; rdfs:domain :Service ; rdfs:range :Mission .
+:relatedToIncident rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Incident .
+:relatedToService rdf:type owl:ObjectProperty ; rdfs:domain :Mission ; rdfs:range :Service .
+```
+
+This ontology should be able to answer all the competency questions and cover all the requirements specified.

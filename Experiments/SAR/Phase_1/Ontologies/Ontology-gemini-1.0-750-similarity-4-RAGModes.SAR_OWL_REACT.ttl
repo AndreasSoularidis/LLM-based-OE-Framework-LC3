@@ -1,0 +1,70 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sar: <http://example.com/sar#> .
+
+sar:WildfireIncident rdf:type owl:Class .
+sar:LandCover rdf:type owl:Class .
+
+sar:Forest rdf:type owl:Class ;
+    rdfs:subClassOf sar:LandCover .
+
+sar:Grassland rdf:type owl:Class ;
+    rdfs:subClassOf sar:LandCover .
+
+sar:AgriculturalLand rdf:type owl:Class ;
+    rdfs:subClassOf sar:LandCover .
+
+sar:WeatherCondition rdf:type owl:Class .
+
+sar:temperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:WeatherCondition ;
+    rdfs:range xsd:float .
+
+sar:windSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:WeatherCondition ;
+    rdfs:range xsd:float .
+
+sar:humidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:WeatherCondition ;
+    rdfs:range xsd:float .
+
+sar:location rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:WildfireIncident ;
+    rdfs:range xsd:string .
+
+sar:priority rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:WildfireIncident ;
+    rdfs:range xsd:string .
+
+sar:Observation rdf:type owl:Class .
+sar:SensorData rdf:type owl:Class ;
+    rdfs:subClassOf sar:Observation .
+
+sar:SocialMediaData rdf:type owl:Class ;
+    rdfs:subClassOf sar:Observation .
+
+sar:hasSource rdf:type owl:ObjectProperty ;
+    rdfs:domain sar:Observation ;
+    rdfs:range xsd:string .
+
+sar:timestamp rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:Observation ;
+    rdfs:range xsd:dateTime .
+
+sar:fireBoundary rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:Observation ;
+    rdfs:range xsd:string .
+
+sar:smokePlume rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:Observation ;
+    rdfs:range xsd:string .
+
+sar:weatherPattern rdf:type owl:DatatypeProperty ;
+    rdfs:domain sar:Observation ;
+    rdfs:range xsd:string .
+
+sar:hasObservation rdf:type owl:ObjectProperty ;
+    rdfs:domain sar:WildfireIncident ;
+    rdfs:range sar:Observation .

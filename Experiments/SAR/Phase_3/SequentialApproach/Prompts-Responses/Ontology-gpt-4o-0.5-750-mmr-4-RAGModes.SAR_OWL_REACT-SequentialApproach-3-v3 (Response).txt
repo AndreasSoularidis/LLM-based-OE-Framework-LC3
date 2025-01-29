@@ -1,0 +1,216 @@
+### Iterative Discussion
+
+#### Knowledge Engineer (KE)
+KE: Let's start by reviewing the existing ontology. It has a good base, but we need to make it more robust and expressive. We should also remove any irrelevant concepts.
+
+#### Domain Expert (DE)
+DE: Agreed. Let's focus on ensuring all necessary concepts for Search and Rescue (SAR) missions in wildfire incidents are well-represented. Some classes and properties seem redundant or out of scope.
+
+#### Knowledge Worker (KW)
+KW: I think we should also ensure that the ontology is well-structured and the relationships between the concepts are clearly defined. This will help in practical applications.
+
+#### KE: 
+KE: Right. Let's start by removing irrelevant concepts. For instance, classes like `BuildingFire`, `VehicleFire`, `OtherDisaster`, `Building`, and `Vehicle` seem out of scope for wildfire incidents.
+
+#### DE:
+DE: I agree. We should focus on classes and properties directly related to wildfire incidents and SAR missions.
+
+#### KW:
+KW: We should also add more expressiveness using OWL axioms like `owl:equivalentClass`, `owl:equivalentProperty`, `owl:inverseOf`, and others to make the ontology more comprehensive.
+
+#### KE:
+KE: Let's proceed with restructuring. We'll remove irrelevant concepts, add necessary properties, and use OWL axioms to enhance expressiveness.
+
+### Updated Ontology in Turtle (TTL) Format
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:Incident a owl:Class .
+:Wildfire a owl:Class; rdfs:subClassOf :Incident .
+
+:Impact a owl:Class .
+:PropertyDamage a owl:Class; rdfs:subClassOf :Impact .
+:EnvironmentalImpact a owl:Class; rdfs:subClassOf :Impact .
+:HumanCasualty a owl:Class; rdfs:subClassOf :Impact .
+
+:WeatherCondition a owl:Class .
+:Temperature a owl:Class; rdfs:subClassOf :WeatherCondition .
+:WindSpeed a owl:Class; rdfs:subClassOf :WeatherCondition .
+:Humidity a owl:Class; rdfs:subClassOf :WeatherCondition .
+
+:SensorData a owl:Class .
+:SatelliteData a owl:Class; rdfs:subClassOf :SensorData .
+:GroundSensorData a owl:Class; rdfs:subClassOf :SensorData .
+
+:SocialMediaData a owl:Class .
+:FirstResponderInput a owl:Class .
+
+:Mission a owl:Class .
+:Service a owl:Class .
+
+:AreaBurnt a owl:Class .
+:Forest a owl:Class; rdfs:subClassOf :AreaBurnt .
+:Swamp a owl:Class; rdfs:subClassOf :AreaBurnt .
+:Woodland a owl:Class; rdfs:subClassOf :AreaBurnt .
+:CropResidue a owl:Class; rdfs:subClassOf :AreaBurnt .
+:Grassland a owl:Class; rdfs:subClassOf :AreaBurnt .
+
+:Rescue a owl:Class .
+:Person a owl:Class; rdfs:subClassOf :Rescue .
+
+:Animal a owl:Class .
+:Bird a owl:Class; rdfs:subClassOf :Animal .
+:Hive a owl:Class; rdfs:subClassOf :Animal .
+
+:Accident a owl:Class .
+:Death a owl:Class; rdfs:subClassOf :Accident .
+
+:PossibleCauseOfFire a owl:Class .
+:Physics a owl:Class; rdfs:subClassOf :PossibleCauseOfFire .
+:ArsonWithIntent a owl:Class; rdfs:subClassOf :PossibleCauseOfFire .
+:ArsonByNegligence a owl:Class; rdfs:subClassOf :PossibleCauseOfFire .
+
+:ForcesInvolved a owl:Class .
+:PermanentForce a owl:Class; rdfs:subClassOf :ForcesInvolved .
+:SeasonalForce a owl:Class; rdfs:subClassOf :ForcesInvolved .
+:VolunteerFirefighter a owl:Class; rdfs:subClassOf :ForcesInvolved .
+:ArmedForcePersonnel a owl:Class; rdfs:subClassOf :ForcesInvolved .
+:ServicePersonnel a owl:Class; rdfs:subClassOf :ForcesInvolved .
+:MunicipalityStaff a owl:Class; rdfs:subClassOf :ForcesInvolved .
+:PublicSectorStaff a owl:Class; rdfs:subClassOf :ForcesInvolved .
+:ClubMember a owl:Class; rdfs:subClassOf :ForcesInvolved .
+:Individual a owl:Class; rdfs:subClassOf :ForcesInvolved .
+
+:InvestmentInstrument a owl:Class .
+:FireTruck a owl:Class; rdfs:subClassOf :InvestmentInstrument .
+:Tanker a owl:Class; rdfs:subClassOf :InvestmentInstrument .
+:FireFightingVehicle a owl:Class; rdfs:subClassOf :InvestmentInstrument .
+:Machine a owl:Class; rdfs:subClassOf :InvestmentInstrument .
+
+:AirInvolvement a owl:Class .
+
+:Personnel a owl:Class .
+:Firefighter a owl:Class; rdfs:subClassOf :Personnel .
+:Paramedic a owl:Class; rdfs:subClassOf :Personnel .
+
+:causesFire a owl:ObjectProperty; rdfs:domain :WeatherCondition; rdfs:range :Incident .
+:currentMeasurement a owl:DatatypeProperty; rdfs:domain :WeatherCondition; rdfs:range xsd:float .
+:forecastMeasurement a owl:DatatypeProperty; rdfs:domain :WeatherCondition; rdfs:range xsd:float .
+:location a owl:DatatypeProperty; rdfs:domain :Incident; rdfs:range xsd:string .
+:priority a owl:DatatypeProperty; rdfs:domain :Incident; rdfs:range xsd:string .
+:urgency a owl:DatatypeProperty; rdfs:domain :Incident; rdfs:range xsd:string .
+:sourceData a owl:ObjectProperty; rdfs:domain :Incident; rdfs:range :SensorData .
+:creationDate a owl:DatatypeProperty; rdfs:domain :SensorData; rdfs:range xsd:dateTime .
+:smokeClassification a owl:DatatypeProperty; rdfs:domain :Incident; rdfs:range xsd:string .
+:vulnerableObjects a owl:DatatypeProperty; rdfs:domain :Incident; rdfs:range xsd:string .
+:forestryWorkStatus a owl:DatatypeProperty; rdfs:domain :Incident; rdfs:range xsd:string .
+:offeredService a owl:ObjectProperty; rdfs:domain :Service; rdfs:range xsd:string .
+:mission a owl:ObjectProperty; rdfs:domain :Service; rdfs:range :Mission .
+:missionLocation a owl:DatatypeProperty; rdfs:domain :Mission; rdfs:range xsd:string .
+:urgentMissionLocation a owl:DatatypeProperty; rdfs:domain :Mission; rdfs:range xsd:string .
+:populationDensity a owl:DatatypeProperty; rdfs:domain :Mission; rdfs:range xsd:float .
+:peopleLocation a owl:DatatypeProperty; rdfs:domain :Mission; rdfs:range xsd:string .
+
+:hasImpact a owl:ObjectProperty; rdfs:domain :Incident; rdfs:range :Impact .
+:hasWeatherCondition a owl:ObjectProperty; rdfs:domain :Incident; rdfs:range :WeatherCondition .
+:hasSensorData a owl:ObjectProperty; rdfs:domain :Incident; rdfs:range :SensorData .
+:hasSocialMediaData a owl:ObjectProperty; rdfs:domain :Incident; rdfs:range :SocialMediaData .
+:hasFirstResponderInput a owl:ObjectProperty; rdfs:domain :Incident; rdfs:range :FirstResponderInput .
+:hasMission a owl:ObjectProperty; rdfs:domain :Incident; rdfs:range :Mission .
+:hasService a owl:ObjectProperty; rdfs:domain :Incident; rdfs:range :Service .
+
+# OWL Axioms for expressiveness
+
+:Incident owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:Wildfire)
+] .
+
+:Impact owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:PropertyDamage :EnvironmentalImpact :HumanCasualty)
+] .
+
+:WeatherCondition owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:Temperature :WindSpeed :Humidity)
+] .
+
+:SensorData owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:SatelliteData :GroundSensorData)
+] .
+
+:AreaBurnt owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:Forest :Swamp :Woodland :CropResidue :Grassland)
+] .
+
+:Animal owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:Bird :Hive)
+] .
+
+:PossibleCauseOfFire owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:Physics :ArsonWithIntent :ArsonByNegligence)
+] .
+
+:ForcesInvolved owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:PermanentForce :SeasonalForce :VolunteerFirefighter :ArmedForcePersonnel :ServicePersonnel :MunicipalityStaff :PublicSectorStaff :ClubMember :Individual)
+] .
+
+:InvestmentInstrument owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:FireTruck :Tanker :FireFightingVehicle :Machine)
+] .
+
+:Personnel owl:equivalentClass [
+  rdf:type owl:Class ;
+  owl:oneOf (:Firefighter :Paramedic)
+] .
+
+:hasImpact owl:inverseOf [
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :isImpactOf
+] .
+
+:hasWeatherCondition owl:inverseOf [
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :isWeatherConditionOf
+] .
+
+:hasSensorData owl:inverseOf [
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :isSensorDataOf
+] .
+
+:hasSocialMediaData owl:inverseOf [
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :isSocialMediaDataOf
+] .
+
+:hasFirstResponderInput owl:inverseOf [
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :isFirstResponderInputOf
+] .
+
+:hasMission owl:inverseOf [
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :isMissionOf
+] .
+
+:hasService owl:inverseOf [
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :isServiceOf
+] .
+```
+
+### Conclusion
+The updated ontology is more focused on wildfire incidents and SAR missions. Irrelevant concepts have been removed, and the structure has been enhanced with OWL axioms to improve expressiveness and connectivity.

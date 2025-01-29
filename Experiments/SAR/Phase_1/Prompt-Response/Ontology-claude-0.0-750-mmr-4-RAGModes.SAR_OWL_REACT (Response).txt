@@ -1,0 +1,49 @@
+I'll simulate a conversation between the three roles to create the SAR ontology for wildfire incidents.
+
+Knowledge Engineer (KE): Hello! Let's start creating the ontology for SAR missions focusing on wildfire incidents. First, I'd like to hear from our domain expert about the key concepts we should model.
+
+Domain Expert (DE): Based on my experience, we need to model several critical aspects:
+1. The incident itself (wildfire) and its characteristics
+2. Environmental conditions, especially weather
+3. Resources and response teams
+4. Affected areas and assets
+5. Data sources for situational awareness
+
+Knowledge Worker (KW): As a user, I need the ontology to help me:
+1. Track incident priorities
+2. Monitor weather conditions
+3. Coordinate resources
+4. Access sensor and social media data
+5. Track mission status
+
+KE: Let me start with a basic structure in Turtle format:
+
+```turtle
+@prefix : <http://example.com/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+:Incident rdf:type owl:Class .
+:Wildfire rdfs:subClassOf :Incident .
+:WeatherCondition rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Resource rdf:type owl:Class .
+:Location rdf:type owl:Class .
+:DataSource rdf:type owl:Class .
+
+# Properties
+:hasLocation rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:ObjectProperty .
+:hasWeatherCondition rdf:type owl:ObjectProperty .
+:involvesMission rdf:type owl:ObjectProperty .
+:requiresResource rdf:type owl:ObjectProperty .
+```
+
+DE: We need to add more specific classes for weather conditions and affected areas. Also, don't forget about the forces involved in firefighting.
+
+KW: And we need classes for data sources like sensors and social media.
+
+[Conversation continues... Would you like me to proceed with the detailed development?]

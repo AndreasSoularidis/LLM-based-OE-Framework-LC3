@@ -1,0 +1,74 @@
+@prefix : <http://example.org/sar#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:WildfireIncident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:ObservationData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Person rdf:type owl:Class .
+:Location rdf:type owl:Class .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Location .
+
+:hasPriority rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:int .
+
+:hasUrgency rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+
+:hasTemperature rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasWindSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasHumidity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:float .
+
+:hasForecast rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WeatherCondition ;
+    rdfs:range xsd:string .
+
+:hasObservationDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:dateTime .
+
+:hasObservationLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range :Location .
+
+:hasService rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Service .
+
+:hasMissionLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Mission ;
+    rdfs:range :Location .
+
+:hasSmokeClassification rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ObservationData ;
+    rdfs:range xsd:string .
+
+:hasForestryWorkStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range xsd:string .
+
+:hasPopulationDensity rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:int .
+
+:hasInvolvedPeople rdf:type owl:ObjectProperty ;
+    rdfs:domain :WildfireIncident ;
+    rdfs:range :Person .

@@ -1,0 +1,101 @@
+@prefix : <http://example.com/sar/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://example.com/sar> rdf:type owl:Ontology .
+
+# Classes
+:Incident rdf:type owl:Class .
+:Impact rdf:type owl:Class .
+:WeatherCondition rdf:type owl:Class .
+:SensorData rdf:type owl:Class .
+:SatelliteData rdf:type owl:Class .
+:SocialMediaData rdf:type owl:Class .
+:Mission rdf:type owl:Class .
+:Service rdf:type owl:Class .
+:Building rdf:type owl:Class .
+:Vehicle rdf:type owl:Class .
+:Person rdf:type owl:Class .
+:Animal rdf:type owl:Class .
+:FirefightingService rdf:type owl:Class .
+:FireBreak rdf:type owl:Class .
+:ForestRoad rdf:type owl:Class .
+
+# Properties
+:hasWeatherVariable rdf:type owl:ObjectProperty .
+:hasCurrentMeasurement rdf:type owl:DatatypeProperty .
+:hasForecast rdf:type owl:DatatypeProperty .
+:hasLocation rdf:type owl:DatatypeProperty .
+:hasPriority rdf:type owl:DatatypeProperty .
+:hasUrgency rdf:type owl:DatatypeProperty .
+:hasDataSource rdf:type owl:ObjectProperty .
+:hasCreationDate rdf:type owl:DatatypeProperty .
+:hasSmokeClassification rdf:type owl:DatatypeProperty .
+:hasVulnerableObject rdf:type owl:ObjectProperty .
+:hasStatus rdf:type owl:DatatypeProperty .
+:offersSupport rdf:type owl:ObjectProperty .
+:followsMission rdf:type owl:ObjectProperty .
+:hasPopulationDensity rdf:type owl:DatatypeProperty .
+:hasInvolvedPeople rdf:type owl:ObjectProperty .
+
+# Relationships
+:Incident rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:ForestFire :GrassFire :CropResidueFire)
+] .
+:Impact rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:BurntArea :DestroyedProperty :RescuedPeople :RescuedAnimals)
+] .
+:WeatherCondition rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:Temperature :WindSpeed :Humidity :WeatherForecast)
+] .
+:SensorData rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:Sensor :Satellite :SocialMedia)
+] .
+:Mission rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:Firefighting :Evacuation :MedicalAssistance)
+] .
+:Service rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:FirefightingService :MedicalService :EvacuationService)
+] .
+:Building rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:Farm :Church :ResidentialBuilding)
+] .
+:Vehicle rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:Tractor :PrivateVehicle)
+] .
+:Person rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:RescuedPerson :Firefighter :Volunteer)
+] .
+:Animal rdfs:subClassOf [
+  rdf:type owl:Class ;
+  owl:unionOf (:Bird :Hive)
+] .
+
+# Example of data properties
+:hasCurrentMeasurement rdfs:comment "The current measurement of a weather variable"^^xsd:string .
+:hasCreationDate rdfs:comment "The creation date of the data"^^xsd:string .
+:hasLocation rdfs:comment "The location of the incident or mission"^^xsd:string .
+:hasPriority rdfs:comment "The priority level of an incident"^^xsd:string .
+:hasUrgency rdfs:comment "The urgency level of an incident or mission"^^xsd:string .
+:hasSmokeClassification rdfs:comment "The classification type of smoke"^^xsd:string .
+:hasStatus rdfs:comment "The status of wildfire forestry works"^^xsd:string .
+:hasPopulationDensity rdfs:comment "The population density in the area"^^xsd:string .
+
+# Example of object properties
+:offersSupport rdfs:comment "The services or support offered for firefighting"^^xsd:string .
+:followsMission rdfs:comment "The mission followed for the support/service"^^xsd:string .
+:hasInvolvedPeople rdfs:comment "The people involved in the incident or mission"^^xsd:string .
+
+# Imports
+<http://example.com/sar> owl:imports <http://example.org/otherOntologies/families.owl> .

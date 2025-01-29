@@ -1,0 +1,79 @@
+I'll simulate a conversation between the three roles to create a comprehensive SAR ontology for wildfire incidents. Let's start:
+
+Knowledge Engineer (KE): Hello! I'm the knowledge engineer responsible for creating the SAR ontology. Let's begin by discussing the main requirements and concepts.
+
+Domain Expert (DE): Hello! As a domain expert in SAR operations and wildfire management, I can provide detailed insights about the domain. First, we need to model the core concepts related to incidents, weather conditions, observations, and missions.
+
+Knowledge Worker (KW): Hi! As someone who will use this ontology, I need it to effectively capture data from various sources and support decision-making during wildfire incidents.
+
+KE: Let's start with the incident-related concepts. Domain Expert, what are the key elements we should consider?
+
+DE: For wildfire incidents, we need to capture:
+1. Different types of affected areas (forests, grasslands, etc.)
+2. Impact on infrastructure and living beings
+3. Weather conditions that influence fire behavior
+4. Emergency response missions
+
+KW: I also need to track real-time data from sensors and social media. How can we incorporate this?
+
+KE: Here's my initial proposal in Turtle format:
+
+```turtle
+@prefix : <http://example.org/sar#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Core Classes
+:Incident rdf:type owl:Class ;
+    rdfs:comment "Represents an emergency incident"@en .
+
+:WildfireIncident rdfs:subClassOf :Incident .
+
+:AffectedArea rdf:type owl:Class .
+:Forest rdfs:subClassOf :AffectedArea .
+:Grassland rdfs:subClassOf :AffectedArea .
+:Woodland rdfs:subClassOf :AffectedArea .
+:AgriculturalLand rdfs:subClassOf :AffectedArea .
+
+:WeatherCondition rdf:type owl:Class .
+:Temperature rdfs:subClassOf :WeatherCondition .
+:WindSpeed rdfs:subClassOf :WeatherCondition .
+:Humidity rdfs:subClassOf :WeatherCondition .
+
+:Mission rdf:type owl:Class .
+:RescueMission rdfs:subClassOf :Mission .
+:FirefightingMission rdfs:subClassOf :Mission .
+
+:Observation rdf:type owl:Class .
+:SensorObservation rdfs:subClassOf :Observation .
+:SocialMediaObservation rdfs:subClassOf :Observation .
+:HumanObservation rdfs:subClassOf :Observation .
+
+:VulnerableObject rdf:type owl:Class .
+:Building rdfs:subClassOf :VulnerableObject .
+:Vehicle rdfs:subClassOf :VulnerableObject .
+:Animal rdfs:subClassOf :VulnerableObject .
+
+# Object Properties
+:hasLocation rdf:type owl:ObjectProperty .
+:hasWeatherCondition rdf:type owl:ObjectProperty .
+:affectsArea rdf:type owl:ObjectProperty .
+:involvesMission rdf:type owl:ObjectProperty .
+:hasObservation rdf:type owl:ObjectProperty .
+:hasImpactOn rdf:type owl:ObjectProperty .
+:requiresService rdf:type owl:ObjectProperty .
+:hasPriority rdf:type owl:ObjectProperty .
+:hasStatus rdf:type owl:ObjectProperty .
+
+# Data Properties
+:hasTemperatureValue rdf:type owl:DatatypeProperty .
+:hasWindSpeedValue rdf:type owl:DatatypeProperty .
+:hasHumidityValue rdf:type owl:DatatypeProperty .
+:hasTimestamp rdf:type owl:DatatypeProperty .
+:hasPopulationDensity rdf:type owl:DatatypeProperty .
+:hasPriorityLevel rdf:type owl:DatatypeProperty .
+```
+
+DE: This is a good start, but we shoul
