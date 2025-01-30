@@ -5,7 +5,7 @@ LLM-based framework that automates the ontology engineering process with LLM-pow
 ![LLM4ACOE](https://github.com/user-attachments/assets/1a43d2f5-c5c3-421b-ad1a-61af613d3fc2)
 
 ## Guick Install
-Python 3.10
+Python 3.12
 For Windows
 ```bash
 py -m venv .venv
