@@ -1,6 +1,9 @@
+import argparse
+import json
+import os
+
 from dotenv import load_dotenv
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
 from langchain_core.prompts import PromptTemplate
 from langchain_community.vectorstores import FAISS
 from FileLoaders import FileLoader
@@ -8,15 +11,37 @@ from OntologyExtractor import OntologyExtractor
 from ChatExtractor import ChatExtractor
 from Modes import RAGModes, FrameworkModes
 from ModelLoader import ModelLoader
+from EmbeddingsLoader import EmbeddingsLoader
 from ChainBuilder import Builder
 from PromptBuilder import CustomPromptBuilder
 
 
 load_dotenv()
+
+
+def parse_args():
+  parser = argparse.ArgumentParser(description="Run the LLM4ACOE ontology simulation.")
+  parser.add_argument("--provider", choices=["openai", "azure-openai", "anthropic", "google", "nvidia"], default="openai")
+  parser.add_argument("--model", default="gpt-4o")
+  parser.add_argument("--temperature", type=float, default=0.5)
+  parser.add_argument("--max-tokens", type=int, default=None)
+  parser.add_argument("--top-p", type=float, default=None)
+  parser.add_argument("--model-kwargs", type=str, default=None, help="Optional JSON object of extra model kwargs.")
+  parser.add_argument("--embedding-provider", choices=["huggingface", "openai", "azure-openai"], default="huggingface")
+  parser.add_argument("--embedding-model", default="sentence-transformers/all-MiniLM-L6-v2")
+  parser.add_argument("--embedding-fallback-model", default="sentence-transformers/all-MiniLM-L6-v2")
+  return parser.parse_args()
+
+
+ARGS = parse_args()
 # Hyperparameters
 MODE = FrameworkModes.PARALLEL
-MODEL = "gpt-4o"
-TEMPERATURE = 0.5
+PROVIDER = ARGS.provider
+MODEL = ARGS.model
+TEMPERATURE = ARGS.temperature
+EMBEDDING_PROVIDER = ARGS.embedding_provider
+EMBEDDING_MODEL = ARGS.embedding_model
+EMBEDDING_FALLBACK_MODEL = ARGS.embedding_fallback_model
 CHUNK_SIZE = 750
 DOMAIN_CHUNK_SIZE = CHUNK_SIZE
 CHUNK_OVERLAP = 0
@@ -44,9 +69,30 @@ def split_documents(docs, chunk_size, chunk_overlap):
 
 
 def create_vector_store(docs):
-  embeddings = OpenAIEmbeddings()
+  embeddings = EmbeddingsLoader.load_embeddings(
+    provider=EMBEDDING_PROVIDER,
+    model=EMBEDDING_MODEL,
+    fallback_model=EMBEDDING_FALLBACK_MODEL,
+  )
   vector_store = FAISS.from_documents(docs, embeddings)
   return vector_store
+
+
+def build_model_kwargs(args):
+  extra_kwargs = {}
+  if args.max_tokens is not None:
+    extra_kwargs["max_tokens"] = args.max_tokens
+  if args.top_p is not None:
+    extra_kwargs["top_p"] = args.top_p
+  if args.model_kwargs:
+    try:
+      parsed = json.loads(args.model_kwargs)
+      if not isinstance(parsed, dict):
+        raise ValueError("--model-kwargs must be a JSON object")
+      extra_kwargs.update(parsed)
+    except json.JSONDecodeError as exc:
+      raise ValueError(f"Invalid JSON for --model-kwargs: {args.model_kwargs}") from exc
+  return extra_kwargs
 
 
 def start_simulation(question, domain_retriever, owl_retriever, react_retriever):
@@ -72,8 +118,8 @@ def start_enhanced_simulation(question, round, domain_retriever, owl_retriever, 
 
 if __name__ == '__main__':
   print("Initialization. Please wait..\n")
-  
-  model = ModelLoader.load_llm(MODEL, TEMPERATURE)
+  model_kwargs = build_model_kwargs(ARGS)
+  model = ModelLoader.load_llm(PROVIDER, MODEL, TEMPERATURE, model_kwargs=model_kwargs)
   
   react_retriever = owl_retriever = domain_retriever = None
 

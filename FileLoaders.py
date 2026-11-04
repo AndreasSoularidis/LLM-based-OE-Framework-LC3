@@ -62,7 +62,8 @@ class FileLoader:
   
   @staticmethod
   def get_txt_loader(folder_name):
-    text_loader = DirectoryLoader(f".\\{folder_name}", glob="**\\*.txt", loader_cls=TextLoader, show_progress=True, silent_errors=True)
+    # text_loader = DirectoryLoader(f".\\{folder_name}", glob="**\\*.txt", loader_cls=TextLoader, show_progress=True, silent_errors=True)
+    text_loader = DirectoryLoader(f"{folder_name}", glob="**/*.txt", loader_cls=TextLoader, show_progress=True, silent_errors=True)
     docs = text_loader.load()
     return docs
   
